@@ -129,6 +129,96 @@ class mySelenium():
             raise
         return webElement
 
+    def judge_element_presence(self, css, secs=5):
+        """
+        判断元素是否存在，返回bool值
+        :return:
+        """
+        t1 = time.time()
+        if '->' not in css:
+            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
+            raise NameError('Positioning syntax errors, lack of "->"')
+        by = css.split('->')[0]
+        if by == 'uiautomator':
+            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+        else:
+            ele = css.split('->')[1]
+        flag = True
+        webElement = None
+        try:
+            if by == 'id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.ID, ele)))
+            elif by == 'class':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.CLASS_NAME, ele)))
+            elif by == 'text':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.LINK_TEXT, ele)))
+            elif by == 'name':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.NAME, ele)))
+            elif by == 'xpath':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.XPATH, ele)))
+            elif by == 'uiautomator':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
+            elif by == 'accessibility id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                                                                    ((By.ACCESSIBILITY_ID, ele)))
+            else:
+                flag = False
+                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+                raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
+                                '"text"、"uiautomator"、"accessibility id"')
+            log.info('{0} Find targeting element:"{1}", spend {2} seconds'.format(success, css, time.time() - t1))
+        except:
+            flag = False
+            log.info('{0} Unable to find element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+
+        return flag, webElement
+
+    def judge_element_clickable(self, css, secs=5):
+        """
+        判断元素是否存在，返回bool值
+        :return:
+        """
+        t1 = time.time()
+        if '->' not in css:
+            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
+            raise NameError('Positioning syntax errors, lack of "->"')
+        by = css.split('->')[0]
+        if by == 'uiautomator':
+            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+        else:
+            ele = css.split('->')[1]
+        flag = True
+        webElement = None
+        try:
+            if by == 'id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.ID, ele)))
+            elif by == 'class':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.CLASS_NAME, ele)))
+            elif by == 'text':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.LINK_TEXT, ele)))
+            elif by == 'name':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.NAME, ele)))
+            elif by == 'xpath':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.XPATH, ele)))
+            elif by == 'uiautomator':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
+                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
+            elif by == 'accessibility id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
+                                                                    ((By.ACCESSIBILITY_ID, ele)))
+            else:
+                flag = False
+                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+                raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
+                                '"text"、"uiautomator"、"accessibility id"')
+            log.info('{0} The element:"{1}" is clickable, spend {2} seconds'.format(success, css, time.time() - t1))
+        except:
+            flag = False
+            log.info('{0} The element:"{1}" is not clickable, spend {2} seconds'.format(fail, css, time.time() - t1))
+
+        return flag, webElement
+
     def judge_element(self, css, secs=5):
         """
         判断元素是否存在，返回bool值
@@ -139,7 +229,10 @@ class mySelenium():
             log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
             raise NameError('Positioning syntax errors, lack of "->"')
         by = css.split('->')[0]
-        ele = css.split('->')[1]
+        if by == 'uiautomator':
+            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+        else:
+            ele = css.split('->')[1]
         flag = True
         webElement = None
         try:
@@ -220,6 +313,7 @@ class mySelenium():
         t1 = time.time()
         try:
             ele = self.find_element(css, secs)
+            ele.clear()
             ele.send_keys(test)
             log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(success, css, test, time.time() - t1))
         except Exception as e:
@@ -335,6 +429,20 @@ class mySelenium():
             log.info('{0} Not find the activity:{1}， spend {2} seconds'.format(fail, activity, time.time() - t1))
             log.error(e)
             raise
+
+    """--------------------------------------------------mobile private-----------------------------------"""
+    def send_app_text(self, css, text, secs=8):
+
+        content = self.get_ele_content(css)
+        self.click(css)
+        self.driver.keyevent(123)   # 移动光标到末尾
+        for i in range(len(content)):
+            self.driver.keyevent(67)    # 操作退格键
+        # self.send(css, text)
+        ele = css.split('->')[1]
+        # self.driver.set_value(ele, text)
+        self.driver.find_element()
+
 
 
 

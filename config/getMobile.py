@@ -7,7 +7,7 @@ from common.log import Logger
 
 path = getProjectPath.get_project_path()
 mobile_path = os.path.join(path, 'config', 'mobile.xlsx')
-log = Logger('config.mobile').get_logger()
+log = Logger('config.getMobile').get_logger()
 
 
 def get_mobile():
