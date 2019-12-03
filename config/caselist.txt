@@ -1,0 +1,2 @@
+# 配置测试用例文件
+testcase/enterZC_test.py
