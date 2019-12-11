@@ -1,6 +1,6 @@
 import os
 import time
-from common.HTMLTestRunner import HTMLTestRunner
+from common.HTMLTestRunner2 import HTMLTestRunner
 from common.caseSuite import caseSuite
 from config.getProjectPath import get_project_path
 from common.log import Logger

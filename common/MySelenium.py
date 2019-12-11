@@ -1,5 +1,6 @@
 import os
 import time
+from selenium.common.exceptions import InvalidElementStateException
 from config.getMobile import get_mobile
 from common.log import Logger
 from selenium import webdriver
@@ -7,8 +8,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.mobileby import MobileBy as By
 from selenium.webdriver.common.action_chains import ActionChains
+from config.getProjectPath import get_project_path
 
-phone_data = get_mobile()[1]
+path = get_project_path()
+phone_data = get_mobile()[2]    # 选择设备和app
 log = Logger('common.mySelenium').get_logger()
 success = 'Success'
 fail = 'Fail'
@@ -110,7 +113,7 @@ class mySelenium():
                 webElement = \
                     WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.LINK_TEXT, element)), message=message)
             elif by == 'css':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
                                                                     ((By.CSS_SELECTOR, element)), message=message)
             elif by == 'uiautomator':
                 webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
@@ -302,7 +305,7 @@ class mySelenium():
             log.error(e)
             raise
 
-    def send(self, css, test, secs=8):
+    def send(self, css, text, secs=8):
         """
         输入框写入文本方法
         :param css:
@@ -313,13 +316,69 @@ class mySelenium():
         t1 = time.time()
         try:
             ele = self.find_element(css, secs)
-            ele.clear()
-            ele.send_keys(test)
-            log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(success, css, test, time.time() - t1))
+            self.clear_text(ele)
+            ele.send_keys(text)
+            log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(success, css, text, time.time() - t1))
         except Exception as e:
-            log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(fail, css, test, time.time() - t1))
+            log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(fail, css, text, time.time() - t1))
             log.error(e)
             raise
+
+    def js_send(self, css, text, secs=8):
+        """使用ActionChains库操作输入框输入"""
+        t1 = time.time()
+        if '->' not in css:
+            log.error('Positioning syntax errors. element:"{0}" lack of "->"'.format(css))
+            raise NameError('Positioning syntax errors. lack of "->"')
+        try:
+            by = css.split('->')[0]
+            element = css.split('->')[1]
+            flag, ele = self.judge_element(css, secs)
+            if flag:
+                if by == 'id':
+                    js = "document.getElementById('" + element + "').value='" + text + "';"
+                elif by == 'class':
+                    js = "document.getElementsByClassName('" + element + "')[0].value='" + text + "';"
+                elif by == 'name':
+                    js = "document.getElementByNme('" + element + "').value='" + text + "';"
+                elif by == 'tagname':
+                    js = "document.getElementByTagName('" + element + "').value='" + text + "';"
+                elif by == 'selector':
+                    js = "document.querySelector('" + element + "').value='" + text + "';"
+                else:
+                    log.error('Please enter the correct targeting elements,"id"、"class"、"name"、"tagname"、"selector"')
+                    raise NameError('Please enter the correct targeting elements,"id"、'
+                                    '"class"、"name"、"tagname"、"selector"、')
+                self.js(js)
+                log.info(
+                    '{0} Send keys:"{1}" content uses js: "{2}", spend {3} seconds'.
+                        format(success, css, text, time.time() - t1))
+            else:
+                log.error('{0} Send keys:"{2}", not find elementr:"{1}", spend {3} seconds'.
+                          format(fail, css, text, time.time() - t1))
+        except Exception as e:
+            log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(fail, css, text, time.time() - t1))
+            log.error(e)
+            raise
+
+    def clear_text(self, ele, n=5):
+        """
+        清除文本框内容
+        :param ele: webelement元素
+        :param n: 循环次数
+        :return:
+        """
+        try:
+            for num in range(n):
+                ele.clear()
+                if ele.text == '':
+                    log.info('{0} clear element: "{1}" content, this is show:"{2}"'.format(success, ele, ele.text))
+                    break
+                else:
+                    log.info('Not clear element: "{1}" content:"{2}"'.format(success, ele, ele.text))
+        except InvalidElementStateException as i:
+            log.error('Not clear element: "{1}" content'.format(fail, ele))
+            log.error(i)
 
     def get_ele_content(self, css, secs=8):
         """
@@ -332,12 +391,75 @@ class mySelenium():
         try:
             ele = self.find_element(css, secs)
             text = ele.text
-            log.info('{0} Get text of element:"{1}", spend {2} seconds'.format(success, css, time.time() - t1))
+            log.info('{0} Get text of element:"{1}", spend {2} seconds'.format(success, text, time.time() - t1))
         except Exception as e:
-            log.info('{0} Get text of element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+            log.error('{0} Get text of element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
             log.error(e)
             raise
         return text
+
+    def get_alert_content(self, secs=1):
+        """获取alert弹窗内容"""
+        time.sleep(secs)
+        content = self.driver.switch_to.alert().text
+        return content
+
+    def get_page_title(self):
+        """获取页面标题"""
+        t1 = time.time()
+        try:
+            current_title = self.driver.title
+            log.info(
+                '{0} Get current page title:"{1}" , spend {2} seconds'.format(success, current_title, time.time() - t1))
+        except Exception as e:
+            log.error('Fail get current page title, spend "{1}" seconds'.format(fail, time.time() - t1))
+            log.error(e)
+            raise
+        return current_title
+
+    def get_page_url(self):
+        """获取当前页面链接"""
+        t1 = time.time()
+        try:
+            current_url = self.driver.current_url
+            log.info('{0} Get current page link:"{1}" , spend {2} seconds'.format(success, current_url, time.time() - t1))
+        except Exception as e:
+            log.error('Fail get current page link, spend "{1}" seconds'.format(fail, time.time() - t1))
+            log.error(e)
+            raise
+        return current_url
+
+    def get_page_screenshot(self, file_path, case_name, source='web', sces=1):
+        """
+        获取页面截图
+        :param file_name:图片存储目录路径
+        :param img_name:图片名称
+        :param source:来源：web or webview or app
+        """
+        time.sleep(1)
+        t1 = time.time()
+        if source == 'webview':
+            url = self.get_page_url()
+            img_name = self.get_page_title() + '_' + case_name + '.png'
+            self.switch_app_context()
+        elif source == 'web':
+            url = self.get_page_url()
+            img_name = self.get_page_title() + '_' + case_name + '.png'
+        elif source == 'app':
+            activity = self.get_app_activity().split('.')[-1]
+            img_name = activity + '_' + case_name + '.png'
+        else:
+            img_name = 'test' + case_name + '.png'
+        try:
+            self.driver.save_screenshot(os.path.join(file_path, img_name))  # 截取当前页面图片
+            print("screenshot:", img_name)  # 图片写入测试报告
+            if source == 'webview':
+                self.switch_app_context()
+            log.info('{0} Get current page screenshot, spend {1} seconds'.format(success, time.time() - t1))
+        except Exception as e:
+            log.error('{0} Get current page screenshot, spend {1} seconds'.format(fail, time.time() - t1))
+            log.error(e)
+            raise
 
     def quit(self):
         """关闭窗口/app"""
@@ -430,20 +552,102 @@ class mySelenium():
             log.error(e)
             raise
 
+    def back_button(self, num=1):
+        """
+        返回按钮事件
+        :param num:返回次数
+        :return:
+        """
+        for i in range(num):
+            self.driver.back()
+
+    def get_page_source(self, filename=None, secs=2):
+        """
+        获取页面代码
+        :param secs:
+        :param filename: 文件名称，后缀为.html
+        :return:
+        """
+        time.sleep(secs)
+        page = self.driver.page_source
+        file_path = os.path.join(path, 'xiaoe', filename)
+        html_file = open(file_path, 'w', encoding='utf-8')
+        html_file.write(page)
+        time.sleep(secs)
+        html_file.close()
+
     """--------------------------------------------------mobile private-----------------------------------"""
-    def send_app_text(self, css, text, secs=8):
+    def app_background(self, secs=2):
+        """
+        app后台运行
+        :param secs: 后台运行时间
+        :return:
+        """
+        self.driver.background_app(secs)
 
-        content = self.get_ele_content(css)
-        self.click(css)
-        self.driver.keyevent(123)   # 移动光标到末尾
-        for i in range(len(content)):
-            self.driver.keyevent(67)    # 操作退格键
-        # self.send(css, text)
-        ele = css.split('->')[1]
-        # self.driver.set_value(ele, text)
-        self.driver.find_element()
+    def get_app_context(self):
+        """获取app当前的context"""
+        current_context = self.driver.current_context
+        return current_context
 
+    def get_app_contexts(self):
+        """获取app所有context"""
+        contexts = self.driver.contexts
+        return contexts
 
+    def get_app_activity(self):
+        """获取app的activity"""
+        activity = self.driver.current_activity
+        return activity.split('.')[-1]
+
+    def switch_context(self, context):
+
+        self.driver._switch_to.context(context)
+
+    def switch_app_context(self, secs=0.5):
+        """切换app的context"""
+        time.sleep(secs)
+        t1 = time.time()
+        try:
+            current_context = self.driver.context
+            contexts = self.driver.contexts
+            for context in contexts:
+                if context != current_context:
+                    log.info('{0} Get context:"{1}"'.format(success, context))
+                    self.driver._switch_to.context(context)
+                    log.info('{0} switch to context:"{1}", spend {2} seconds'.format(success, context, time.time() - t1))
+                else:
+                    log.info('{0} Context equal current context:"{1}", spend {2} seconds'.
+                             format(fail, context, time.time() - t1))
+        except Exception as e:
+            log.info('{0} switch to context, spend {1} seconds'.format(fail, time.time() - t1))
+            log.error(e)
+            raise
+
+    def clear_app_text(self, css):
+        """
+        通过键值清空输入框
+        :param text:输入框文本内容
+        :param sourrce:输入框来源；app or webview
+        :return:
+        """
+        t1 = time.time()
+        try:
+            self.click(css)
+            text = self.get_ele_content(css)
+            self.driver.keyevent(123)
+            for i in range(len(text)):
+                self.driver.keyevent(67)
+            log.info('{0} clear app:"{1}" content:"{2}", spend {3} seconds'.format(success, css, text, time.time() - t1))
+        except Exception as e:
+            log.error(
+                '{0} clear app:"{1}" content, spend {2} seconds'.format(fail, css, time.time() - t1))
+            log.error(e)
+            raise
+
+    def get_apppage_screenshot(self, filename):
+        """"""
+        self.driver.save_screenshot(filename)
 
 
 

@@ -1,6 +1,6 @@
 import unittest
 import time
-from common.mySelenium import mySelenium
+from common.MySelenium import mySelenium
 from common.log import Logger
 from testpage.enterApp_page import enterApp_page
 
@@ -14,7 +14,7 @@ class Mymobile(unittest.TestCase):
         log.info("****************************************  start  **************************************************")
         cls.dr = mySelenium()
         cls.dr.mobile()
-        enterApp_page(cls.dr).tgp_login_main()
+        # enterApp_page(cls.dr).tgp_login_main()  # 登录app
 
     @classmethod
     def tearDownClass(cls):

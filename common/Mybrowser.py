@@ -1,6 +1,6 @@
 import unittest
 import time
-from common.mySelenium import mySelenium
+from common.MySelenium import mySelenium
 from common.log import Logger
 
 log = Logger('Mytest.Mytest').get_logger()

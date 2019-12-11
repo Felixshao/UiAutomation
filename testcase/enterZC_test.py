@@ -18,10 +18,9 @@ class enterZC(Mybrowser.Mybrowser):
         enterpage.click_task()
 
     def test2_print(self):
-        enterpage = enterZC_page(self.dr)
-
-        enterpage.into_ZC()
-        enterpage.click_login_button()
+        """调试截图"""
+        self.dr.open_url('https://www.baidu.com')
+        self.dr.get_page_screenshot('d:\\study\\python\\UiAutomation\\report\\screen_shot\\LauncherUI_我的.png', 'LauncherUI_我的.png')
 
 
 
