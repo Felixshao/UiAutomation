@@ -2,299 +2,363 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>自动化报告2019-12-02 22</title>
-    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <title>自动化报告2019-12-19 17</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
     <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
     
 <style type="text/css" media="screen">
-    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 80%; }
-    table       { font-size: 100%; }
-    pre         { white-space: pre-wrap;word-wrap: break-word; }
-    /* -- heading ---------------------------------------------------------------------- */
-    h1 {
-        font-size: 16pt;
-        color: gray;
-    }
-    .heading {
-        margin-top: 0ex;
-        margin-bottom: 1ex;
-    }
-    .heading .attribute {
-        margin-top: 1ex;
-        margin-bottom: 0;
-    }
-    .heading .description {
-        margin-top: 2ex;
-        margin-bottom: 3ex;
-    }
-    /* -- css div popup ------------------------------------------------------------------------ */
-    a.popup_link {
-    }
-    a.popup_link:hover {
-        color: red;
-    }
-    .popup_window {
-        display: none;
-        position: relative;
-        left: 0px;
-        top: 0px;
-        /*border: solid #627173 1px; */
-        padding: 10px;
-        /*background-color: #E6E6D6; */
-        font-family: "Lucida Console", "Courier New", Courier, monospace;
-        text-align: left;
-        font-size: 8pt;
-        /* width: 500px;*/
-    }
-    }
-    /* -- report ------------------------------------------------------------------------ */
-    #show_detail_line {
-        margin-top: 3ex;
-        margin-bottom: 1ex;
-    }
-    #result_table {
-        width: 99%;
-    }
-    #header_row {
-        font-weight: bold;
-        color: #303641;
-        background-color: #ebebeb;
-    }
-    #total_row  { font-weight: bold; }
-    .passClass  { background-color: #bdedbc; }
-    .failClass  { background-color: #ffefa4; }
-    .errorClass { background-color: #ffc9c9; }
-    .passCase   { color: #6c6; }
-    .failCase   { color: #FF6600; font-weight: bold; }
-    .errorCase  { color: #c00; font-weight: bold; }
-    .hiddenRow  { display: none; }
-    .testcase   { margin-left: 2em; }
-    /* -- ending ---------------------------------------------------------------------- */
-    #ending {
-    }
-    #div_base {
-                position:absolute;
-                top:0%;
-                left:5%;
-                right:5%;
-                width: auto;
-                height: auto;
-                margin: -15px 0 0 0;
-    }
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+    float:left;
+    width:50%;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+.heading .attribute{
+    font-size: 16px;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+#screen_shot  { width:100%;}
+#screen {display:block; width:490px; height:240px; margin:0 30px 0 -240px;}
+#show_detail_line { vertical-align: middle;display: inline-block;position: relative;margin-bottom: 1ex; margin-top: 1ex;}
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
 </style>
 
 </head>
-<body>
-    <script language="javascript" type="text/javascript"><!--
-    output_list = Array();
-    /* level - 0:Summary; 1:Failed; 2:All */
-    function showCase(level) {
-        trs = document.getElementsByTagName("tr");
-        for (var i = 0; i < trs.length; i++) {
-            tr = trs[i];
-            id = tr.id;
-            if (id.substr(0,2) == 'ft') {
-                if (level < 1) {
-                    tr.className = 'hiddenRow';
-                }
-                else {
-                    tr.className = '';
-                }
-            }
-            if (id.substr(0,2) == 'pt') {
-                if (level > 1) {
-                    tr.className = '';
-                }
-                else {
-                    tr.className = 'hiddenRow';
-                }
-            }
-        }
-    }
-    function showClassDetail(cid, count) {
-        var id_list = Array(count);
-        var toHide = 1;
-        for (var i = 0; i < count; i++) {
-            tid0 = 't' + cid.substr(1) + '.' + (i+1);
-            tid = 'f' + tid0;
-            tr = document.getElementById(tid);
-            if (!tr) {
-                tid = 'p' + tid0;
-                tr = document.getElementById(tid);
-            }
-            id_list[i] = tid;
-            if (tr.className) {
-                toHide = 0;
-            }
-        }
-        for (var i = 0; i < count; i++) {
-            tid = id_list[i];
-            if (toHide) {
-                document.getElementById('div_'+tid).style.display = 'none'
-                document.getElementById(tid).className = 'hiddenRow';
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+4:Error  
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
             }
             else {
-                document.getElementById(tid).className = '';
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2 || level ==4) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
             }
         }
     }
-    function showTestDetail(div_id){
-        var details_div = document.getElementById(div_id)
-        var displayState = details_div.style.display
-        // alert(displayState)
-        if (displayState != 'block' ) {
-            displayState = 'block'
-            details_div.style.display = 'block'
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+    //console.log(detail_class.length)
+    if (level == 3) {
+        for (var i = 0; i < detail_class.length; i++){
+            detail_class[i].innerHTML="收起"
+        }
+    }
+    else{
+            for (var i = 0; i < detail_class.length; i++){
+            detail_class[i].innerHTML="详细"
+        }
+    }
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
         }
         else {
-            details_div.style.display = 'none'
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
         }
     }
-    function html_escape(s) {
-        s = s.replace(/&/g,'&amp;');
-        s = s.replace(/</g,'&lt;');
-        s = s.replace(/>/g,'&gt;');
-        return s;
-    }
-    /* obsoleted by detail in <div>
-    function showOutput(id, name) {
-        var w = window.open("", //url
-                        name,
-                        "resizable,scrollbars,status,width=800,height=450");
-        d = w.document;
-        d.write("<pre>");
-        d.write(html_escape(output_list[id]));
-        d.write("\n");
-        d.write("<a href='javascript:window.close()'>close</a>\n");
-        d.write("</pre>\n");
-        d.close();
-    }
-    */
-    --></script>
-    <div id="div_base">
-        
-    <div class='page-header'>
-        <h1>自动化报告2019-12-02 22</h1>
-    <p class='attribute'><strong>开始时间:</strong> 2019-12-02 22:50:22</p>
-<p class='attribute'><strong>运行时长:</strong> 0:00:21.109437</p>
-<p class='attribute'><strong>状态:</strong> 共 2 通过 2</p>
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h3 style="font-family: Microsoft YaHei">自动化报告2019-12-19 17</h3>
+<p class='attribute'><strong>测试人员 : </strong> felix</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-12-19 17:44:50</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:32.419001</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 4，通过 4，通过率= 100.00%</p>
 
-    </div>
-    <div style="float: left;width:50%;"><p class='description'></p></div>
-    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+<p class='description'></p>
+</div>
+<div style="float: left;width:50%;"><p class='description'></p></div>
+<div id="chart" style="width:50%;height:400px;float:left;"></div>
 
-        
-    <div class="btn-group btn-group-sm">
-        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
-        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
-        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
-    </div>
-    <p></p>
-    <table id='result_table' class="table table-bordered">
-        <colgroup>
-            <col align='left' />
-            <col align='right' />
-            <col align='right' />
-            <col align='right' />
-            <col align='right' />
-            <col align='right' />
-        </colgroup>
-        <tr id='header_row'>
-            <td>测试套件/测试用例</td>
-            <td>总数</td>
-            <td>通过</td>
-            <td>失败</td>
-            <td>错误</td>
-            <td>查看</td>
-        </tr>
-        
-    <tr class='passClass'>
-        <td>enterZC_test.enterZC</td>
-        <td>2</td>
-        <td>2</td>
-        <td>0</td>
-        <td>0</td>
-        <td><a href="javascript:showClassDetail('c1',2)">详情</a></td>
-    </tr>
 
-<tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test1_enterZC</div></td>
-    <td colspan='5' align='center'>通过</td>
+<div id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
+<a class="btn btn-warning" href='javascript:showCase(4)'>错误{ 0 }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 4 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 4 }</a>
+</div>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+    <td>截图</td>
 </tr>
 
-<tr id='pt1.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test2_print</div></td>
-    <td colspan='5' align='center'>
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >
-        通过</a>
-    <div id='div_pt1.2' class="popup_window">
-        <pre>pt1.2: 1
-</pre>
+<tr class='passClass warning'>
+    <td>ZCtask_test.ZCtask_test</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
+    <td class="text-center">Assert or Error Image</td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase' width='300px'><div class='testcase'>test1_view_task: 查看可参与任务</div></td>
+    <td colspan='5' align='left' width='600px'> <!--print 输出框位置-->
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:600px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt1_1: 用例成功!
+screenshot: 【Testin众测】-汇聚测试精英，提升软件质量！_筛选任务_有结果时.png
+
+
+    </pre>
     </div>
-    <!--css div popup end-->
+    </td>
+    <td align="right">
+        <a id="screen"  href="../screen_shot/【Testin众测】-汇聚测试精英，提升软件质量！_筛选任务_有结果时.png
+" target="_blank">
+            <img  id="screen_shot" src="../screen_shot/【Testin众测】-汇聚测试精英，提升软件质量！_筛选任务_有结果时.png
+"/>
+        </a>
     </td>
 </tr>
 
-        <tr id='total_row'>
-            <td>总计</td>
-            <td>2</td>
-            <td>2</td>
-            <td>0</td>
-            <td>0</td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
 
-        <div id='ending'>&nbsp;</div>
-        
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('chart'));
-        // 指定图表的配置项和数据
-        var option = {
-            title : {
-                text: '测试执行情况',
-                x:'center'
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            color: ['#95b75d', 'grey', '#b64645'],
-            legend: {
-                orient: 'vertical',
-                left: 'left',
-                data: ['通过','失败','错误']
-            },
-            series : [
-                {
-                    name: '测试执行情况',
-                    type: 'pie',
-                    radius : '60%',
-                    center: ['50%', '60%'],
-                    data:[
-                        {value:2, name:'通过'},
-                        {value:0, name:'失败'},
-                        {value:0, name:'错误'}
-                    ],
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    </script>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase' width='300px'><div class='testcase'>test2_task_print: 进入测试荣誉页面</div></td>
+    <td colspan='5' align='left' width='600px'> <!--print 输出框位置-->
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:600px; margin:auto; border:1px solid #e1e1e1;">
     
+pt1_2: 用例成功!
+screenshot: 【Testin众测】-汇聚测试精英，提升软件质量！_众测荣誉_成功.png
+
+
+    </pre>
     </div>
+    </td>
+    <td align="right">
+        <a id="screen"  href="../screen_shot/【Testin众测】-汇聚测试精英，提升软件质量！_众测荣誉_成功.png
+" target="_blank">
+            <img  id="screen_shot" src="../screen_shot/【Testin众测】-汇聚测试精英，提升软件质量！_众测荣誉_成功.png
+"/>
+        </a>
+    </td>
+</tr>
+
+
+
+<tr class='passClass warning'>
+    <td>ZCuserhome_test.ZCuserhome_test</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',2)" class="detail" id='c2'>详细</a></td>
+    <td class="text-center">Assert or Error Image</td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase' width='300px'><div class='testcase'>test1_ZCsignin: 众测签到</div></td>
+    <td colspan='5' align='left' width='600px'> <!--print 输出框位置-->
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse in">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:600px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_1: 今日已签到，用例成功!
+screenshot: Testin众测_签到成功_今日已签到.png
+
+
+    </pre>
+    </div>
+    </td>
+    <td align="right">
+        <a id="screen"  href="../screen_shot/Testin众测_签到成功_今日已签到.png
+" target="_blank">
+            <img  id="screen_shot" src="../screen_shot/Testin众测_签到成功_今日已签到.png
+"/>
+        </a>
+    </td>
+</tr>
+
+
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase' width='300px'><div class='testcase'>test2_view_myrecode: 查看战绩</div></td>
+    <td colspan='5' align='left' width='600px'> <!--print 输出框位置-->
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse in">
+    <pre style="overflow-y:scroll; overflow-x:hidden;height:200px; width:600px; margin:auto; border:1px solid #e1e1e1;">
+    
+pt2_2: 用例通过,贡献率为:5.78 %
+screenshot: Testin众测_查看战绩_成功.png
+
+
+    </pre>
+    </div>
+    </td>
+    <td align="right">
+        <a id="screen"  href="../screen_shot/Testin众测_查看战绩_成功.png
+" target="_blank">
+            <img  id="screen_shot" src="../screen_shot/Testin众测_查看战绩_成功.png
+"/>
+        </a>
+    </td>
+</tr>
+
+
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>4</td>
+    <td>4</td>
+    <td>0</td>
+    <td>0</td>
+    <td>通过率：100.00%</td>
+    <td> <a href="" target="_blank"></a></td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+            <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('chart'));
+                // 指定图表的配置项和数据
+                var option = {
+                    title : {
+                        text: '测试执行情况',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    color: ['#95b75d', 'grey', '#b64645'],
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        data: ['通过','失败','错误']
+                    },
+                    series : [
+                        {
+                            name: '测试执行情况',
+                            type: 'pie',
+                            radius : '60%',
+                            center: ['50%', '60%'],
+                            data:[
+                                {value:4, name:'通过'},
+                                {value:0, name:'失败'},
+                                {value:0, name:'错误'}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
 </body>
 </html>

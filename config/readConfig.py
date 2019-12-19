@@ -31,7 +31,10 @@ class readConfig():
         values = config.items('Phone')
         values_dict = {}
         for i in values:
-            values_dict[i[0]] = i[1]
+            if i[0] == 'chromeOptions':
+                values_dict[i[0]] = eval(i[1])
+            else:
+                values_dict[i[0]] = i[1]
             if i[1] == 'True' or i[1] == 'False':
                 values_dict[i[0]] = bool(i[1])
         return values_dict
@@ -47,9 +50,15 @@ class readConfig():
             values_dict[i[0]] = i[1]
         return values_dict
 
+    def get_browser(self):
+        """
+        获取log配置信息
+        :return:
+        """
+        values = config.items('Browser')
+        values_dict = {}
+        for i in values:
+            values_dict[i[0]] = i[1]
+        return values_dict
 
-if __name__ == '__main__':
-
-    dict = readConfig().get_phone()
-    print(dict)
 

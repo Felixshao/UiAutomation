@@ -12,8 +12,10 @@ change_taskcontent = '1.selenium如何使用?\n' + '2.unittest框架如何实现
 wechat_nav_my = 'uiautomator->我'     # 导航栏我
 wechat_my_favorite = 'uiautomator->收藏'  # 我的页面收藏按钮
 wechat_favorite_search = 'accessibility id->搜索'     # 收藏页面搜索图标
-wechat_search_input = 'id->com.tencent.mm:id/l3'    # 收藏中搜索页面输入框
-wechat_search_result = 'id->com.tencent.mm:id/yk'   # 选择搜索结果第一个
+wechat_search_input = 'id->com.tencent.mm:id/l3'    # 收藏中搜索页面输入框(真机，努比亚)
+# wechat_search_input = 'id->com.tencent.mm:id/kh'    # 收藏中搜索页面输入(模拟器，夜神)
+wechat_search_result = 'id->com.tencent.mm:id/yk'   # 选择搜索结果第一个(真机，努比亚)
+# wechat_search_result = 'id->com.tencent.mm:id/bb'   # 选择搜索结果第一个(模拟器，夜神)
 wechat_xiaoenav_my = 'xpath->//div[@class="micro_wrapper"]/div[1]/div[1]/div[2]'     # 准现网我的按钮
 wechat_xiaoemy_task = 'xpath->//div[@class="function-card"]/div[3]'    # 准现网我的页面作业按钮
 wechat_xiaoetask_createtask = 'class->exercise-set-wrapper'     # 作业页面布置作业按钮
@@ -47,10 +49,12 @@ class weChatXiaoe_page(Page):
 
     def input_search_content(self):
         """在微信收藏页面搜索框输入内容,并点击"""
+        # self.dr.get_page_source('我的收藏搜索页面.xml')
         n = 0
         while True:
-            self.dr.send(wechat_search_input, '准现网')
+            self.dr.send(wechat_search_input, '准现网', default='搜索')
             flag, ele = self.dr.judge_element(wechat_search_result)
+            self.dr.get_page_source('微信我的收藏搜索结果页.xml')
             if flag:
                 ele.click()
                 break

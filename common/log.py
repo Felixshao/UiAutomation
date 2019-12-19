@@ -21,8 +21,8 @@ class Logger():
         self.backup_Count = 5  # log文件数量
 
         # 设置日志级别，日志级别：CRITICAL > ERROR > WARNING > INFO > DEBUG
-        self.file_output_lever = 'DEBUG'
-        self.console_output_lever = 'DEBUG'
+        self.file_output_lever = log['file_output_lever']
+        self.console_output_lever = log['console_output_lever']
 
         # 设置日志格式
         self.Formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

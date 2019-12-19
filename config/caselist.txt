@@ -1,2 +1,6 @@
 # 配置测试用例文件
-testcase/enterZC_test.py
+#testcase/enterZC_test.py
+#testcase/tgpIntergral_test.py
+#testcase/weChatXiaoe_test.py
+testcase/ZCtask_test.py
+testcase/ZCuserhome_test.py

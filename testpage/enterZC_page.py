@@ -1,49 +1,57 @@
 from common import basePage
 
+url = 'https://www.ztestin.com/'
+username = '15779582092'
+password = '13691916244shao'
+"""--------------------------------------------------- element ---------------------------------------------------"""
+zc_home_login = 'class->nav_fff'    # 众测首页登录按钮
+zc_login_user = 'id->login_email'   # 众测登录页面账号框
+zc_login_pass = 'id->login_password'    # 众测登录页面密码框
+zc_login_button = 'class->lg-login'     # 众测登录页面登录按钮
+zc_home_user = 'class->nav_per_wrap'    # 登录后，右上角用户名处元素
+
 
 class enterZC_page(basePage.Page):
 
+    def enter_zcAnd_login(self):
+        """打开众测登录,并进入兼职任务页面"""
+        self.into_ZC()
+        self.click_home_login()
+        self.input_user_name()
+        self.input_password()
+        self.click_login()
+        self.hover_user_window()
+        self.click_parttime_task()
+
     def into_ZC(self):
-        """打开百度页"""
-        url = 'https://www.ztestin.com/'
+        """打开众测"""
         self.dr.open_url(url)
 
-    def click_login_button(self):
+    def click_home_login(self):
         """众测首页，点击登录按钮"""
-        self.dr.click('class->nav_fff')
+        self.dr.click(zc_home_login)
 
     def input_user_name(self):
         """众测登录页面，输入账号"""
-        self.dr.send('id->login_email', '15779582092')
+        self.dr.send(zc_login_user, username)
 
     def input_password(self):
         """众测登录页面，输入密码"""
-        self.dr.send('id->login_password', '13691916244shao')
+        self.dr.send(zc_login_pass, password)
 
     def click_login(self):
         """众测登录页面，点击登录"""
-        self.dr.click('class->lg-login')
+        self.dr.click(zc_login_button)
+
+    def hover_user_window(self):
+        """选择用户名并悬停鼠标"""
+        self.dr.hover_element(zc_home_user)     # 用户信息处元素
 
     def click_parttime_task(self):
-        """登录成功后的首页， 悬停在用户上点击兼职任务"""
-        self.dr.hover_element('class->nav_per_wrap')     # 用户信息处元素
+        """在用户名鼠标悬停窗口上点击兼职任务"""
         self.dr.click('xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a')     # 兼职任务
 
-    def swipe_page(self):
-        """兼职任务页面，向下滑动页面"""
-        self.dr.js('window,scrollBy(0, 500)')   # 滑动500px
 
-    def click_filter_task(self):
-        """兼职任务页面，选择可参与筛选"""
-        self.dr.click('xpath->//div[@class="zhall-wrap"]/div[1]/ul[2]/li[3]')
-
-    def click_task(self):
-        """筛选后选择第一个任务"""
-        flag, ele = self.dr.judge_element('xpath->//div[@class="no-data"]/p')   # 判断是否有可参与任务
-        if not flag:
-            self.dr.click('xpath->//ul[@class="hall-list-wrap"]/li[1]/a/ul')    # 选择第一个任务
-        else:
-            print(ele.text)
 
 
 

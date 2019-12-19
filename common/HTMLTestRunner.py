@@ -652,6 +652,12 @@ class _TestResult(TestResult):
                 sys.stderr.write('.')
 
 
+import os
+from config.getProjectPath import get_project_path
+
+path = get_project_path()
+
+
 class HTMLTestRunner(Template_mixin):
 
     def __init__(self, stream=sys.stdout, verbosity=1, title=None, description=None):
@@ -812,10 +818,44 @@ class HTMLTestRunner(Template_mixin):
         desc = doc and ('%s: %s' % (name, doc)) or name
         tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL or self.REPORT_TEST_NO_OUTPUT_TMPL
 
+        # script = self.REPORT_TEST_OUTPUT_TMPL % dict(
+        #     id=tid,
+        #     output=saxutils.escape(o + e),
+        # )
+
+        # utf-8 支持中文 - Findyou
+        # o and e should be byte string because they are collected from stdout and stderr?
+        if isinstance(o, str):
+            # TODO: some problem with 'string_escape': it escape \n and mess up formating
+            # uo = unicode(o.encode('string_escape'))
+            # uo = o.decode('latin-1')
+            uo = o
+        else:
+            uo = o
+        if isinstance(e, str):
+            # TODO: some problem with 'string_escape': it escape \n and mess up formating
+            # ue = unicode(e.encode('string_escape'))
+            # ue = e.decode('latin-1')
+            ue = e
+        else:
+            ue = e
+
         script = self.REPORT_TEST_OUTPUT_TMPL % dict(
             id=tid,
-            output=saxutils.escape(o + e),
+            output=saxutils.escape(uo + ue),
         )
+        # 插入图片
+        unum = str(uo).rfind('screenshot:')
+        if ((uo or ue) and unum != -1):
+            hidde_status = ''
+            unum = str(uo).rfind('screenshot:')
+            image_url = os.path.join(path, 'report',
+                                     ('screen_shot\\' + str(uo)[unum + 11:unum + 34].replace(' ', '')))
+            print(image_url)
+
+        else:
+            hidde_status = '''hidden="hidden"'''
+            image_url = ''
 
         row = tmpl % dict(
             tid=tid,
@@ -823,6 +863,8 @@ class HTMLTestRunner(Template_mixin):
             style=(n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'none')),
             desc=desc,
             script=script,
+            hidde=hidde_status,
+            image=image_url,
             status=self.STATUS[n],
         )
         rows.append(row)

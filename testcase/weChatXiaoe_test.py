@@ -13,12 +13,12 @@ class weChatXiaoe_test(unittest.TestCase):
     def setUpClass(cls):
         log.info("****************************************  start  **************************************************")
         cls.dr = mySelenium()
-        cls.dr.mobile()
-        # cls.xiaoe = weChatXiaoe_page(cls.dr)
-        # cls.xiaoe.click_nav_my()
-        # cls.xiaoe.click_my_favorite()
-        # cls.xiaoe.click_favorite_search()
-        # cls.xiaoe.input_search_content()
+        cls.dr.caller_starup(source='mobile')
+        cls.xiaoe = weChatXiaoe_page(cls.dr)
+        cls.xiaoe.click_nav_my()
+        cls.xiaoe.click_my_favorite()
+        cls.xiaoe.click_favorite_search()
+        cls.xiaoe.input_search_content()
 
     @classmethod
     def tearDownClass(cls):

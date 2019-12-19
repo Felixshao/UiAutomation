@@ -24,10 +24,12 @@ def get_mobile():
         for i in range(1, row):
             dict = {}
             for j in range(1, col):
-                if table.cell_value(i, j) == 'True':
+                if table.cell_value(i, j) == 'True' or table.cell_value(i, j) == 'true':
                     dict[table.cell_value(0, j)] = True
-                elif table.cell_value(i, j) == 'False':
+                elif table.cell_value(i, j) == 'False' or table.cell_value(i, j) == 'false':
                     dict[table.cell_value(0, j)] = False
+                elif table.cell_value(0, j) == 'chromeOptions' and table.cell_value(i, j) != '':
+                    dict[table.cell_value(0, j)] = eval(table.cell_value(i, j).replace('\n', ''))
                 else:
                     dict[table.cell_value(0, j)] = table.cell_value(i, j)
             datas[int(table.cell_value(i, 0))] = dict

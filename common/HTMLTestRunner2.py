@@ -348,7 +348,8 @@ table       { font-size: 100%; }
 }
 /* -- report ------------------------------------------------------------------------ */
 #total_row  { font-weight: bold; }
-#screen_shot  { display: block; margin: auto; width: 150px}
+#screen_shot  { width:100%;}
+#screen {display:block; width:490px; height:240px; margin:0 30px 0 -240px;}
 #show_detail_line { vertical-align: middle;display: inline-block;position: relative;margin-bottom: 1ex; margin-top: 1ex;}
 .passCase   { color: #5cb85c; }
 .failCase   { color: #d9534f; font-weight: bold; }
@@ -449,7 +450,7 @@ table       { font-size: 100%; }
     </div>
     </td>
     <td align="right">
-        <a %(hidde)s href="%(image)s">
+        <a id="screen" %(hidde)s href="%(image)s" target="_blank">
             <img  id="screen_shot" src="%(image)s"/>
         </a>
     </td>
@@ -464,7 +465,7 @@ table       { font-size: 100%; }
     <td class='%(style)s'><div class='testcase'>%(desc)s</div></td>
     <td colspan='5' align='center'><span class="label label-success success">%(status)s</span></td>
     <td align="right">
-        <a %(hidde)s href="%(image)s">
+        <a id="screen" %(hidde)s href="%(image)s" target="_blank">
             <img id="screen_shot"  src="%(image)s" />
         </a>
     </td>
@@ -585,10 +586,6 @@ class _TestResult(TestResult):
         else:
             sys.stderr.write('F')
 
-import os
-from config.getProjectPath import get_project_path
-
-path = get_project_path()
 
 class HTMLTestRunner(Template_mixin):
     """
@@ -636,7 +633,7 @@ class HTMLTestRunner(Template_mixin):
         r = [(cls, rmap[cls]) for cls in classes]
         return r
 
-    #替换测试结果status为通过率 --Findyou
+    # 替换测试结果status为通过率 --Findyou
     def getReportAttributes(self, result):
         """
         Return report attributes as a list of (name, value).
@@ -788,8 +785,7 @@ class HTMLTestRunner(Template_mixin):
         if ((uo or ue) and unum !=-1):
             hidde_status = ''
             unum=str(uo).rfind('screenshot:')
-            image_url = '../screen_shot/'+str(uo)[unum+11:unum+34].replace(' ', '')
-            print(image_url)
+            image_url = '../screen_shot/'+str(uo)[unum+11:].replace(' ', '')
         else:
             hidde_status = '''hidden="hidden"'''
             image_url = ''

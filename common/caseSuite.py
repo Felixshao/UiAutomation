@@ -50,3 +50,15 @@ class caseSuite():
         return suiteset
 
 
+if __name__ == '__main__':
+
+    suite = caseSuite().set_case_suite()
+    num = 1
+    print(type(suite))
+    for i in suite:
+        print('{0}:{1}'.format(num, i))
+        num += 1
+        print(type(i))
+
+
+
