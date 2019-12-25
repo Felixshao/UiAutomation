@@ -51,7 +51,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # URL: http://tungwaiyip.info/software/HTMLTestRunner.html
 
-__author__ = "Felix Shao,  Test"
+__author__ = "Wai Yip Tung,  Findyou"
 __version__ = "0.8.2.1"
 
 
@@ -491,7 +491,6 @@ table       { font-size: 100%; }
 
 TestResult = unittest.TestResult
 
-
 class _TestResult(TestResult):
     # note: _TestResult is a pure representation of results.
     # It lacks the output and reporting ability compares to unittest._TextTestResult.
@@ -516,6 +515,7 @@ class _TestResult(TestResult):
         #增加一个测试通过率 --Findyou
         self.passrate = float(0)
 
+
     def startTest(self, test):
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
@@ -526,6 +526,7 @@ class _TestResult(TestResult):
         self.stderr0 = sys.stderr
         sys.stdout = stdout_redirector
         sys.stderr = stderr_redirector
+
 
     def complete_output(self):
         """
@@ -539,11 +540,13 @@ class _TestResult(TestResult):
             self.stderr0 = None
         return self.outputBuffer.getvalue()
 
+
     def stopTest(self, test):
         # Usually one of addSuccess, addError or addFailure would have been called.
         # But there are some path in unittest that would bypass this.
         # We must disconnect stdout in stopTest(), which is guaranteed to be called.
         self.complete_output()
+
 
     def addSuccess(self, test):
         self.success_count += 1
@@ -583,6 +586,10 @@ class _TestResult(TestResult):
         else:
             sys.stderr.write('F')
 
+import os
+from config.getProjectPath import get_project_path
+
+path = get_project_path()
 
 class HTMLTestRunner(Template_mixin):
     """
@@ -605,14 +612,16 @@ class HTMLTestRunner(Template_mixin):
 
         self.startTime = datetime.datetime.now()
 
+
     def run(self, test):
-        """Run the given test case or test suite."""
+        "Run the given test case or test suite."
         result = _TestResult(self.verbosity)
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
         print(sys.stderr, '\nTime Elapsed: %s' % (self.stopTime - self.startTime))
         return result
+
 
     def sortResult(self, result_list):
         # unittest does not seems to run in any particular order.
@@ -628,7 +637,7 @@ class HTMLTestRunner(Template_mixin):
         r = [(cls, rmap[cls]) for cls in classes]
         return r
 
-    # 替换测试结果status为通过率 --Findyou
+    #替换测试结果status为通过率 --Findyou
     def getReportAttributes(self, result):
         """
         Return report attributes as a list of (name, value).
@@ -662,12 +671,12 @@ class HTMLTestRunner(Template_mixin):
         ending = self._generate_ending()
         chart = self._generate_chart(result)
         output = self.HTML_TMPL % dict(
-            title=saxutils.escape(self.title),
-            generator=generator,
-            stylesheet=stylesheet,
-            heading=heading,
-            report=report,
-            ending=ending,
+            title = saxutils.escape(self.title),
+            generator = generator,
+            stylesheet = stylesheet,
+            heading = heading,
+            report = report,
+            ending = ending,
             chart_script=chart
         )
         self.stream.write(output.encode('utf8'))
@@ -675,7 +684,7 @@ class HTMLTestRunner(Template_mixin):
     def _generate_stylesheet(self):
         return self.STYLESHEET_TMPL
 
-    # 增加Tester显示 -Findyou
+    #增加Tester显示 -Findyou
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
@@ -692,7 +701,7 @@ class HTMLTestRunner(Template_mixin):
         )
         return heading
 
-    # 生成报告  --Findyou添加注释
+    #生成报告  --Findyou添加注释
     def _generate_report(self, result):
         rows = []
         sortedResult = self.sortResult(result.result)
@@ -755,7 +764,7 @@ class HTMLTestRunner(Template_mixin):
         tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
-        # o and e should be byte string because they are collected from stdout and stderr?
+         # o and e should be byte string because they are collected from stdout and stderr?
         if isinstance(o, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # uo = unicode(o.encode('string_escape'))
@@ -777,10 +786,12 @@ class HTMLTestRunner(Template_mixin):
         )
         # 插入图片
         unum = str(uo).rfind('screenshot:')
+        print('unum:', unum)
         if ((uo or ue) and unum !=-1):
             hidde_status = ''
             unum=str(uo).rfind('screenshot:')
             image_url = '../screen_shot/'+str(uo)[unum+11:].replace(' ', '')
+            print(image_url)
         else:
             hidde_status = '''hidden="hidden"'''
             image_url = ''
