@@ -4,3 +4,4 @@
 #testcase/weChatXiaoe_test.py
 testcase/ZCtask_test.py
 testcase/ZCuserhome_test.py
+testcase/ZCnotice_test.py

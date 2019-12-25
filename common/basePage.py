@@ -1,5 +1,6 @@
 import os
 from config.getProjectPath import get_project_path
+from common.BeautifulReport import BeautifulReport
 
 path = get_project_path()
 

@@ -9,6 +9,8 @@ zc_login_user = 'id->login_email'   # 众测登录页面账号框
 zc_login_pass = 'id->login_password'    # 众测登录页面密码框
 zc_login_button = 'class->lg-login'     # 众测登录页面登录按钮
 zc_home_user = 'class->nav_per_wrap'    # 登录后，右上角用户名处元素
+zc_home_parttimeask = 'xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a'  # 首页用户悬浮框的兼职任务
+zc_task_banner = 'class->task-banner-main'  # 众测任务页面banner图
 
 
 class enterZC_page(basePage.Page):
@@ -22,6 +24,12 @@ class enterZC_page(basePage.Page):
         self.click_login()
         self.hover_user_window()
         self.click_parttime_task()
+        flag, ele = self.dr.judge_element(zc_task_banner)
+        if flag:
+            pass
+        else:
+            self.dr.quit()
+            self.enter_zcAnd_login()
 
     def into_ZC(self):
         """打开众测"""
@@ -49,7 +57,12 @@ class enterZC_page(basePage.Page):
 
     def click_parttime_task(self):
         """在用户名鼠标悬停窗口上点击兼职任务"""
-        self.dr.click('xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a')     # 兼职任务
+        self.dr.click(zc_home_parttimeask)     # 兼职任务
+
+    def check_login(self):
+        """"""
+        flag, ele = self.dr.judge_element()
+        return flag
 
 
 

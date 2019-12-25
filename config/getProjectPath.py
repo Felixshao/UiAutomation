@@ -10,5 +10,3 @@ def get_project_path():
     project_path = os.path.abspath(os.path.dirname(current_path))   # 获取项目路径并返回绝对路径
 
     return project_path
-
-print(get_project_path())

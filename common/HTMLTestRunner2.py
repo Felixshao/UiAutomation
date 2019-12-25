@@ -51,7 +51,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # URL: http://tungwaiyip.info/software/HTMLTestRunner.html
 
-__author__ = "Wai Yip Tung,  Findyou"
+__author__ = "Felix Shao,  Test"
 __version__ = "0.8.2.1"
 
 
@@ -515,7 +515,6 @@ class _TestResult(TestResult):
         #增加一个测试通过率 --Findyou
         self.passrate = float(0)
 
-
     def startTest(self, test):
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
@@ -618,7 +617,6 @@ class HTMLTestRunner(Template_mixin):
         print(sys.stderr, '\nTime Elapsed: %s' % (self.stopTime - self.startTime))
         return result
 
-
     def sortResult(self, result_list):
         # unittest does not seems to run in any particular order.
         # Here at least we want to group them together by class.
@@ -667,12 +665,12 @@ class HTMLTestRunner(Template_mixin):
         ending = self._generate_ending()
         chart = self._generate_chart(result)
         output = self.HTML_TMPL % dict(
-            title = saxutils.escape(self.title),
-            generator = generator,
-            stylesheet = stylesheet,
-            heading = heading,
-            report = report,
-            ending = ending,
+            title=saxutils.escape(self.title),
+            generator=generator,
+            stylesheet=stylesheet,
+            heading=heading,
+            report=report,
+            ending=ending,
             chart_script=chart
         )
         self.stream.write(output.encode('utf8'))
@@ -680,7 +678,7 @@ class HTMLTestRunner(Template_mixin):
     def _generate_stylesheet(self):
         return self.STYLESHEET_TMPL
 
-    #增加Tester显示 -Findyou
+    # 增加Tester显示 -Findyou
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
@@ -697,7 +695,7 @@ class HTMLTestRunner(Template_mixin):
         )
         return heading
 
-    #生成报告  --Findyou添加注释
+    # 生成报告  --Findyou添加注释
     def _generate_report(self, result):
         rows = []
         sortedResult = self.sortResult(result.result)
@@ -760,7 +758,7 @@ class HTMLTestRunner(Template_mixin):
         tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
-         # o and e should be byte string because they are collected from stdout and stderr?
+        # o and e should be byte string because they are collected from stdout and stderr?
         if isinstance(o, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # uo = unicode(o.encode('string_escape'))

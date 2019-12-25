@@ -25,14 +25,14 @@ class ZCtask_test(unittest.TestCase):
     def tearDownClass(cls):
         # time.sleep(3)
         cls.dr.quit()
-        log.info('****************************************  start  **************************************************')
+        log.info('****************************************  end  **************************************************')
 
     def test1_view_task(self):
         """查看可参与任务"""
         self.task.click_filter_task()
         self.task.check_filtertask_result()
 
-    def test2_task_print(self):
+    def test2_view_honor(self):
         """进入测试荣誉页面"""
         self.task.click_zc_honor()
 

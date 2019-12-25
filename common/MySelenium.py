@@ -511,8 +511,9 @@ class mySelenium():
             log.error(e)
             raise
 
-    def quit(self):
+    def quit(self, sces=1):
         """关闭窗口/app"""
+        time.sleep(sces)
         t1 = time.time()
         self.driver.quit()
         log.info('{0} Quit window/app. spend {1} seconds'.format(success, time.time() - t1))
@@ -574,8 +575,15 @@ class mySelenium():
             log.error(e)
             raise
 
-    def js(self, js):
+    def win_scroll_page(self, num='0, 200'):
+        """window系统滚动页面"""
+        if ',' not in num:
+            raise NameError('Positioning syntax errors. lack of ","')
+        scroll = 'window.scrollBy(' + num + ')'
+        self.js(scroll)
 
+    def js(self, js):
+        """调用js语句"""
         t1 = time.time()
         try:
             self.driver.execute_script(js)
