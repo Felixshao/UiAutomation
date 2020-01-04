@@ -12,6 +12,7 @@ from appium.webdriver.common.mobileby import MobileBy as By
 from selenium.webdriver.common.action_chains import ActionChains
 from config.getProjectPath import get_project_path
 from config.readConfig import readConfig
+from common.BeautifulReport import BeautifulReport
 
 path = get_project_path()
 phone_data = get_mobile()[2]    # 选择设备和app
@@ -96,7 +97,8 @@ class mySelenium():
         except Exception as e:
             log.info('Open link {0}: {1}, spend {2} seconds'.format(fail, url, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(file_path=screenshot_path, case_name='打开url失败', source='web')
+            self.get_page_screenshot(file_path=screenshot_path, case_name=url + '_打开url失败')
+            BeautifulReport.add_test_img3(url + '_打开url失败')
             raise
 
     def max_window(self, source='web'):
@@ -111,12 +113,14 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Maximize window, spend {1} seconds'.format(fail, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='最大化窗口失败', source=source)
+            url = self.get_page_url()
+            self.get_page_screenshot(case_name=url + '_最大化窗口失败', source=source)
+            BeautifulReport.add_test_img3(url + '_最大化窗口失败')
             raise
 
     def find_element(self, css, secs=8, source='web'):
         """
-        封装查找元素方法，加入WebDriverWait
+        封装查找元素方法，加入WebDriverWait,判断元素是否在dom树中
         :param css:
         :param secs:
         :return:
@@ -158,110 +162,77 @@ class mySelenium():
                                                                     ((By.ACCESSIBILITY_ID, element)), message=message)
             else:
                 log.error('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
-                self.get_page_screenshot(case_name='元素错误', source=source)
+                # self.get_page_screenshot(case_name=element + '_元素错误', source=source)
+                # BeautifulReport.add_test_img3(element + '_元素错误')
                 raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
                                 '"text"、"uiautomator"、"accessibility id"')
             log.info('{0} Find element "{1}" through "{2}", spend {3} seconds'.format(success, element, by, time.time() - t1))
         except Exception as e:
             log.info('{0} Unable to find element "{1}" through "{2}", spend {3} seconds'.format(fail, element, by, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='元素错误', source=source)
+            # self.get_page_screenshot(case_name=element + '_元素错误', source=source)
+            # BeautifulReport.add_test_img3(element + '_元素错误')
             raise
         return webElement
 
-    def judge_element_presence(self, css, secs=5, source='web'):
+    def finds_element(self, css, secs=8, source='web'):
         """
-        判断元素是否存在，返回bool值
+        查找元素集，加入WebDriverWait
+        :param css:
+        :param secs:
         :return:
         """
         t1 = time.time()
         if '->' not in css:
-            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
-            raise NameError('Positioning syntax errors, lack of "->"')
+            log.error('Positioning syntax errors. element:"{0}" lack of "->"'.format(css))
+            raise NameError('Positioning syntax errors. lack of "->"')
         by = css.split('->')[0]
         if by == 'uiautomator':
-            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+            element = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
         else:
-            ele = css.split('->')[1]
-        flag = True
-        webElement = None
+            element = css.split('->')[1]
+        message = 'Element: "{0}" not fount in {1} seconds'.format(element, secs)
         try:
             if by == 'id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.ID, ele)))
+                webElements = \
+                    WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located((By.ID, element)), message=message)
             elif by == 'class':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.CLASS_NAME, ele)))
-            elif by == 'text':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.LINK_TEXT, ele)))
+                webElements = \
+                    WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located((By.CLASS_NAME, element)), message=message)
             elif by == 'name':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.NAME, ele)))
+                webElements = \
+                    WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located((By.NAME, element)), message=message)
             elif by == 'xpath':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.XPATH, ele)))
+                webElements = \
+                    WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located((By.XPATH, element)), message=message)
+            elif by == 'text':
+                webElements = \
+                    WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located((By.LINK_TEXT, element)), message=message)
+            elif by == 'css':
+                webElements = WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located
+                                                                    ((By.CSS_SELECTOR, element)), message=message)
             elif by == 'uiautomator':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
-                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
+                webElements = WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located
+                                                                    ((By.ANDROID_UIAUTOMATOR, element)), message=message)
             elif by == 'accessibility id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
-                                                                    ((By.ACCESSIBILITY_ID, ele)))
+                webElements = WebDriverWait(self.driver, secs).until(EC.presence_of_all_elements_located
+                                                                    ((By.ACCESSIBILITY_ID, element)), message=message)
             else:
-                flag = False
-                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
-                self.get_page_screenshot(case_name='元素错误', source=source)
+                log.error('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+                # self.get_page_screenshot(case_name=element + '_元素错误', source=source)
+                # BeautifulReport.add_test_img3(element + '_元素错误')
                 raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
                                 '"text"、"uiautomator"、"accessibility id"')
-            log.info('{0} Find targeting element:"{1}", spend {2} seconds'.format(success, css, time.time() - t1))
-        except:
-            flag = False
-            log.info('{0} Unable to find element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+            log.info('{0} Find element "{1}" through "{2}", spend {3} seconds'.format(success, element, by, time.time() - t1))
+        except Exception as e:
+            log.info('{0} Unable to find element "{1}" through "{2}", spend {3} seconds'.format(fail, element, by, time.time() - t1))
+            log.error(e)
+            # self.get_page_screenshot(case_name=element + '_元素错误', source=source)
+            # BeautifulReport.add_test_img3(element + '_元素错误')
+            raise
+        return webElements
 
-        return flag, webElement
-
-    def judge_element_clickable(self, css, secs=5, source='web'):
-        """
-        判断元素是否可点击，返回bool值和元素位置
-        :return:
-        """
-        t1 = time.time()
-        if '->' not in css:
-            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
-            raise NameError('Positioning syntax errors, lack of "->"')
-        by = css.split('->')[0]
-        if by == 'uiautomator':
-            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
-        else:
-            ele = css.split('->')[1]
-        flag = True
-        webElement = None
-        try:
-            if by == 'id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.ID, ele)))
-            elif by == 'class':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.CLASS_NAME, ele)))
-            elif by == 'text':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.LINK_TEXT, ele)))
-            elif by == 'name':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.NAME, ele)))
-            elif by == 'xpath':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.XPATH, ele)))
-            elif by == 'uiautomator':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
-                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
-            elif by == 'accessibility id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
-                                                                    ((By.ACCESSIBILITY_ID, ele)))
-            else:
-                flag = False
-                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
-                self.get_page_screenshot(case_name='元素错误', source=source)
-                raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
-                                '"text"、"uiautomator"、"accessibility id"')
-            log.info('{0} The element:"{1}" is clickable, spend {2} seconds'.format(success, css, time.time() - t1))
-        except:
-            flag = False
-            log.info('{0} The element:"{1}" is not clickable, spend {2} seconds'.format(fail, css, time.time() - t1))
-
-        return flag, webElement
-
-    def judge_element(self, css, secs=5, source='web'):
+    def judge_element(self, css, secs=8, source='web'):
         """
         判断元素是否存在，返回bool值和元素位置
         :param css: 定位方式和元素
@@ -299,13 +270,106 @@ class mySelenium():
             else:
                 flag = False
                 log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
-                self.get_page_screenshot(case_name='元素错误', source=source)
+                # self.get_page_screenshot(case_name=ele + '_元素错误', source=source)
+                # BeautifulReport.add_test_img3(ele + '_元素错误')
                 raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
                                 '"text"、"uiautomator"、"accessibility id"')
             log.info('{0} Find targeting element:"{1}", spend {2} seconds'.format(success, css, time.time() - t1))
         except:
             flag = False
             log.info('{0} Unable to find element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+
+        return flag, webElement
+
+    def judge_element_visibility(self, css, secs=5, source='web'):
+        """
+        判断元素是否可见（隐藏），返回bool值
+        :return:
+        """
+        t1 = time.time()
+        if '->' not in css:
+            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
+            raise NameError('Positioning syntax errors, lack of "->"')
+        by = css.split('->')[0]
+        if by == 'uiautomator':
+            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+        else:
+            ele = css.split('->')[1]
+        flag = True
+        try:
+            if by == 'id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.ID, ele)))
+            elif by == 'class':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.CLASS_NAME, ele)))
+            elif by == 'text':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.LINK_TEXT, ele)))
+            elif by == 'name':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.NAME, ele)))
+            elif by == 'xpath':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.XPATH, ele)))
+            elif by == 'uiautomator':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
+                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
+            elif by == 'accessibility id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
+                                                                    ((By.ACCESSIBILITY_ID, ele)))
+            else:
+                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+                # self.get_page_screenshot(case_name=ele + '_元素错误', source=source)
+                # BeautifulReport.add_test_img3(ele + '_元素错误')
+                raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
+                                '"text"、"uiautomator"、"accessibility id"')
+            log.info('{0} Find targeting element:"{1}", spend {2} seconds'.format(success, css, time.time() - t1))
+        except:
+            flag = False
+            log.info('{0} Unable to find element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+
+        return flag
+
+    def judge_element_clickable(self, css, secs=5, source='web'):
+        """
+        判断元素是否可点击，返回bool值和元素位置
+        :return:
+        """
+        t1 = time.time()
+        if '->' not in css:
+            log.info('{0} Positioning syntax errors:"{1}", lack of "->"'.format(fail, css))
+            raise NameError('Positioning syntax errors, lack of "->"')
+        by = css.split('->')[0]
+        if by == 'uiautomator':
+            ele = 'new UiSelector().text(\"' + css.split('->')[1] + '\")'
+        else:
+            ele = css.split('->')[1]
+        flag = True
+        webElement = None
+        try:
+            if by == 'id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.ID, ele)))
+            elif by == 'class':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.CLASS_NAME, ele)))
+            elif by == 'text':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.LINK_TEXT, ele)))
+            elif by == 'name':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.NAME, ele)))
+            elif by == 'xpath':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable((By.XPATH, ele)))
+            elif by == 'uiautomator':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
+                                                                    ((By.ANDROID_UIAUTOMATOR, ele)))
+            elif by == 'accessibility id':
+                webElement = WebDriverWait(self.driver, secs).until(EC.element_to_be_clickable
+                                                                    ((By.ACCESSIBILITY_ID, ele)))
+            else:
+                flag = False
+                log.info('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
+                # self.get_page_screenshot(case_name=ele + '_元素错误', source=source)
+                # BeautifulReport.add_test_img3(ele + '_元素错误')
+                raise NameError('Please enter the correct targeting elements,"id"、"class"、"name"、"xpath"、'
+                                '"text"、"uiautomator"、"accessibility id"')
+            log.info('{0} The element:"{1}" is clickable, spend {2} seconds'.format(success, css, time.time() - t1))
+        except:
+            flag = False
+            log.info('{0} The element:"{1}" is not clickable, spend {2} seconds'.format(fail, css, time.time() - t1))
 
         return flag, webElement
 
@@ -324,7 +388,8 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Unable to the element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='点击失败', source=source)
+            # self.get_page_screenshot(case_name=css + '_点击失败', source=source)
+            # BeautifulReport.add_test_img3(css + '_点击失败')
             raise
 
     def open_new_window(self, css, sces=8):
@@ -346,7 +411,8 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Click element:"css" open a new window and switch into. spend {1} seconds'.format(success, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(file_path=screenshot_path, case_name='新窗口', source='web')
+            # self.get_page_screenshot(file_path=screenshot_path, case_name=css + '_切换新窗口失败', source='web')
+            # BeautifulReport.add_test_img3(css + '_切换新窗口失败')
             raise
 
     def send(self, css, text, default=None, secs=8, source='web'):
@@ -367,7 +433,8 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(fail, css, text, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='写入失败', source=source)
+            # self.get_page_screenshot(case_name=css + '_写入失败', source=source)
+            # BeautifulReport.add_test_img3(css + '_写入失败')
             raise
 
     def js_send(self, css, text, secs=8, source='web'):
@@ -405,7 +472,8 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Send keys:"{1}" content: "{2}", spend {3} seconds'.format(fail, css, text, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='点击失败', source=source)
+            # self.get_page_screenshot(case_name=css + '_点击失败', source=source)
+            # BeautifulReport.add_test_img3(css + '_点击失败')
             raise
 
     def clear_text(self, ele, default=None, n=5):
@@ -434,15 +502,20 @@ class mySelenium():
         :param secs:
         :return:
         """
+
         t1 = time.time()
         try:
-            ele = self.find_element(css, secs)
-            text = ele.text
+            if '->' not in str(css):
+                text = css.text
+            else:
+                ele = self.find_element(css, secs)
+                text = ele.text
             log.info('{0} Get text of element:"{1}", spend {2} seconds'.format(success, text, time.time() - t1))
         except Exception as e:
             log.error('{0} Get text of element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='获取元素内容失败', source=source)
+            # self.get_page_screenshot(case_name=str(css) + '_获取元素内容失败', source=source)
+            # BeautifulReport.add_test_img3(str(css) + '_获取元素内容失败')
             raise
         return text
 
@@ -462,7 +535,9 @@ class mySelenium():
         except Exception as e:
             log.error('Fail get current page title, spend "{1}" seconds'.format(fail, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='获取页面标题失败', source=source)
+            url = self.get_page_url()
+            self.get_page_screenshot(case_name=url + '_获取页面标题失败', source=source)
+            BeautifulReport.add_test_img3(url + '_获取页面标题失败')
             raise
         return current_title
 
@@ -475,7 +550,9 @@ class mySelenium():
         except Exception as e:
             log.error('Fail get current page link, spend "{1}" seconds'.format(fail, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(case_name='获取页面链接失败', source=source)
+            title = self.get_page_title()
+            self.get_page_screenshot(case_name=title + '_获取页面链接失败', source=source)
+            BeautifulReport.add_test_img3(title + '_获取页面链接失败')
             raise
         return current_url
 
@@ -488,21 +565,10 @@ class mySelenium():
         """
         time.sleep(1)
         t1 = time.time()
-        if source == 'webview':
-            url = self.get_page_url()
-            img_name = self.get_page_title().replace(' ', '') + '_' + case_name + '.png'
-            self.switch_app_context()
-        elif source == 'web':
-            url = self.get_page_url()
-            img_name = self.get_page_title().replace(' ', '') + '_' + case_name + '.png'
-        elif source == 'app':
-            activity = self.get_app_activity().split('.')[-1]
-            img_name = activity + '_' + case_name + '.png'
-        else:
-            img_name = 'test_' + case_name + '.png'
+        img_name = case_name + '.png'
         try:
             self.driver.save_screenshot(os.path.join(file_path, img_name))  # 截取当前页面图片
-            print("screenshot:", img_name)  # 图片写入测试报告
+            # print("screenshot:", img_name)  # 图片写入测试报告
             if source == 'webview':
                 self.switch_app_context()
             log.info('{0} Get current page screenshot, spend {1} seconds'.format(success, time.time() - t1))
@@ -656,7 +722,8 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Not find the activity:{1}， spend {2} seconds'.format(fail, activity, time.time() - t1))
             log.error(e)
-            self.get_page_screenshot(file_path=screenshot_path, case_name='等待activity', source='app')
+            self.get_page_screenshot(file_path=screenshot_path, case_name=activity + '_等待activity', source='app')
+            BeautifulReport.add_test_img3(activity + '_等待activity')
             raise
 
     def switch_context(self, context):

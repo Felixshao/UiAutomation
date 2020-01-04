@@ -19,14 +19,24 @@ from distutils.sysconfig import get_python_lib
 import traceback
 from functools import wraps
 from config.getProjectPath import get_project_path
+from common.log import Logger
 
 path = get_project_path()
+log = Logger('common.BeautifulReport').get_logger()
 
 __all__ = ['BeautifulReport']
 
+# 接收base64位图片地址
 HTML_IMG_TEMPLATE = """
-    <a href="data:image/png;base64, {}" target="_blank">
+    <a href="{}" target="_blank" id='aClick'>
     <img src="data:image/png;base64, {}" height="500px"/>
+    </a>
+    <br></br>
+"""
+
+HTML_IMG_TEMPLATE2 = """
+    <a href="{}" target="_blank" id='aClick'>
+    <img src="{}" height="500px"/>
     </a>
     <br></br>
 """
@@ -173,7 +183,7 @@ class ReportTestResult(unittest.TestResult):
     
     def stopTest(self, test) -> None:
         """
-            当测试用力执行完成后进行调用
+            当测试用例执行完成后进行调用
         :return:
         """
         self.end_time = '{0:.3} s'.format((time.time() - self.start_time))
@@ -203,6 +213,28 @@ class ReportTestResult(unittest.TestResult):
             item = json.loads(str(MakeResultJson(item)))
             FIELDS.get('testResult').append(item)
         FIELDS['testAll'] = len(self.result_list)                            # 标记
+        FIELDS['testName'] = title if title else self.default_report_name
+        FIELDS['testFail'] = self.failure_count
+        FIELDS['beginTime'] = self.begin_time
+        end_time = int(time.time())
+        start_time = int(time.mktime(time.strptime(self.begin_time, '%Y-%m-%d %H:%M:%S')))
+        FIELDS['totalTime'] = str(end_time - start_time) + 's'
+        FIELDS['testError'] = self.error_count
+        FIELDS['testSkip'] = self.skipped
+        self.FIELDS = FIELDS
+        return FIELDS
+
+    def stopTestRun2(self, title=None, result_list=None) -> dict:
+        """
+            所有测试执行完成后, 执行该方法
+        :param title:
+        :return:
+        """
+        FIELDS['testPass'] = self.success_counter
+        for item in result_list:
+            item = json.loads(str(MakeResultJson(item)))
+            FIELDS.get('testResult').append(item)
+        FIELDS['testAll'] = len(result_list)  # 标记
         FIELDS['testName'] = title if title else self.default_report_name
         FIELDS['testFail'] = self.failure_count
         FIELDS['beginTime'] = self.begin_time
@@ -339,7 +371,6 @@ class ReportTestResult(unittest.TestResult):
 
 
 class BeautifulReport(ReportTestResult, PATH):
-    img_path2 = os.path.join(path, 'report', 'screen_shot', '\\')  # 设置截图地址
     img_path = 'screen_shot/' if platform.system() != 'Windows' else 'screen_shot\\'    # 设置截图地址
     
     def __init__(self, suites, verbosity=1):
@@ -350,12 +381,13 @@ class BeautifulReport(ReportTestResult, PATH):
         self.filename = 'report.html'
         self.verbosity = verbosity
 
-    def report(self, description, filename: str = None, log_path='.'):
+    def report(self, description, filename: str = None, log_path='.', process=False):
         """
             生成测试报告,并放在当前运行路径下
         :param log_path: 生成report的文件存储路径
         :param filename: 生成文件的filename
         :param description: 生成文件的注释
+        :param process:是否使用多进程
         :return:
         """
         if filename:
@@ -367,11 +399,19 @@ class BeautifulReport(ReportTestResult, PATH):
         # self.log_path = os.path.abspath(log_path)
         self.log_path = log_path
         self.suites.run(result=self)
-        self.stopTestRun(self.title)
+        self.stopTestRun2(self.title, result_list=self.result_list)
+        if not process:
+            self.output_report()
+            text = '\n测试已全部完成, 可前往{}\查询测试报告'.format(self.log_path)
+            print(text)
+        return self.FIELDS
+
+    def stop_output(self, log_path='.', FIELDS=None):
+        """适用于多线程输出报告"""
+        self.log_path = log_path
+        self.FIELDS = FIELDS
         self.output_report()
-        text = '\n测试已全部完成, 可前往{}\查询测试报告'.format(self.log_path)
-        print(text)
-    
+
     def output_report(self):
         """
             生成测试报告到指定路径下
@@ -382,7 +422,6 @@ class BeautifulReport(ReportTestResult, PATH):
         #     os.path.abspath(self.log_path).endswith('/') else \
         #     os.path.abspath(self.log_path) + '/'
         override_path = self.log_path
-        
         with open(template_path, 'rb') as file:
             body = file.readlines()
         with open(override_path + self.filename, 'wb') as write_file:
@@ -394,7 +433,7 @@ class BeautifulReport(ReportTestResult, PATH):
                     item = ''.join(item).encode()
                     item = bytes(item) + b';\n'
                 write_file.write(item)
-    
+
     @staticmethod
     def img2base(img_path: str, file_name: str) -> str:
         """
@@ -404,23 +443,19 @@ class BeautifulReport(ReportTestResult, PATH):
         :return:
         """
         pattern = '/' if platform != 'Windows' else '\\'
-
         with open(img_path + pattern + file_name, 'rb') as file:
             data = file.read()
         return base64.b64encode(data).decode()
 
     def add_test_img(*pargs):
         """
-            接受若干个图片元素, 并展示在测试报告中
+        接受若干个图片元素，并将图片地址转为base64位, 并展示在测试报告中
         :param pargs:
         :return:
         """
-
         def _wrap(func):
             @wraps(func)
             def __wrap(*args, **kwargs):
-                # img_path = os.path.abspath('{}'.format(BeautifulReport.img_path))
-
                 img_path = os.path.join(path, 'report', BeautifulReport.img_path)  # 配置截图路径
                 try:
                     result = func(*args, **kwargs)
@@ -429,7 +464,9 @@ class BeautifulReport(ReportTestResult, PATH):
                         save_img = getattr(args[0], 'save_img')
                         save_img(func.__name__)
                         data = BeautifulReport.img2base(img_path, pargs[0] + '.png')
-                        print(HTML_IMG_TEMPLATE.format(data, data))
+                        # print(HTML_IMG_TEMPLATE.format(data, data))
+                        img = os.path.join('..', 'screen_shot', pargs[0] + '.png')  # 图片地址
+                        print(HTML_IMG_TEMPLATE.format(img, data))
                     sys.exit(0)
                 print('<br></br>')
 
@@ -438,14 +475,75 @@ class BeautifulReport(ReportTestResult, PATH):
                         print(parg + ':')
                         try:
                             data = BeautifulReport.img2base(img_path, parg + '.png')
-                            print(HTML_IMG_TEMPLATE.format(data, data))
+                            img = os.path.join('..', 'screen_shot', parg + '.png')  # 图片地址
+                            print(HTML_IMG_TEMPLATE.format(img, data))
+                            # print(HTML_IMG_TEMPLATE.format(data, data))
                         except FileNotFoundError as f:
                             print('msg:', f)
                     return result
                 if not os.path.exists(img_path + pargs[0] + '.png'):
                     return result
                 data = BeautifulReport.img2base(img_path, pargs[0] + '.png')
-                print(HTML_IMG_TEMPLATE.format(data, data))
+                img = os.path.join('..', 'screen_shot', pargs[0] + '.png')  # 图片地址
+                print(HTML_IMG_TEMPLATE.format(img, data))
+                # print(HTML_IMG_TEMPLATE.format(data, data))
                 return result
             return __wrap
         return _wrap
+
+    def add_test_img2(*pargs):
+        """
+        装饰器，接受若干个图片元素, 并展示在测试报告中
+        :param pargs:
+        :return:
+        """
+        def _wrap(func):
+            @wraps(func)
+            def __wrap(*args, **kwargs):
+                img_path = os.path.join(path, 'report', BeautifulReport.img_path)  # 配置截图路径
+                try:
+                    result = func(*args, **kwargs)
+                except Exception:
+                    if 'save_img' in dir(args[0]):
+                        save_img = getattr(args[0], 'save_img')
+                        save_img(func.__name__)
+                        img = os.path.join('..', 'screen_shot', pargs[0] + '.png')  # 图片地址
+                        print(HTML_IMG_TEMPLATE2.format(img, img))
+                    sys.exit(0)
+
+                if len(pargs) > 1:
+                    for parg in pargs:
+                        try:
+                            img = os.path.join('..', 'screen_shot', parg + '.png')  # 图片地址
+                            if os.path.exists(img_path + parg + '.png'):
+                                print('data:', parg)
+                                print(HTML_IMG_TEMPLATE2.format(img, img))
+                        except FileNotFoundError as f:
+                            print('msg:', f)
+                    return result
+                if not os.path.exists(img_path + pargs[0] + '.png'):
+                    return result
+                img = os.path.join('..', 'screen_shot', pargs[0] + '.png')  # 图片地址
+                print(HTML_IMG_TEMPLATE2.format(img, img))
+                return result
+            return __wrap
+        return _wrap
+
+    @staticmethod
+    def add_test_img3(parg):
+        """
+        接受单个图片元素, 并展示在测试报告中
+        :param pargs:
+        :return:
+        """
+        img_path = os.path.join(path, 'report', BeautifulReport.img_path)  # 配置截图路径
+        try:
+            img = os.path.join('..', 'screen_shot', parg + '.png')  # 图片地址
+            if os.path.exists(img_path + parg + '.png'):
+                print('data:', parg)
+                print(HTML_IMG_TEMPLATE2.format(img, img))
+                log.info('Success insert screenshot, img:{0}'.format(os.path.join(img_path, parg + '.png')))
+            else:
+                log.info('无截图， img_path:{0}'.format(os.path.join(img_path, parg + '.png')))
+        except FileNotFoundError as f:
+                print('msg:', f)

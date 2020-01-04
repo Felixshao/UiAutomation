@@ -5,3 +5,4 @@
 testcase/ZCtask_test.py
 testcase/ZCuserhome_test.py
 testcase/ZCnotice_test.py
+testcase/ZChonor_test.py

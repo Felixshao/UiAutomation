@@ -31,7 +31,7 @@ class enterApp_page(Page):
         tgp登录主函数
         :return:
         """
-        flag, ele = self.dr.judge_element_presence(tgp_login_button)     # 判断app是否已登录
+        flag, ele = self.dr.judge_element(tgp_login_button)     # 判断app是否已登录
         try:
             if flag:
                 self.qq_login(ele)
@@ -40,7 +40,7 @@ class enterApp_page(Page):
             else:
                 self.lgnore_update()
                 self.dr.click(tgp_nav_my)
-                flag, loginPop_login = self.dr.judge_element_presence(tgp_loginPop_login)
+                flag, loginPop_login = self.dr.judge_element(tgp_loginPop_login)
                 if flag:
                     loginPop_login.click()
                     self.qq_login()
@@ -57,7 +57,7 @@ class enterApp_page(Page):
         :return:
         """
         # 首次登录的qq进入资料完善页面，找到确认按钮
-        flag, ele = self.dr.judge_element_presence(tgp_updatePop_later)  # 找到弹窗以后再说按钮
+        flag, ele = self.dr.judge_element(tgp_updatePop_later)  # 找到弹窗以后再说按钮
         if flag:
             ele.click()
             log.info('Success find update window, update later.')
@@ -67,7 +67,7 @@ class enterApp_page(Page):
         判断是否为首次登录，首次登录完善资料
         :return:
         """
-        flag, infomation = self.dr.judge_element_presence(tgp_infomation_confirm)  # 完善资料页面确认按钮
+        flag, infomation = self.dr.judge_element(tgp_infomation_confirm)  # 完善资料页面确认按钮
         if flag:
             infomation.click()
             try:
@@ -91,8 +91,8 @@ class enterApp_page(Page):
             ele = self.dr.find_element(tgp_login_button)
         log.info('"{0}" is not logged in, start the login operation.'.format(phone['Appname']))
         ele.click()
-        flag, login_button = self.dr.judge_element_presence(tgp_qq_warrant)  # 判断手机qq是否已登录,找到授权qq登录按钮
-        flag2, qq_user = self.dr.judge_element_presence(tgp_qqLogin_user)  # 找到qq登录页面账号框
+        flag, login_button = self.dr.judge_element(tgp_qq_warrant)  # 判断手机qq是否已登录,找到授权qq登录按钮
+        flag2, qq_user = self.dr.judge_element(tgp_qqLogin_user)  # 找到qq登录页面账号框
         if flag:
             login_button.click()
             log.info('Success logged into the "{0}"'.format(phone['Appname']))

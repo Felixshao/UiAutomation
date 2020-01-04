@@ -517,6 +517,7 @@ class _TestResult(TestResult):
         self.passrate = float(0)
 
     def startTest(self, test):
+
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
         self.outputBuffer = StringIO()
@@ -699,7 +700,7 @@ class HTMLTestRunner(Template_mixin):
         for cid, (cls, cls_results) in enumerate(sortedResult):
             # subtotal for a class
             np = nf = ne = 0
-            for n,t,o,e in cls_results:
+            for n, t, o, e in cls_results:
                 if n == 0: np += 1
                 elif n == 1: nf += 1
                 else: ne += 1

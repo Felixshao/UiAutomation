@@ -19,7 +19,7 @@ class ZCuserhome_page(Page):
         """点击个人主页按钮"""
         self.dr.click(zc_user_home)
 
-    @BeautifulReport.add_test_img('test_签到成功', 'test_签到失败_无弹窗', 'test_签到成功_今日已签到', 'test_签到失败_未知原因')
+    @BeautifulReport.add_test_img2('签到成功', '签到失败_无弹窗', '签到成功_今日已签到', '签到失败_未知原因')
     def click_userhome_signin(self):
         """点击签到按钮,并判断是否成功"""
         text = self.dr.get_ele_content(zc_userhome_signin)
@@ -46,7 +46,7 @@ class ZCuserhome_page(Page):
             log.error('Fail signin case, msg:unkonwn reason!')
             assert False
 
-    @BeautifulReport.add_test_img('test_查看战绩_成功', 'test_查看战绩_失败')
+    @BeautifulReport.add_test_img2('查看战绩_失败', '查看战绩_成功')
     def click_userhome_myrecord(self):
         """点击我的战绩,并输出贡献率"""
         self.dr.click(zc_userhome_myrecord)
@@ -60,4 +60,5 @@ class ZCuserhome_page(Page):
             print('用例失败')
             log.info('Fail case!')
             self.dr.get_page_screenshot(file_path=self.img_path, case_name='查看战绩_失败', source='other')
+            BeautifulReport.add_test_img('test_查看战绩_失败')
             assert flag

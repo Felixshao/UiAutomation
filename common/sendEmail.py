@@ -7,7 +7,8 @@ from common.log import Logger
 
 path = get_project_path()
 email_data = readConfig().get_email()
-log_path = os.path.join(path, 'report', 'log', 'logs.log')
+load_time = time.strftime('%Y-%m-%d', time.localtime())
+log_path = os.path.join(path, 'report', 'log', 'logs' + str(load_time) + '.log')
 report_path = os.path.join(path, 'report', 'report', 'report.html')
 log = Logger('sendEmail').get_logger()
 

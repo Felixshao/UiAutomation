@@ -30,7 +30,7 @@ class ZCnotice_page(Page):
         """通知页面点击新任务推荐按钮"""
         self.dr.click(zc_notice_newtask)
 
-    @BeautifulReport.add_test_img('test_阅读未读消息_成功', 'test_阅读未读消息_失败', 'test_新任务推荐暂无未读消息')
+    @BeautifulReport.add_test_img2('阅读未读消息_成功', '阅读未读消息_失败', '新任务推荐暂无未读消息')
     def click_newtask_unread(self):
         """新任务推荐按钮栏下点击第一条未读消息的任务推荐按钮"""
         flag, ele = self.dr.judge_element(zc_newtask_unread_content)
@@ -52,7 +52,7 @@ class ZCnotice_page(Page):
             print('当前页无未读消息')
             self.dr.get_page_screenshot(case_name='新任务推荐暂无未读消息', source='other')
 
-    @BeautifulReport.add_test_img('test_查看运营活动_成功', 'test_查看运营活动_失败', 'test_运营活动暂无此类消息')
+    @BeautifulReport.add_test_img2('查看运营活动_成功', '查看运营活动_失败', '运营活动暂无此类消息')
     def click_notice_operation(self):
         """通知页面点击运营活动按钮"""
         self.dr.click(zc_notice_operation)
@@ -75,7 +75,7 @@ class ZCnotice_page(Page):
             log.info('Success view operation case, promat:"{}"'.format(prompt))
             self.dr.get_page_screenshot(case_name='运营活动暂无此类消息', source='other')
 
-    @BeautifulReport.add_test_img('test_查看官方公告_成功', 'test_查看官方公告_失败', 'test_官方公告暂无此类消息')
+    @BeautifulReport.add_test_img2('查看官方公告_成功', '查看官方公告_失败', '官方公告暂无此类消息')
     def click_notice_official(self):
         """通知页面点击官方公告按钮"""
         self.dr.click(zc_notice_official)
