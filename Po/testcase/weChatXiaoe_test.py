@@ -2,7 +2,7 @@ import unittest
 import time
 from common.log import Logger
 from common.MySelenium import mySelenium
-from testpage.weChatXiao_page import weChatXiaoe_page
+from Po.testpage.weChatXiao_page import weChatXiaoe_page
 
 log = Logger('testcase.weChatXiaoe_test').get_logger()
 

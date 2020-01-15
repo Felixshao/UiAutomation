@@ -1,5 +1,5 @@
 from common.Mymoible import Mymobile
-from testpage.tgpIntergral_page import tgpIntergral_page
+from Po.testpage.tgpIntergral_page import tgpIntergral_page
 
 
 class tgpIntergral_test(Mymobile):

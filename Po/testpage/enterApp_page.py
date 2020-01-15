@@ -1,5 +1,4 @@
 import time
-
 from common.basePage import Page
 from common.log import Logger
 from config.getMobile import get_mobile

@@ -89,6 +89,7 @@ class mySelenium():
                 self.browser(browser=browser_data['chrome'])
                 break
 
+    # @BeautifulReport.add_test_img2('打开url失败')
     def open_url(self, url):
         t1 = time.time()
         try:
@@ -138,27 +139,27 @@ class mySelenium():
         try:
             if by == 'id':
                 webElement = \
-                    WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.ID, element)), message=message)
+                    WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.ID, element)), message=message)
             elif by == 'class':
                 webElement = \
-                    WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.CLASS_NAME, element)), message=message)
+                    WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.CLASS_NAME, element)), message=message)
             elif by == 'name':
                 webElement = \
-                    WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.NAME, element)), message=message)
+                    WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.NAME, element)), message=message)
             elif by == 'xpath':
                 webElement = \
-                    WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.XPATH, element)), message=message)
+                    WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.XPATH, element)), message=message)
             elif by == 'text':
                 webElement = \
-                    WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.LINK_TEXT, element)), message=message)
+                    WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.LINK_TEXT, element)), message=message)
             elif by == 'css':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
                                                                     ((By.CSS_SELECTOR, element)), message=message)
             elif by == 'uiautomator':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
                                                                     ((By.ANDROID_UIAUTOMATOR, element)), message=message)
             elif by == 'accessibility id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
                                                                     ((By.ACCESSIBILITY_ID, element)), message=message)
             else:
                 log.error('{0} Targeting elements error:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
@@ -252,20 +253,20 @@ class mySelenium():
         webElement = None
         try:
             if by == 'id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.ID, ele)))
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.ID, ele)))
             elif by == 'class':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.CLASS_NAME, ele)))
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.CLASS_NAME, ele)))
             elif by == 'text':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.LINK_TEXT, ele)))
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.LINK_TEXT, ele)))
             elif by == 'name':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.NAME, ele)))
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.NAME, ele)))
             elif by == 'xpath':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located((By.XPATH, ele)))
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located((By.XPATH, ele)))
             elif by == 'uiautomator':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
                                                                     ((By.ANDROID_UIAUTOMATOR, ele)))
             elif by == 'accessibility id':
-                webElement = WebDriverWait(self.driver, secs).until(EC.presence_of_element_located
+                webElement = WebDriverWait(self.driver, secs).until(EC.visibility_of_element_located
                                                                     ((By.ACCESSIBILITY_ID, ele)))
             else:
                 flag = False
@@ -388,11 +389,11 @@ class mySelenium():
         except Exception as e:
             log.info('{0} Unable to the element:"{1}", spend {2} seconds'.format(fail, css, time.time() - t1))
             log.error(e)
-            # self.get_page_screenshot(case_name=css + '_点击失败', source=source)
-            # BeautifulReport.add_test_img3(css + '_点击失败')
+            self.get_page_screenshot(case_name=css + '_点击失败', source=source)
+            BeautifulReport.add_test_img3(css + '_点击失败')
             raise
 
-    def open_new_window(self, css, sces=8):
+    def switch_new_window(self, css, secs=8):
         """
         打开新窗口并切换到新窗口
         :param css:
@@ -402,7 +403,8 @@ class mySelenium():
         t1 = time.time()
         try:
             current_handle = self.driver.current_window_handle
-            self.click(css, sces)
+            self.click(css, secs)
+            time.sleep(2)
             all_handles = self.driver.window_handles
             for handle in all_handles:
                 if handle != current_handle:
@@ -480,6 +482,7 @@ class mySelenium():
         """
         清除文本框内容
         :param ele: webelement元素
+        :param default: 输入框默认文本
         :param n: 循环次数
         :return:
         """

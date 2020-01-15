@@ -15,7 +15,7 @@ class clearFolder():
         self.log_path = os.path.join(path, 'report', 'log')
         self.report_path = os.path.join(path, 'report', 'report')
 
-    def clear_folder(self):
+    def clear_screenshot(self):
         """清空截图文件夹内容"""
         try:
             for i in os.listdir(self.screen_shot_path):     # 循环取出文件内容
@@ -31,6 +31,19 @@ class clearFolder():
         except FileNotFoundError as file:
             os.mkdir(self.screen_shot_path)
             log.info('Success mkdir folder;"{0}"'.format(self.screen_shot_path))
+            log.info(file)
+
+    def clear_report(self):
+        """清空报告内容"""
+        try:
+            for i in os.listdir(self.report_path):     # 循环取出文件内容
+                file = os.path.join(self.report_path, i)
+                if os.path.isfile(file):    # 判断是否为文件
+                    os.remove(file)     # 移除文件
+            log.info('Success clear folder;"{0}" content'.format(self.report_path))
+        except FileNotFoundError as file:
+            os.mkdir(self.report_path)
+            log.info('Success mkdir folder;"{0}"'.format(self.report_path))
             log.info(file)
     """----------------------------------------------------------------------------------------------------------"""
     def rmove_folder(self):
@@ -49,4 +62,4 @@ class clearFolder():
 if __name__ == '__main__':
 
     cle = clearFolder()
-    cle.clear_folder()
+    cle.clear_report()

@@ -15,7 +15,7 @@ class caseSuite():
     """
     def __init__(self):
         self.caseList = read_caseList().get_case()     # 测试用例文件
-        self.caseFile = os.path.join(path, 'testcase')  # 测试用例目录
+        self.caseFile = os.path.join(path, 'Po', 'testcase')  # 测试用例目录
 
     def set_case_suite(self):
         """
