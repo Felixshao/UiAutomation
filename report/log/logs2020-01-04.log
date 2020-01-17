@@ -2369,3 +2369,235 @@ from unknown error: web view not found
 2020-01-04 15:30:15,936 - testcase.ZCtasg_test - INFO - ****************************************  end  **************************************************
 2020-01-04 15:30:15,973 - common.runReport - INFO - MoreProcess end.start Transfer data and generate reports...
 2020-01-04 15:30:15,986 - common.runReport - INFO - End of the project.Please see the report!
+2020-01-04 22:50:53,637 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content
+2020-01-04 22:50:53,638 - config.readCaselist - INFO - Success read the caseFile and save it to the list, spend 0.0 seconds
+2020-01-04 22:50:53,741 - config.getMobile - INFO - Success get mobile data, spend 0.04261326789855957 seconds
+2020-01-04 22:50:53,773 - common.caseSuite - INFO - Success get caseSuite, spend 0.13435697555541992 seconds
+2020-01-04 22:50:53,773 - common.runReport - INFO - start moreProcess!
+2020-01-04 22:50:54,034 - config.getMobile - INFO - Success get mobile data, spend 0.0065157413482666016 seconds
+2020-01-04 22:50:54,038 - testcase.ZCuserhome_test - INFO - ****************************************  start  **************************************************
+2020-01-04 22:50:54,039 - common.mySelenium - INFO - Start a new browser: chrome
+2020-01-04 22:50:54,039 - common.mySelenium - INFO - Start a new browser: chrome
+2020-01-04 22:50:54,052 - config.getMobile - INFO - Success get mobile data, spend 0.00601506233215332 seconds
+2020-01-04 22:50:54,056 - testcase.ZCtasg_test - INFO - ****************************************  start  **************************************************
+2020-01-04 22:50:54,057 - common.mySelenium - INFO - Start a new browser: chrome
+2020-01-04 22:50:54,065 - config.getMobile - INFO - Success get mobile data, spend 0.006016969680786133 seconds
+2020-01-04 22:50:54,069 - testcase.ZChonor_test - INFO - ****************************************  start  **************************************************
+2020-01-04 22:50:54,070 - common.mySelenium - INFO - Start a new browser: chrome
+2020-01-04 22:50:58,983 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-01-04 22:50:58,983 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-01-04 22:50:58,983 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-01-04 22:51:00,104 - common.mySelenium - INFO - Success Maximize window, spend 1.1204888820648193 seconds
+2020-01-04 22:51:00,104 - common.mySelenium - INFO - Success Maximize window, spend 1.1204888820648193 seconds
+2020-01-04 22:51:00,104 - common.mySelenium - INFO - Success Maximize window, spend 1.1204888820648193 seconds
+2020-01-04 22:51:00,105 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.0015041828155517578 seconds
+2020-01-04 22:51:00,105 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.0015041828155517578 seconds
+2020-01-04 22:51:00,105 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.0015041828155517578 seconds
+2020-01-04 22:51:01,110 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 1.0041801929473877 seconds
+2020-01-04 22:51:01,191 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 1.0859098434448242 seconds
+2020-01-04 22:51:01,223 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 1.1169919967651367 seconds
+2020-01-04 22:51:02,172 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 2.066390037536621 seconds
+2020-01-04 22:51:02,331 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 2.2258141040802 seconds
+2020-01-04 22:51:02,335 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 2.2298247814178467 seconds
+2020-01-04 22:51:02,336 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 2.229825019836426 seconds
+2020-01-04 22:51:02,346 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 2.2403528690338135 seconds
+2020-01-04 22:51:03,039 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.7069094181060791 seconds
+2020-01-04 22:51:03,050 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.7139286994934082 seconds
+2020-01-04 22:51:03,051 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.7159345149993896 seconds
+2020-01-04 22:51:03,056 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.7099182605743408 seconds
+2020-01-04 22:51:03,086 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="0ec7751bf75e15af04a31538fe2505b8", element="0.3193486601003297-1")>" content, this is show:""
+2020-01-04 22:51:03,088 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="2ae3d27db3dcbb75ef98001abaad80b0", element="0.6556264088875656-1")>" content, this is show:""
+2020-01-04 22:51:03,088 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="624d464c5ca8d34dedd825adb03995f5", element="0.3259185875045072-1")>" content, this is show:""
+2020-01-04 22:51:03,090 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="7e17f5295c510580394f1b28198e1408", element="0.5264279573264969-1")>" content, this is show:""
+2020-01-04 22:51:03,140 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.7941415309906006 seconds
+2020-01-04 22:51:03,140 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.8046703338623047 seconds
+2020-01-04 22:51:03,142 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.8071763515472412 seconds
+2020-01-04 22:51:03,142 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.8106851577758789 seconds
+2020-01-04 22:51:03,148 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.007520914077758789 seconds
+2020-01-04 22:51:03,149 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.008523702621459961 seconds
+2020-01-04 22:51:03,150 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.008022785186767578 seconds
+2020-01-04 22:51:03,151 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.008524179458618164 seconds
+2020-01-04 22:51:03,181 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="7e17f5295c510580394f1b28198e1408", element="0.5264279573264969-2")>" content, this is show:""
+2020-01-04 22:51:03,184 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="0ec7751bf75e15af04a31538fe2505b8", element="0.3193486601003297-2")>" content, this is show:""
+2020-01-04 22:51:03,184 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="624d464c5ca8d34dedd825adb03995f5", element="0.3259185875045072-2")>" content, this is show:""
+2020-01-04 22:51:03,186 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="2ae3d27db3dcbb75ef98001abaad80b0", element="0.6556264088875656-2")>" content, this is show:""
+2020-01-04 22:51:03,231 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.0902395248413086 seconds
+2020-01-04 22:51:03,231 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.0902395248413086 seconds
+2020-01-04 22:51:03,233 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.0902397632598877 seconds
+2020-01-04 22:51:03,240 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.009023904800415039 seconds
+2020-01-04 22:51:03,240 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.009023904800415039 seconds
+2020-01-04 22:51:03,242 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.009024381637573242 seconds
+2020-01-04 22:51:03,242 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.00952601432800293 seconds
+2020-01-04 22:51:03,275 - common.mySelenium - INFO - Success Click element:"class->lg-login", spend 0.04361724853515625 seconds
+
+2020-01-04 22:51:03,280 - common.mySelenium - INFO - Success Click element:"class->lg-login", spend 0.04762673377990723 seconds
+2020-01-04 22:51:05,533 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 2.2524280548095703 seconds
+2020-01-04 22:51:05,546 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:05,546 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 2.2649619579315186 seconds
+2020-01-04 22:51:05,555 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 2.2795004844665527 seconds
+2020-01-04 22:51:05,559 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 2.2835097312927246 seconds
+2020-01-04 22:51:05,564 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.01804828643798828 seconds
+2020-01-04 22:51:05,565 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:05,565 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 2.2900290489196777 seconds
+2020-01-04 22:51:05,573 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:05,574 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 2.2985503673553467 seconds
+2020-01-04 22:51:05,577 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.011028289794921875 seconds
+2020-01-04 22:51:05,577 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 2.3020596504211426 seconds
+2020-01-04 22:51:05,583 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.009525775909423828 seconds
+2020-01-04 22:51:05,591 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:05,591 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 2.315596342086792 seconds
+2020-01-04 22:51:05,600 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.009024381637573242 seconds
+2020-01-04 22:51:05,653 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.10678410530090332 seconds
+2020-01-04 22:51:05,666 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.1002650260925293 seconds
+2020-01-04 22:51:05,670 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.09575486183166504 seconds
+2020-01-04 22:51:05,684 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.0932469367980957 seconds
+2020-01-04 22:51:06,544 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 0.8598225116729736 seconds
+2020-01-04 22:51:06,553 - common.mySelenium - INFO - Success Find element "//div[@class="zhall-wrap"]/div[1]/ul[2]/li[3]/a" through "xpath", spend 0.009024381637573242 seconds
+2020-01-04 22:51:06,585 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="zhall-wrap"]/div[1]/ul[2]/li[3]/a", spend 0.04110980033874512 seconds
+2020-01-04 22:51:07,034 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 1.3807077407836914 seconds
+2020-01-04 22:51:07,043 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 0.00902414321899414 seconds
+2020-01-04 22:51:07,058 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 1.388728380203247 seconds
+2020-01-04 22:51:07,063 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:07,063 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 0.029578685760498047 seconds
+2020-01-04 22:51:07,077 - common.mySelenium - INFO - Success Find element "//ul[@class="per_family clearboth"]/li[2]/a" through "xpath", spend 0.014037609100341797 seconds
+2020-01-04 22:51:07,093 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[3]/a" through "xpath", spend 0.03509354591369629 seconds
+2020-01-04 22:51:07,147 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 1.481475591659546 seconds
+2020-01-04 22:51:07,165 - common.mySelenium - INFO - Success Find targeting element:"xpath->//div[@class="no-data"]/p", spend 0.5800418853759766 seconds
+2020-01-04 22:51:07,174 - common.mySelenium - INFO - Success Find element "//div[@class="no-data"]/p" through "xpath", spend 0.008522748947143555 seconds
+2020-01-04 22:51:07,174 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="per_family clearboth"]/li[2]/a", spend 0.1107947826385498 seconds
+2020-01-04 22:51:07,187 - common.mySelenium - INFO - Success Get text of element:"暂无测试任务", spend 0.02205944061279297 seconds
+2020-01-04 22:51:07,187 - testpage.ZCtasg_page - INFO - Success filter task case, result:"暂无测试任务"
+2020-01-04 22:51:07,198 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[3]/a", spend 0.13937091827392578 seconds
+2020-01-04 22:51:07,214 - common.mySelenium - INFO - Success Find element "//li[@class="pc_i_s fr"]/div/i" through "xpath", spend 0.06617593765258789 seconds
+2020-01-04 22:51:07,263 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:07,263 - common.mySelenium - INFO - Success Hover to element:"xpath->//li[@class="pc_i_s fr"]/div/i" , spend 0.11530661582946777 seconds
+2020-01-04 22:51:07,274 - common.mySelenium - INFO - Success Find element "//div[@class="nav_mes_wrap "]/div/a" through "xpath", spend 0.011029243469238281 seconds
+2020-01-04 22:51:07,359 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_mes_wrap "]/div/a", spend 0.09576582908630371 seconds
+2020-01-04 22:51:08,139 - common.mySelenium - INFO - Success Find element "rank_table_name" through "class", spend 0.9415268898010254 seconds
+2020-01-04 22:51:08,150 - common.mySelenium - INFO - Success Get text of element:"老当益壮", spend 0.010527372360229492 seconds
+2020-01-04 22:51:08,161 - common.mySelenium - INFO - Success Get text of element:"夜之殇泪", spend 0.01103067398071289 seconds
+2020-01-04 22:51:08,171 - common.mySelenium - INFO - Success Get text of element:"铅笔2", spend 0.009524106979370117 seconds
+2020-01-04 22:51:08,183 - common.mySelenium - INFO - Success Get text of element:"ctiler", spend 0.01203155517578125 seconds
+2020-01-04 22:51:08,193 - common.mySelenium - INFO - Success Get text of element:"月野兔De辫子", spend 0.010027170181274414 seconds
+2020-01-04 22:51:08,202 - common.mySelenium - INFO - Success Get text of element:"木易杨", spend 0.009024858474731445 seconds
+2020-01-04 22:51:08,211 - common.mySelenium - INFO - Success Get text of element:"長佩兮陆離", spend 0.009023189544677734 seconds
+2020-01-04 22:51:08,220 - common.mySelenium - INFO - Success Get text of element:"Beryl丹丹", spend 0.009023427963256836 seconds
+2020-01-04 22:51:08,231 - common.mySelenium - INFO - Success Get text of element:"元气柚子", spend 0.011029481887817383 seconds
+2020-01-04 22:51:08,242 - common.mySelenium - INFO - Success Get text of element:"止水如心", spend 0.01002645492553711 seconds
+2020-01-04 22:51:08,242 - testpage.ZChonor_page - INFO - Success case！
+2020-01-04 22:51:08,469 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.2807602882385254 seconds
+2020-01-04 22:51:08,469 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\筛选可参与任务_无结果时.png
+2020-01-04 22:51:08,479 - common.mySelenium - INFO - Success Find element "//div[@class="zhall-wrap"]/div[1]/ul[2]/li[4]/a" through "xpath", spend 0.009525775909423828 seconds
+2020-01-04 22:51:08,511 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="zhall-wrap"]/div[1]/ul[2]/li[4]/a", spend 0.0416107177734375 seconds
+2020-01-04 22:51:08,548 - common.mySelenium - INFO - Success Find element "push-part-4" through "class", spend 1.1896891593933105 seconds
+2020-01-04 22:51:08,564 - common.mySelenium - INFO - Success Find targeting element:"xpath->//div[@class="no-data"]/p", spend 0.053142547607421875 seconds
+2020-01-04 22:51:08,583 - common.mySelenium - INFO - Success Click element:"class->push-part-4", spend 1.2242817878723145 seconds
+2020-01-04 22:51:09,531 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.28926897048950195 seconds
+2020-01-04 22:51:09,532 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\最新一期荣誉榜单_成功.png
+2020-01-04 22:51:09,538 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[3]/a" through "xpath", spend 0.0060155391693115234 seconds
+2020-01-04 22:51:09,636 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[3]/a", spend 0.1037755012512207 seconds
+2020-01-04 22:51:10,071 - common.mySelenium - INFO - Success Find element "sign_in_button" through "id", spend 2.8967373371124268 seconds
+2020-01-04 22:51:10,084 - common.mySelenium - INFO - Success Get text of element:"今日已签到", spend 2.909270763397217 seconds
+2020-01-04 22:51:10,338 - common.mySelenium - INFO - Success Find element "testin-select-set" through "class", spend 0.7018649578094482 seconds
+2020-01-04 22:51:10,379 - common.mySelenium - INFO - Success Click element:"class->testin-select-set", spend 0.7424731254577637 seconds
+2020-01-04 22:51:10,909 - common.mySelenium - INFO - Success Find targeting element:"xpath->//div[@class="testin-select"]/ul/li[2]", spend 0.5299084186553955 seconds
+2020-01-04 22:51:10,911 - common.mySelenium - INFO - Success Execute script: "window.scrollBy(0, 300)", spend 0.002506256103515625 seconds
+2020-01-04 22:51:10,919 - common.mySelenium - INFO - Success Find element "//div[@class="testin-select"]/ul/li[2]" through "xpath", spend 0.00802159309387207 seconds
+2020-01-04 22:51:10,933 - common.mySelenium - INFO - Success Get text of element:"2019年第51期（12月23日）", spend 0.02155780792236328 seconds
+2020-01-04 22:51:10,940 - common.mySelenium - INFO - Success Find element "//div[@class="testin-select"]/ul/li[2]" through "xpath", spend 0.007519721984863281 seconds
+2020-01-04 22:51:10,976 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="testin-select"]/ul/li[2]", spend 0.04361581802368164 seconds
+2020-01-04 22:51:11,364 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.27924227714538574 seconds
+2020-01-04 22:51:11,364 - testpage.ZCusehome_page - INFO - Success signin case!
+2020-01-04 22:51:11,375 - common.mySelenium - INFO - Success Find element "//ul[@class="ability_tab"]/li[2]/a" through "xpath", spend 0.010528326034545898 seconds
+2020-01-04 22:51:11,405 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="ability_tab"]/li[2]/a", spend 0.04110860824584961 seconds
+2020-01-04 22:51:11,487 - common.mySelenium - INFO - Success Find element "rank_table_name" through "class", spend 0.5108585357666016 seconds
+2020-01-04 22:51:11,498 - common.mySelenium - INFO - Success Get text of element:"魔鬼天使", spend 0.010527610778808594 seconds
+2020-01-04 22:51:11,508 - common.mySelenium - INFO - Success Get text of element:"星荣", spend 0.009524345397949219 seconds
+2020-01-04 22:51:11,516 - common.mySelenium - INFO - Success Get text of element:"思夜", spend 0.008522748947143555 seconds
+2020-01-04 22:51:11,525 - common.mySelenium - INFO - Success Get text of element:"扛把子司机", spend 0.008522510528564453 seconds
+2020-01-04 22:51:11,534 - common.mySelenium - INFO - Success Get text of element:"小菜鸟L", spend 0.009024381637573242 seconds
+2020-01-04 22:51:11,543 - common.mySelenium - INFO - Success Get text of element:"芳菲佬", spend 0.009023666381835938 seconds
+2020-01-04 22:51:11,553 - common.mySelenium - INFO - Success Get text of element:"白胖子", spend 0.010026693344116211 seconds
+2020-01-04 22:51:11,562 - common.mySelenium - INFO - Success Get text of element:"宇智波·斑", spend 0.009023904800415039 seconds
+2020-01-04 22:51:11,571 - common.mySelenium - INFO - Success Get text of element:"超越De热度", spend 0.009023904800415039 seconds
+2020-01-04 22:51:11,580 - common.mySelenium - INFO - Success Get text of element:"長佩兮陆離", spend 0.008522987365722656 seconds
+2020-01-04 22:51:11,580 - testpage.ZChonor_page - INFO - Success case！
+2020-01-04 22:51:12,129 - common.mySelenium - INFO - Success Find targeting element:"xpath->//li[@class="statistic_t_li1"]/p/span", spend 0.7239902019500732 seconds
+2020-01-04 22:51:12,134 - common.mySelenium - INFO - Success Find element "//li[@class="statistic_t_li1"]/p/span" through "xpath", spend 0.004513263702392578 seconds
+2020-01-04 22:51:12,148 - common.mySelenium - INFO - Success Get text of element:"4.97 %", spend 0.018579959869384766 seconds
+2020-01-04 22:51:12,148 - testpage.ZCusehome_page - INFO - Success case, devote:"4.97 %"
+2020-01-04 22:51:12,844 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.26317596435546875 seconds
+2020-01-04 22:51:12,844 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\2019年第51期（12月23日）荣誉榜单_成功.png
+2020-01-04 22:51:12,850 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[3]/a" through "xpath", spend 0.006014347076416016 seconds
+2020-01-04 22:51:12,945 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[3]/a", spend 0.10076665878295898 seconds
+2020-01-04 22:51:13,423 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.27425456047058105 seconds
+2020-01-04 22:51:13,639 - common.mySelenium - INFO - Success Find element "testin-select-set" through "class", spend 0.6939918994903564 seconds
+2020-01-04 22:51:13,670 - common.mySelenium - INFO - Success Click element:"class->testin-select-set", spend 0.7250916957855225 seconds
+2020-01-04 22:51:14,196 - common.mySelenium - INFO - Success Find targeting element:"xpath->//div[@class="testin-select"]/ul/li[3]", spend 0.5259623527526855 seconds
+2020-01-04 22:51:14,198 - common.mySelenium - INFO - Success Execute script: "window.scrollBy(0, 300)", spend 0.0020046234130859375 seconds
+2020-01-04 22:51:14,204 - common.mySelenium - INFO - Success Find element "//div[@class="testin-select"]/ul/li[3]" through "xpath", spend 0.005514621734619141 seconds
+2020-01-04 22:51:14,213 - common.mySelenium - INFO - Success Get text of element:"2019年第50期（12月16日）", spend 0.014538764953613281 seconds
+2020-01-04 22:51:14,217 - common.mySelenium - INFO - Success Find element "//div[@class="testin-select"]/ul/li[3]" through "xpath", spend 0.004511833190917969 seconds
+2020-01-04 22:51:14,247 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="testin-select"]/ul/li[3]", spend 0.034090518951416016 seconds
+2020-01-04 22:51:14,756 - common.mySelenium - INFO - Success Find element "rank_table_name" through "class", spend 0.5091636180877686 seconds
+2020-01-04 22:51:14,766 - common.mySelenium - INFO - Success Get text of element:"莫洛", spend 0.009524106979370117 seconds
+2020-01-04 22:51:14,775 - common.mySelenium - INFO - Success Get text of element:"格律声", spend 0.009024620056152344 seconds
+2020-01-04 22:51:14,784 - common.mySelenium - INFO - Success Get text of element:"星荣", spend 0.009022712707519531 seconds
+2020-01-04 22:51:14,793 - common.mySelenium - INFO - Success Get text of element:"宇智波·佐助", spend 0.00902414321899414 seconds
+2020-01-04 22:51:14,802 - common.mySelenium - INFO - Success Get text of element:"思夜", spend 0.009526968002319336 seconds
+2020-01-04 22:51:14,811 - common.mySelenium - INFO - Success Get text of element:"黑糖小圆玉", spend 0.009023189544677734 seconds
+2020-01-04 22:51:14,820 - common.mySelenium - INFO - Success Get text of element:"向阳324", spend 0.009023904800415039 seconds
+2020-01-04 22:51:14,829 - common.mySelenium - INFO - Success Get text of element:"二月春风满地殇", spend 0.00902414321899414 seconds
+2020-01-04 22:51:14,839 - common.mySelenium - INFO - Success Get text of element:"盈盈一水间1", spend 0.009534120559692383 seconds
+2020-01-04 22:51:14,848 - common.mySelenium - INFO - Success Get text of element:"向阳", spend 0.009042501449584961 seconds
+2020-01-04 22:51:14,848 - testpage.ZChonor_page - INFO - Success case！
+2020-01-04 22:51:16,110 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.2621951103210449 seconds
+2020-01-04 22:51:16,111 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\2019年第50期（12月16日）荣誉榜单_成功.png
+2020-01-04 22:51:16,539 - common.mySelenium - INFO - Success Quit window/app. spend 2.1161859035491943 seconds
+2020-01-04 22:51:16,539 - testcase.ZCuserhome_test - INFO - ****************************************  end  **************************************************
+2020-01-04 22:51:16,909 - common.mySelenium - INFO - Fail Unable to find element:"xpath->//span[@class="push-unread"]/../../td[3]/p/span", spend 8.326539754867554 seconds
+2020-01-04 22:51:16,922 - common.mySelenium - INFO - Fail Unable to find element "//div[@class="no-data"]/p" through "xpath", spend 8.358126640319824 seconds
+2020-01-04 22:51:16,922 - common.mySelenium - ERROR - Message: Element: "//div[@class="no-data"]/p" not fount in 8 seconds
+
+2020-01-04 22:51:16,922 - common.mySelenium - ERROR - Fail Get text of element:"xpath->//div[@class="no-data"]/p", spend 8.358126640319824 seconds
+2020-01-04 22:51:16,922 - common.mySelenium - ERROR - Message: Element: "//div[@class="no-data"]/p" not fount in 8 seconds
+
+2020-01-04 22:51:16,958 - common.mySelenium - INFO - Success Find element "//div[@class="zhall-wrap"]/div[1]/ul[2]/li[5]/a" through "xpath", spend 0.007494926452636719 seconds
+2020-01-04 22:51:17,009 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="zhall-wrap"]/div[1]/ul[2]/li[5]/a", spend 0.05863142013549805 seconds
+2020-01-04 22:51:18,134 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.22406649589538574 seconds
+2020-01-04 22:51:18,139 - common.mySelenium - INFO - Success Find element "//li[@class="pc_i_s fr"]/div/i" through "xpath", spend 0.005514860153198242 seconds
+2020-01-04 22:51:18,149 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:18,149 - common.mySelenium - INFO - Success Hover to element:"xpath->//li[@class="pc_i_s fr"]/div/i" , spend 0.015540599822998047 seconds
+2020-01-04 22:51:18,155 - common.mySelenium - INFO - Success Find element "//div[@class="nav_mes_wrap "]/div/a" through "xpath", spend 0.00554347038269043 seconds
+2020-01-04 22:51:18,261 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_mes_wrap "]/div/a", spend 0.1107945442199707 seconds
+2020-01-04 22:51:18,407 - common.mySelenium - INFO - Success Find element "push-part-2" through "class", spend 0.14638924598693848 seconds
+2020-01-04 22:51:18,582 - common.mySelenium - INFO - Success Click element:"class->push-part-2", spend 0.3213541507720947 seconds
+2020-01-04 22:51:19,233 - common.mySelenium - INFO - Success Quit window/app. spend 2.121854305267334 seconds
+2020-01-04 22:51:19,233 - testcase.ZChonor_test - INFO - ****************************************  end  **************************************************
+2020-01-04 22:51:25,148 - common.mySelenium - INFO - Fail Unable to find element:"xpath->//div[@class="no-data"]/p", spend 8.13850712776184 seconds
+2020-01-04 22:51:25,148 - testpage.ZCtasg_page - INFO - Success filter end task case,
+2020-01-04 22:51:26,363 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.21505022048950195 seconds
+2020-01-04 22:51:26,363 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\筛选已结束任务_有结果时.png
+2020-01-04 22:51:26,813 - common.mySelenium - INFO - Fail Unable to find element:"class->m-t-15", spend 8.230388402938843 seconds
+2020-01-04 22:51:26,821 - common.mySelenium - INFO - Success Find element "//p[@class="push-limit-p"]/span" through "xpath", spend 0.007991552352905273 seconds
+2020-01-04 22:51:26,830 - common.mySelenium - INFO - Success Get text of element:"很遗憾，您没有通过用例测试【用例考核】的武试考核，未通过原因：用例条数不足，需50-60条，希望您再接再厉。", spend 0.0175173282623291 seconds
+2020-01-04 22:51:26,831 - testpage.ZCnotice_page - INFO - Success view operation case, notice_content:"很遗憾，您没有通过用例测试【用例考核】的武试考核，未通过原因：用例条数不足，需50-60条，希望您再接再厉。"
+2020-01-04 22:51:28,059 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.22838735580444336 seconds
+2020-01-04 22:51:28,068 - common.mySelenium - INFO - Success Find element "//li[@class="pc_i_s fr"]/div/i" through "xpath", spend 0.008022069931030273 seconds
+2020-01-04 22:51:28,077 - common.mySelenium - INFO - Success Execution event!
+2020-01-04 22:51:28,078 - common.mySelenium - INFO - Success Hover to element:"xpath->//li[@class="pc_i_s fr"]/div/i" , spend 0.017547607421875 seconds
+2020-01-04 22:51:28,085 - common.mySelenium - INFO - Success Find element "//div[@class="nav_mes_wrap "]/div/a" through "xpath", spend 0.007520437240600586 seconds
+2020-01-04 22:51:28,166 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_mes_wrap "]/div/a", spend 0.08823585510253906 seconds
+2020-01-04 22:51:28,323 - common.mySelenium - INFO - Success Find element "push-part-3" through "class", spend 0.1559128761291504 seconds
+2020-01-04 22:51:28,480 - common.mySelenium - INFO - Success Click element:"class->push-part-3", spend 0.31333160400390625 seconds
+2020-01-04 22:51:28,617 - common.mySelenium - INFO - Success Find targeting element:"class->m-t-15", spend 0.13736510276794434 seconds
+2020-01-04 22:51:28,670 - common.mySelenium - INFO - Success Find element "m-t-15" through "class", spend 0.05263996124267578 seconds
+2020-01-04 22:51:28,680 - common.mySelenium - INFO - Success Get text of element:"暂无此类消息", spend 0.0621647834777832 seconds
+2020-01-04 22:51:28,680 - testpage.ZCnotice_page - INFO - Success view official case, promat:"暂无此类消息"
+2020-01-04 22:51:29,466 - common.mySelenium - INFO - Success Quit window/app. spend 2.1026663780212402 seconds
+2020-01-04 22:51:29,466 - testcase.ZCtasg_test - INFO - ****************************************  end  **************************************************
+2020-01-04 22:51:29,889 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.2095479965209961 seconds
+2020-01-04 22:51:33,004 - common.mySelenium - INFO - Success Quit window/app. spend 2.1141185760498047 seconds
+2020-01-04 22:51:33,004 - testcase.ZCtasg_test - INFO - ****************************************  end  **************************************************
+2020-01-04 22:51:33,023 - common.runReport - INFO - MoreProcess end.start Transfer data and generate reports...
+2020-01-04 22:51:33,032 - common.runReport - INFO - End of the project.Please see the report!

@@ -61,4 +61,19 @@ class readConfig():
             values_dict[i[0]] = i[1]
         return values_dict
 
+    def get_caselist(self):
+        """
+        获取测试用例信息
+        :return:
+        """
+        values = config.items('Case_Path')
+        values_list = []
+        for i in values:
+            values_list.append(i[1].split('/'))
+        return values_list
+
+
+if __name__ == '__main__':
+
+    readConfig().get_caselist()
 

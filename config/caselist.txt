@@ -1,13 +1,14 @@
 # 配置测试用例文件
-#testcase/enterZC_test.py
-#testcase/tgpIntergral_test.py
-#testcase/weChatXiaoe_test.py
-testcase/ZCschool_test.py
-testcase/ZCtask_test.py
-testcase/ZCuserhome_test.py
-testcase/ZCnotice_test.py
-testcase/ZChonor_test.py
-testcase/ZCservice_test.py
-testcase/ZCvalue_test.py
+#testapp/tgpIntergral_test.py
+#testapp/weChatXiaoe_test.py
+#testcase/ZCschool_test.py
+#testcase/ZCtask_test.py
+#testcase/ZCuserhome_test.py
+#testcase/ZCnotice_test.py
+#testcase/ZChonor_test.py
+#testcase/ZCservice_test.py
+#testcase/ZCvalue_test.py
 testcase/Stockdyn_test.py
+testinterface/ZCtaskinter_test.py
+testinterface/ZCuserinter_test.py
 

@@ -1,7 +1,7 @@
 import os
 import unittest
 import time
-from config.readCaselist import read_caseList
+from config.readConfig import readConfig
 from config.getProjectPath import get_project_path
 from common.log import Logger
 
@@ -14,8 +14,8 @@ class caseSuite():
     测试套件类
     """
     def __init__(self):
-        self.caseList = read_caseList().get_case()     # 测试用例文件
-        self.caseFile = os.path.join(path, 'Po', 'testcase')  # 测试用例目录
+        self.caseList = readConfig().get_caselist()     # 测试用例文件
+        self.caseFile = os.path.join(path, 'Po')  # 测试用例目录
 
     def set_case_suite(self):
         """
@@ -27,7 +27,8 @@ class caseSuite():
         suite_list = []
         for suite in self.caseList:
             # 创建测试集合
-            suiteSet = unittest.defaultTestLoader.discover(self.caseFile, pattern=suite)
+            suiteSet = unittest.defaultTestLoader.discover(os.path.join(self.caseFile, suite[0]), pattern=suite[1],
+                                                           top_level_dir=os.path.join(self.caseFile, suite[0]))
             suite_list.append(suiteSet)
         if len(suite_list) > 0:
             for suite in suite_list:
@@ -54,11 +55,10 @@ if __name__ == '__main__':
 
     suite = caseSuite().set_case_suite()
     num = 1
-    print(type(suite))
     for i in suite:
         print('{0}:{1}'.format(num, i))
         num += 1
-        print(type(i))
+
 
 
 

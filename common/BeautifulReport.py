@@ -366,7 +366,11 @@ class ReportTestResult(unittest.TestResult):
         """
         class_name = test.__class__.__qualname__
         method_name = test.__dict__['_testMethodName']
-        method_doc = test.__dict__['_testMethodDoc']
+        try:
+            method_doc = method_name.split('___')[1]    # 数据驱动时，取接口文件中接口名称为用例描述
+        except IndexError as index:
+            method_doc = test.__dict__['_testMethodDoc']
+            log.error('get_testcase_property:{0}'.format(index))
         return class_name, method_name, method_doc
 
 

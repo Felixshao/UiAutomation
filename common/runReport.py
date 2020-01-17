@@ -125,7 +125,7 @@ class run_report():
             if not process:
                 suite = self.suite_all
             result = BeautifulReport(suite, verbosity=2)
-            results = result.report(filename=name, description='测试deafult报告', log_path=self.reportFile1, process=process)
+            results = result.report(filename=name, description='测试众测报告', log_path=self.reportFile1, process=process)
             if process:
                 q.put(results)
         except Exception as e:
