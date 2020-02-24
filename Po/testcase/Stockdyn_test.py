@@ -26,4 +26,9 @@ class Stockdyn_test(unittest.TestCase):
     def test1_view_stock(self):
         """查看600223股票情况"""
         self.dyn.open_stock_dynamic()
-        self.dyn.send_stock_search()
+        self.dyn.send_stock_search('600223')
+
+    def test2_view_stock(self):
+        """查看601698股票情况"""
+        self.dyn.open_stock_dynamic()
+        self.dyn.send_stock_search('601698')

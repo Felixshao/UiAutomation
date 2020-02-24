@@ -28,7 +28,6 @@ class read_caseList():
             log.info('Fail read the caseFile. spend {0} seconds'.format(time.time() - t1))
             log.error(e)
             raise
-        print(case_list)
         return case_list
 
     def get_interfacl_case(self):
@@ -53,4 +52,7 @@ class read_caseList():
         return case_inter_list
 
 
+if __name__ == '__main__':
+
+    read_caseList().get_case()
 

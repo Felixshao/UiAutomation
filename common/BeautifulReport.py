@@ -365,12 +365,17 @@ class ReportTestResult(unittest.TestResult):
         :return: (class_name, method_name, method_doc) -> tuple
         """
         class_name = test.__class__.__qualname__
-        method_name = test.__dict__['_testMethodName']
+        try:
+            methods = test.__dict__['_testMethodName'].split('___')
+            method_name = methods[0] + '___' + methods[1]
+        except IndexError as index:
+            method_name = test.__dict__['_testMethodName']
+            log.error('get_testcase_property method_name:{0}'.format(index))
         try:
             method_doc = method_name.split('___')[1]    # 数据驱动时，取接口文件中接口名称为用例描述
         except IndexError as index:
             method_doc = test.__dict__['_testMethodDoc']
-            log.error('get_testcase_property:{0}'.format(index))
+            log.error('get_testcase_property method_doc:{0}'.format(index))
         return class_name, method_name, method_doc
 
 

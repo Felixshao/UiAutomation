@@ -8,7 +8,7 @@ from common.caseSuite import caseSuite
 from config.getProjectPath import get_project_path
 from common.log import Logger
 from common.BeautifulReport import BeautifulReport
-from config.readCaselist import read_caseList
+from config.readConfig import readConfig
 
 
 path = get_project_path()
@@ -22,7 +22,7 @@ class run_report():
     运行测试套件，并生成报告
     """
     def __init__(self):
-        self.caselist = read_caseList().get_case()
+        self.caselist = readConfig().get_caselist()
         self.reportFile = os.path.join(path, 'report', 'report', 'report.html')     # 测试报告路径
         self.reportFile1 = os.path.join(path, 'report', 'report')  # 测试报告目录
         self.suite_all = caseSuite().set_case_suite()       # 获取测试套件
@@ -101,9 +101,6 @@ class run_report():
                 dict['testFail'] = self.report_result[i]['testFail']
                 dict['testSkip'] = self.report_result[i]['testSkip']
                 dict['testError'] = self.report_result[i]['testError']
-                dict['totalTime'] = self.report_result[i]['totalTime']
-            elif i == (len(self.report_result) - 1):
-                dict['totalTime'] = self.report_result[i]['totalTime']
             else:
                 dict['testPass'] += self.report_result[i]['testPass']
                 dict['testResult'] += self.report_result[i]['testResult']
@@ -111,6 +108,7 @@ class run_report():
                 dict['testFail'] += self.report_result[i]['testFail']
                 dict['testSkip'] += self.report_result[i]['testSkip']
                 dict['testError'] += self.report_result[i]['testError']
+            dict['totalTime'] = self.report_result[i]['totalTime']
         log.info('MoreProcess end.start Transfer data and generate reports...')
         result = BeautifulReport(self.suite_all)
         result.stop_output(log_path=self.reportFile1 + '\\', FIELDS=dict)

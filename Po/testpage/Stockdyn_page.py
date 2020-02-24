@@ -8,9 +8,11 @@ from config.getProjectPath import get_project_path
 path = get_project_path()
 log = Logger('testpage.Stockdyn_page').get_logger()
 stock_dynamic_url = 'http://quote.eastmoney.com/'   # 股票动态查询网址
+file_path = os.path.join(path, 'file', 'stock.xlsx')
 """------------------------------------------- element --------------------------------------------------------"""
-stock_search_bar = 'name->StockCode'     # 股票动态搜索框
-stock_search_result = 'xpath->//div[@class="modules_stock"]/div/div[2]/table/tbody/tr[1]'   # 股票搜索结果第一条
+stock_search_bar = 'id->search_box'     # 股票搜索按钮
+stock_search_butten = 'xpath->//input[@id="search_box"]/../input[2]'     # 股票搜索按钮
+stock_search_result = 'xpath->//div[@class="module module-share"]/div[1]/a[1]'  # 股票搜索结果第一条
 stock_new_prices = 'id->price9'  # 股票当前价格
 # stock_opentoday_money = 'xpath->//table[@class="yfw"]/tbody/tr[1]/td[2]'  # 股票今开价格
 # stock_highest_money = 'xpath->//table[@class="yfw"]/tbody/tr[1]/td[4]'  # 股票最高价格
@@ -28,12 +30,11 @@ class Stockdyn_page(Page):
         """打开股票动态页面"""
         self.dr.open_url(stock_dynamic_url)
 
-    def send_stock_search(self):
-        stock_name = '600223'
-        file_path = os.path.join(path, 'file', 'stock.xlsx')
+    def send_stock_search(self, stock_name):
+        """输入股票代码"""
         self.dr.send(stock_search_bar, stock_name)
-        self.dr.click(stock_search_bar)
-        self.dr.switch_new_window(stock_search_result, secs=12)
+        self.dr.switch_new_window(stock_search_butten)
+        self.dr.switch_new_window(stock_search_result)
         self.collection_stock_prices(stock_name=stock_name, filepath=file_path)
 
     def collection_stock_prices(self, stock_name, filepath):

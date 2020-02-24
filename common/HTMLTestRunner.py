@@ -543,6 +543,7 @@ class _TestResult(TestResult):
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
         self.outputBuffer = io.StringIO()
+        print('546 self.outputBuffer', self.outputBuffer)
         stdout_redirector.fp = self.outputBuffer
         stderr_redirector.fp = self.outputBuffer
         self.stdout0 = sys.stdout
@@ -677,6 +678,7 @@ class HTMLTestRunner(Template_mixin):
     def run(self, test):
         """Run the given test case or test suite."""
         result = _TestResult(self.verbosity)
+        print('614 result', result, type(result))
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
