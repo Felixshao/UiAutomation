@@ -16,7 +16,7 @@ from common.BeautifulReport import BeautifulReport
 
 path = get_project_path()
 phone_data = get_mobile()[2]    # 选择设备和app
-# phone_data = readConfig().get_phone()
+# phone_data = readConfig().get_App()
 browser_data = readConfig().get_browser()
 log = Logger('common.mySelenium').get_logger()
 screenshot_path = os.path.join(path, 'report', 'screen_shot')

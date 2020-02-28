@@ -23,12 +23,22 @@ class Stockdyn_test(unittest.TestCase):
         cls.dr.quit()
         log.info("""--------------------------------- Stockdyn_test end -------------------------------""")
 
-    def test1_view_stock(self):
-        """查看600223股票情况"""
-        self.dyn.open_stock_dynamic()
-        self.dyn.send_stock_search('600223')
+    def test1_Lushang_stock(self):
+        """查看鲁商发展（600223）股票情况"""
+        self.dyn.open_stock_dynamic('sh600223')
 
-    def test2_view_stock(self):
-        """查看601698股票情况"""
-        self.dyn.open_stock_dynamic()
-        self.dyn.send_stock_search('601698')
+    def test2_chinaSatcom_stock(self):
+        """查看中国卫通（601698）股票情况"""
+        self.dyn.open_stock_dynamic('sh601698')
+
+    def test3_xinlong_stock(self):
+        """查看欣龙控股（000955）股票情况"""
+        self.dyn.open_stock_dynamic('sz000955')
+
+    def test4_chinabaoan_stock(self):
+        """查看中国宝安（000009）股票情况"""
+        self.dyn.open_stock_dynamic('sz000009')
+
+    def test5_twosixthree_stock(self):
+        """查看二六三（002467）股票情况"""
+        self.dyn.open_stock_dynamic('sz002467')

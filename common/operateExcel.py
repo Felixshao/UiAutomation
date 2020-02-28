@@ -62,9 +62,9 @@ class operateExcel():
         try:
             table = openpyxl.load_workbook(self.file_name)
         except BaseException as per:
-            log.error('当前表格已当前，请手动关闭后再试，文件:'.format(self.file_name))
+            log.error('当前表格已打开，请手动关闭后再试，文件:'.format(self.file_name))
             log.error(per)
-            print('当前表格已当前，请手动关闭后再试，文件:', self.file_name)
+            print('当前表格已打开，请手动关闭后再试，文件:', self.file_name)
             raise
         if self.sheet_name in table.sheetnames:
             sheet = table[self.sheet_name]  # 选择指定表

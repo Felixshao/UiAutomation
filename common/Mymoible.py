@@ -2,7 +2,7 @@ import unittest
 import time
 from common.MySelenium import mySelenium
 from common.log import Logger
-from testpage.enterApp_page import enterApp_page
+from Po.testpage.enterApp_page import enterApp_page
 
 log = Logger('common.Mymobile').get_logger()
 

@@ -11,7 +11,7 @@ class ZClistinter_test(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        log.info('------------------------ ZClistinter_test 开始 -------------------------------------------------')
+        log.info('------------------------  ZClistinter_test  开始 -------------------------------------------------')
         urllib3.disable_warnings()
         login = operateExcel(file_name='zc_interface.xlsx', sheet_name='login').get_excel_list()[0]
         cls.s = requests.session()

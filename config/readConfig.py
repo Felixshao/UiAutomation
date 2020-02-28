@@ -23,12 +23,12 @@ class readConfig():
             values_dict[i[0]] = i[1]
         return values_dict
 
-    def get_phone(self):
+    def get_App(self):
         """
-        获取手机配置信息
+        获取app配置信息
         :return:
         """
-        values = config.items('Phone')
+        values = config.items('App')
         values_dict = {}
         for i in values:
             if i[0] == 'chromeOptions':
@@ -72,8 +72,20 @@ class readConfig():
             values_list.append(i[1].split('/'))
         return values_list
 
+    def get_sms(self):
+        """
+        获取log配置信息
+        :return:
+        """
+        values = config.items('SMS')
+        values_dict = {}
+        for i in values:
+            values_dict[i[0]] = i[1]
+        return values_dict
+
 
 if __name__ == '__main__':
 
-    readConfig().get_caselist()
+    sms = readConfig().get_sms()
+    print(sms)
 
