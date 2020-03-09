@@ -103,6 +103,8 @@ class Stockinter_test(unittest.TestCase):
         """断言接口"""
         now_time = datetime.datetime.now()
         if (now_time.hour >= 16) or (13 > now_time.hour >= 12):
+            print('{}采集{}股票结束!'.format(now_time, stock))
+        else:
             if float(text['data'][stock]['199112']) >= 5.0:
                 body = 'stock:' + stock + ', up warning' + prices['涨跌幅度'] + ', price:' + prices['当前']
                 SMS.twilio_sms(body)
@@ -114,7 +116,6 @@ class Stockinter_test(unittest.TestCase):
             else:
                 time.sleep(300)
             self.collection_stock_prices(stock, data)
-        else:
-            print('{}采集{}股票结束!'.format(now_time, stock))
+            
 
 
