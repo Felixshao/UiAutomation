@@ -102,7 +102,7 @@ class Stockinter_test(unittest.TestCase):
     def check_hororlist_inter(self, text, prices, stock, data):
         """断言接口"""
         now_time = datetime.datetime.now()
-        if (now_time.hour >= 16) or (13 > now_time.hour >= 12):
+        if (now_time.hour >= 15) or (13 > now_time.hour >= 12):
             print('{}采集{}股票结束!'.format(now_time, stock))
         else:
             if float(text['data'][stock]['199112']) >= 5.0:
