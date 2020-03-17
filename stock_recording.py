@@ -25,16 +25,16 @@ def process():
     多进程运行用例，并提取数据存入文件中
     :return:
     """
-    pool = mp.Pool(5)
+    pool = mp.Pool()
     q = mp.Manager().Queue()
     stock_result = []
     for i in range(len(stock)):
-        pool.apply_async(monitor_stock_inter, args=(stock[i], q))
+        pool.apply_async(monitor_stock_inter, args=(stock[i+5], q))
     pool.close()
     pool.join()
     for i in range(q.qsize()):
         stock_result.append(q.get())
-
+    print(stock_result)
     prices = {}
     num = 0
     for i in stock_result:
@@ -51,13 +51,22 @@ def process():
     t = time.strftime("%Y-%m-%d", time.localtime())
     table = openpyxl.load_workbook(file)
     for i in prices.keys():
-        shell = table[i]
+        if i not in table.sheetnames:
+            table.create_sheet(i)
+            shell = table[i]
+            shell.cell(1, 1, i)
+            shell.cell(2, 1, '时间')
+            shell.cell(2, 2, '详情')
+        else:
+            shell = table[i]
         row = shell.max_row     # max_row获取最大行数
         # col = table.max_column  # max_row获取最大列数
         shell.cell(row+1, 1, t)
         shell.cell(row+1, 2, str(prices[i]))
     table.save(file)
+    print('成功写入:{}'.format(file))
 
 
 if __name__ == '__main__':
     process()
+
