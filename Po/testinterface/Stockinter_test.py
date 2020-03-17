@@ -1,5 +1,6 @@
 import json
 import time
+import multiprocessing as mp
 import unittest, ddt, requests, urllib3, re, datetime, os
 from common.operateExcel import operateExcel
 from common.log import Logger
@@ -73,7 +74,7 @@ class Stockinter_test(unittest.TestCase):
             data[4] = eval(data[4])
         except TypeError:
             pass
-        self.collection_stock_prices('002467', data)
+        return self.collection_stock_prices('002467', data)
 
     def collection_stock_prices(self, stock, data, filepath=file_path):
         """采集股票数据"""
@@ -107,15 +108,13 @@ class Stockinter_test(unittest.TestCase):
         else:
             if float(text['data'][stock]['199112']) >= 5.0:
                 body = 'stock:' + stock + ', up warning' + prices['涨跌幅度'] + ', price:' + prices['当前']
-                SMS.twilio_sms(body)
+                SMS.send_msg(body)
                 time.sleep(1800)
             elif float(text['data'][stock]['199112']) <= -5.0:
                 body = 'stock:' + stock + ', fall warning:' + prices['涨跌幅度'] + ', price:' + prices['当前']
-                SMS.twilio_sms(body)
+                SMS.send_msg(body)
                 time.sleep(1800)
             else:
                 time.sleep(300)
             self.collection_stock_prices(stock, data)
-            
-
 

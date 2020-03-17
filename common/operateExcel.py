@@ -24,7 +24,7 @@ class operateExcel():
 
     def get_excel_list(self):
         """
-        读取excel并存入list
+        xlrd读取excel并存入list
         :return:data;数据存放在list中返回
         """
         table = xlrd.open_workbook(self.file_name)
@@ -35,7 +35,7 @@ class operateExcel():
 
     def get_excel_dict(self):
         """
-        读取excel并存入dict
+        xird读取excel并存入dict
         :return:data;数据存放在dict中返回
         """
         if os.path.exists(self.file_name):
@@ -59,6 +59,8 @@ class operateExcel():
         在excel写入结果
         :param result: 传入结果dict
         """
+        # if not os.path.exists(self.file_name):
+        #     table = openpyxl.Workbook(self.file_name)
         try:
             table = openpyxl.load_workbook(self.file_name)
         except BaseException as per:

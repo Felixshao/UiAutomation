@@ -64,10 +64,10 @@ class Stockdyn_page(Page):
         increase = float(prices['涨跌幅度'].replace('%', ''))
         if increase >= 5.0:
             body = 'stock:' + stock_name + 'up warning' + prices['涨跌幅度'] + ', price:' + prices['当前']
-            SMS.twilio_sms(body)
+            SMS.send_msg(body)
         elif increase <= -5.0:
             body = 'stock:' + stock_name + 'fall warning:' + prices['涨跌幅度'] + ', price:' + prices['当前']
-            SMS.twilio_sms(body)
+            SMS.send_msg(body)
         else:
             now_time = datetime.datetime.now()
             if now_time.hour >= 15:

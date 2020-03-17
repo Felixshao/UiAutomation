@@ -13,7 +13,7 @@ def prin():
     #     print(2)
 
 
-def send():
+def send_msg():
     account_sid = 'ACefb05e1bae528c777e0ef1582495d5d3'
     account_token = '2d5880790bcbffff800401823630d892'
     client = Client(account_sid, account_token)

@@ -1,14 +1,11 @@
 import unittest
-import threadpool
 import threading
 import multiprocessing as mp
-from Po.testcase.Stockdyn_test import Stockdyn_test
 from Po.testinterface.Stockinter_test import Stockinter_test
 
 
 def run(case):
     suite = unittest.TestSuite()
-    # cases = [Stockdyn_test('test1_Lushang_stock'), Stockdyn_test('test2_chinaSatcom_stock')]
     suite.addTest(case)
     runny = unittest.TextTestRunner(verbosity=1)
     runny.run(suite)
