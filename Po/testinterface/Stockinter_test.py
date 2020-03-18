@@ -90,15 +90,15 @@ class Stockinter_test(unittest.TestCase):
         prices['昨收'] = text['data'][stock]['6']
         prices['涨跌幅度'] = text['data'][stock]['199112'] + '%'
         self.check_hororlist_inter(text, prices, stock, data)
-        new_data[t] = prices
-        excel = operateExcel(filepath, stock)
-        old_data = excel.get_excel_dict()
-        if old_data:
-            all_data = {**old_data, **new_data}
-        else:
-            all_data = new_data
-        excel.input_excel(all_data)
-        print('采集成功，在{0}中查看'.format(filepath))
+        # new_data[t] = prices
+        # excel = operateExcel(filepath, stock)
+        # old_data = excel.get_excel_dict()
+        # if old_data:
+        #     all_data = {**old_data, **new_data}
+        # else:
+        #     all_data = new_data
+        # excel.input_excel(all_data)
+        # print('采集成功，在{0}中查看'.format(filepath))
 
     def check_hororlist_inter(self, text, prices, stock, data):
         """断言接口"""

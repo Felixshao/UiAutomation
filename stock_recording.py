@@ -29,7 +29,7 @@ def process():
     q = mp.Manager().Queue()
     stock_result = []
     for i in range(len(stock)):
-        pool.apply_async(monitor_stock_inter, args=(stock[i+5], q))
+        pool.apply_async(monitor_stock_inter, args=(stock[i], q))
     pool.close()
     pool.join()
     for i in range(q.qsize()):
@@ -52,8 +52,7 @@ def process():
     table = openpyxl.load_workbook(file)
     for i in prices.keys():
         if i not in table.sheetnames:
-            table.create_sheet(i)
-            shell = table[i]
+            shell = table.create_sheet(i)
             shell.cell(1, 1, i)
             shell.cell(2, 1, '时间')
             shell.cell(2, 2, '详情')
@@ -69,4 +68,5 @@ def process():
 
 if __name__ == '__main__':
     process()
+
 
