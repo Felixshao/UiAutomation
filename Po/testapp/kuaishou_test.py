@@ -1,10 +1,10 @@
 import unittest, time
-from common.log import Logger
 from common.MySelenium import mySelenium
 from Po.testpage.kuaishou_page import kuaishou_page
 from common import openPC
 from common.Myadb import Myadb
 from config.getMobile import get_mobile
+from common.log import Logger
 
 log = Logger('Po.testpc.kuaishou_test').get_logger()
 mobile = get_mobile()[4]
@@ -18,7 +18,7 @@ class kuaishou_test(unittest.TestCase):
         log.info('------------------------------------  kuaishou_test strat  --------------------------------------')
         openPC.open_pc_yesheng()    # 打开夜神模拟器
         openPC.open_pc_appium()     # 打开Appium
-        time.sleep(60)
+        time.sleep(40)
         Myadb().call_adb(command)
         time.sleep(5)
         cls.app = mySelenium()
