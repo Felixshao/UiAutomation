@@ -15,7 +15,7 @@ from config.readConfig import readConfig
 from common.BeautifulReport import BeautifulReport
 
 path = get_project_path()
-phone_data = get_mobile()[2]    # 选择设备和app
+phone_data = get_mobile()[4]    # 选择设备和app
 # phone_data = readConfig().get_App()
 browser_data = readConfig().get_browser()
 log = Logger('common.mySelenium').get_logger()
@@ -75,8 +75,12 @@ class mySelenium():
             log.error(web)
             return web
 
-    def caller_starup(self, source, num=3):
-        """回调函数,回调启动app/浏览器方法"""
+    def caller_starup(self, source='browser', num=3):
+        """
+        回调函数,回调启动app/浏览器方法
+        source:browser(浏览器) or mobile(app) (打开设备类型,默认为browser)
+        num:循环测试
+        """
         for i in range(num):
             if source == 'mobile':
                 error = self.mobile(data=phone_data)
@@ -122,7 +126,7 @@ class mySelenium():
     def find_element(self, css, secs=8, source='web'):
         """
         封装查找元素方法，加入WebDriverWait,判断元素是否在dom树中
-        :param css:
+        :param css:传入css， 格式:元素类型->定位元素(id->nvn)
         :param secs:
         :return:
         """
@@ -773,6 +777,22 @@ class mySelenium():
                 '{0} clear app:"{1}" content, spend {2} seconds'.format(fail, css, time.time() - t1))
             log.error(e)
             raise
+
+    def slipe_up_window(self, num=1):
+        """
+        向上滑动页面
+        num:传入次数，控制滑动次数
+        """
+        size = self.driver.get_window_size()
+        width = size['width']
+        height = size['height']
+        x1 = width * 0.5
+        y1 = height * 0.8
+        y2 = height * 0.2
+        for i in range(num):
+            self.driver.swipe(x1, y1, x1, y2)
+            time.sleep(1)
+
 
 
 

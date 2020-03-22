@@ -28,8 +28,8 @@ def get_mobile():
                     dict[table.cell_value(0, j)] = True
                 elif table.cell_value(i, j) == 'False' or table.cell_value(i, j) == 'false':
                     dict[table.cell_value(0, j)] = False
-                elif table.cell_value(0, j) == 'chromeOptions' and table.cell_value(i, j) != '':
-                    dict[table.cell_value(0, j)] = eval(table.cell_value(i, j).replace('\n', ''))
+                elif (table.cell_value(0, j) == 'chromeOptions') and (not table.cell_value(i, j)):
+                    continue
                 else:
                     dict[table.cell_value(0, j)] = table.cell_value(i, j)
             datas[int(table.cell_value(i, 0))] = dict
@@ -38,6 +38,9 @@ def get_mobile():
         log.info('Fail get mobile data, spend {0} seconds'.format(time.time() - t1))
         log.error(e)
         raise
-
     return datas
 
+
+if __name__ == '__main__':
+    # get_mobile()
+    print(get_mobile())

@@ -74,7 +74,7 @@ class readConfig():
 
     def get_sms(self):
         """
-        获取log配置信息
+        获取sms配置信息
         :return:
         """
         values = config.items('SMS')
@@ -83,9 +83,20 @@ class readConfig():
             values_dict[i[0]] = i[1]
         return values_dict
 
+    def get_exe(self):
+        """
+        获取exe配置信息
+        :return:
+        """
+        values = config.items('EXE')
+        values_dict = {}
+        for i in values:
+            values_dict[i[0]] = i[1]
+        return values_dict
+
 
 if __name__ == '__main__':
 
-    sms = readConfig().get_sms()
-    print(sms)
+    exe = readConfig().get_exe()
+    print(exe['yesheng'])
 
