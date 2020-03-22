@@ -6,6 +6,8 @@ from common.log import Logger
 
 
 log = Logger('common.openPC.py').get_logger()
+pyautogui.FAILSAFE = False      # 关闭保障，否则jenkins调用时报pyautogui.FailSafeException异常
+pyautogui.PAUSE = 1     # 设置gui延迟，默认延迟0.1s
 
 
 def open_pc_yesheng():
