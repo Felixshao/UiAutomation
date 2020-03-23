@@ -45,7 +45,7 @@ def notebook():
 
 if __name__ == '__main__':
     # notebook()
-    open_pc_yesheng()
+    open_pc_appium()
     # open_pc_yesheng()
 
 
