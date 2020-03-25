@@ -17,7 +17,7 @@ class kuaishou_test(unittest.TestCase):
     def setUpClass(cls):
         log.info('------------------------------------  kuaishou_test strat  --------------------------------------')
         openPC.open_pc_yesheng()    # 打开夜神模拟器
-        openPC.open_pc_appium()     # 打开Appium
+        # openPC.open_pc_appium()     # 打开Appium
         time.sleep(40)
         Myadb().call_adb(command)
         time.sleep(5)

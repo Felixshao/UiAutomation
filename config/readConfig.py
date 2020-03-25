@@ -1,5 +1,5 @@
 import os
-from common.MyConfiParser import  MyConfigParser
+from common.MyConfiParser import MyConfigParser
 from config import getProjectPath
 
 config = MyConfigParser()        # 引入configParser类读取配置文件

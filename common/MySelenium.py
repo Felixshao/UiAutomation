@@ -1,4 +1,4 @@
-import os
+import os, pywinauto
 import time
 from selenium.common.exceptions import InvalidElementStateException, WebDriverException
 from urllib3.exceptions import MaxRetryError
@@ -13,6 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from config.getProjectPath import get_project_path
 from config.readConfig import readConfig
 from common.BeautifulReport import BeautifulReport
+from pywinauto.application import Application
 
 path = get_project_path()
 phone_data = get_mobile()[4]    # 选择设备和app
@@ -74,6 +75,21 @@ class mySelenium():
             log.error('{0} to open "{1}" app, msg: 无法连接设备或无法安装Unicode'.format(fail, data['Appname']))
             log.error(web)
             return web
+
+    def open_pc_exe(self, file_path, title=None, class_name=None,backend='win32'):
+        """
+        打开pc中exe应用
+        :param file_path:   # 应用路径
+        :param title:   # 窗口标题
+        :param backend:     # 窗口backend类型
+        :return:
+        """
+        try:
+            self.driver = Application(backend=backend)
+            self.driver.connect(title_re=title, class_name=class_name)
+        except BaseException :
+            self.driver.start(file_path)
+        log.info('Success open:"{}"'.format(file_path))
 
     def caller_starup(self, source='browser', num=3):
         """
@@ -793,7 +809,46 @@ class mySelenium():
             self.driver.swipe(x1, y1, x1, y2)
             time.sleep(1)
 
+    """--------------------------------------------------pc private-----------------------------------"""
+    def positipo_window(self, title, class_name=None, timeout=3):
+        """
+        定位窗口
+        title:  窗口标题
+        class_name: 窗口class
+        timeout：等待时间
+        :return:
+        """
+        win = self.driver.window(title=title, class_name=class_name)
+        win.wait('exists ready', timeout=timeout, retry_interval=1)
+        return win
 
+    def get_exe_controls(self, title, class_name=None, timeout=8):
+        """
+        获取exe应用控件和属性
+        title:  窗口标题
+        class_name: 窗口class
+        timeout：等待时间
+        :return:
+        """
+        win = self.positipo_window(title=title, timeout=timeout)
+        win.print_control_identifiers()
+
+    def click_exe(self, control, title, class_name=None, timeout=8):
+        """
+        exe应用click事件
+        :return:
+        """
+        win = self.positipo_window(title=title, timeout=timeout)
+        win[control].click()
+
+    def checkbox_exe(self, control, title, class_name=None, timeout=8):
+        """
+        勾选checkbox按钮
+        :return:
+        """
+        win = self.positipo_window(title=title, timeout=timeout)
+
+        win[control].uncheck()
 
 
 

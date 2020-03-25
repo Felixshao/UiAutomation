@@ -9,6 +9,11 @@ def run():
     runny.run(suite)
 
 
-if __name__ == '__main__':
+def open_pc():
+    app = application.Application(backend='uia')
+    app.start('C:/Program Files (x86)/Appium/Appium.exe')
+    print(app)
 
+
+if __name__ == '__main__':
     run()

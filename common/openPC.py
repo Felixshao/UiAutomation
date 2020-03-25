@@ -1,4 +1,4 @@
-import pyautogui
+import pyautogui, pywinauto, subprocess
 from time import sleep
 from pywinauto import application, ElementNotFoundError
 from config.readConfig import readConfig
@@ -18,18 +18,23 @@ def open_pc_yesheng():
         app.connect(title_re='夜神模拟器', class_name='Qt5QWindowIcon')
     except ElementNotFoundError:
         app.start(file_path)
+    log.info('Sucess open 夜神模拟器!')
 
 
 def open_pc_appium():
     """打开appium"""
-    file_path = readConfig().get_exe()['appium']
-    app = application.Application(backend='uia')
-    app.start(file_path, timeout=10)
-    sleep(5)
-    # appium = app.window(title='Appium')
-    # appium.print_control_identifiers()
-    pyautogui.moveTo(951, 654)  # 鼠标放置appium  start按钮处
-    pyautogui.click()       # 点击
+    file_path = readConfig().get_exe()['appium']    # 读取appium.exe文件路径
+    app = application.Application(backend='uia')    # 定义application实例
+    # app.start(file_path)
+    # sleep(2)
+    # print(pywinauto.findwindows.find_elements(title='Appium'))
+    app.connect(title_re='Appium', class_name='Chrome_WidgetWin_1')
+    appium = app.window(title='Appium')     # 指定窗口
+    appium.wait("exists ready", timeout=3, retry_interval=3)  # 等待窗口就绪
+    # sleep(5)
+    appium.print_control_identifiers()
+    appium.Button4.click()      # 点击指定按钮（Button4）
+    log.info('Sucess start appium!')
 
 
 def notebook():
@@ -44,8 +49,7 @@ def notebook():
 
 
 if __name__ == '__main__':
-    # notebook()
     open_pc_appium()
-    # open_pc_yesheng()
+    # pass
 
 
