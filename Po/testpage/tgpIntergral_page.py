@@ -6,7 +6,7 @@ log = Logger('testpage.tgpIntergral_page').get_logger()
 
 """---------------------------------------------- element -------------------------------------------------"""
 tgp_nav_recommend = 'uiautomator->推荐'   # 导航栏积分按钮
-tgp_intergral_icon = 'id->com.tencent.tgp:id/signId'    # 积分商城图标
+tgp_intergral_icon = 'id->com.tencent.tgp:id/gift_entry_view'    # 积分商城图标
 tgp_intergral_checkIn = 'id->com.tencent.tgp:id/tv_sign2'   # 积分商城打卡按钮
 tgp_intergral_annal = 'id->com.tencent.tgp:id/record_layout'    # 积分商城记录图标
 tgp_intergral_num = 'id->com.tencent.tgp:id/coin_num'   # 积分商城积分总额

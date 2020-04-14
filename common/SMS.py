@@ -32,5 +32,5 @@ def call_num():
 
 
 if __name__ == '__main__':
-    call_num()
+    send_msg('zhe is code!')
 

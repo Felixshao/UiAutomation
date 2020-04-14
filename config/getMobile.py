@@ -13,7 +13,7 @@ log = Logger('config.getMobile').get_logger()
 def get_mobile():
     """
     获取配置的手机和app信息，在mobile.xlsx文件修改和增加配置元件
-    :return:
+    :return:datas; 返回所有设备信息，dict格式
     """
     t1 = time.time()
     try:
@@ -22,17 +22,19 @@ def get_mobile():
         col = table.ncols   # 列
         datas = {}
         for i in range(1, row):
-            dict = {}
+            mobile_data = {}
             for j in range(1, col):
                 if table.cell_value(i, j) == 'True' or table.cell_value(i, j) == 'true':
-                    dict[table.cell_value(0, j)] = True
+                    mobile_data[table.cell_value(0, j)] = True
                 elif table.cell_value(i, j) == 'False' or table.cell_value(i, j) == 'false':
-                    dict[table.cell_value(0, j)] = False
+                    mobile_data[table.cell_value(0, j)] = False
                 elif (table.cell_value(0, j) == 'chromeOptions') and (not table.cell_value(i, j)):
                     continue
                 else:
-                    dict[table.cell_value(0, j)] = table.cell_value(i, j)
-            datas[int(table.cell_value(i, 0))] = dict
+                    mobile_data[table.cell_value(0, j)] = table.cell_value(i, j)
+            if 'chromeOptions' in mobile_data.keys():
+                mobile_data['chromeOptions'] = eval(mobile_data['chromeOptions'])
+            datas[int(table.cell_value(i, 0))] = mobile_data
         log.info('Success get mobile data, spend {0} seconds'.format(time.time() - t1))
     except Exception as e:
         log.info('Fail get mobile data, spend {0} seconds'.format(time.time() - t1))
@@ -42,5 +44,8 @@ def get_mobile():
 
 
 if __name__ == '__main__':
+    print(type(get_mobile()[1]))
+    # app = {'a': 'b'}
+    # print(dict)
     # get_mobile()
-    print(get_mobile())
+    # pass

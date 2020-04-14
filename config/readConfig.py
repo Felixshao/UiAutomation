@@ -97,6 +97,6 @@ class readConfig():
 
 if __name__ == '__main__':
 
-    exe = readConfig().get_exe()
-    print(exe['yesheng'])
+    exe = readConfig().get_App()
+    print(type(exe['chromeOptions']))
 

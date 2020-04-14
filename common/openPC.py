@@ -16,9 +16,24 @@ def open_pc_yesheng():
     app = application.Application(backend='uia')
     try:
         app.connect(title_re='夜神模拟器', class_name='Qt5QWindowIcon')
+        sleep(5)
     except ElementNotFoundError:
         app.start(file_path)
+        sleep(40)
     log.info('Sucess open 夜神模拟器!')
+
+
+def open_pc_appium2():
+    """打开夜神模拟器"""
+    file_path = readConfig().get_exe()['appium']
+    app = application.Application(backend='uia')
+    try:
+        app.connect(title_re='Appium', class_name='Chrome_WidgetWin_1')
+        sleep(8)
+    except ElementNotFoundError:
+        app.start(file_path)
+        sleep(8)
+    log.info('Sucess open appium!')
 
 
 def open_pc_appium():
@@ -49,7 +64,7 @@ def notebook():
 
 
 if __name__ == '__main__':
-    open_pc_appium()
+    open_pc_yesheng()
     # pass
 
 

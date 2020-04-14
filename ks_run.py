@@ -1,5 +1,6 @@
 import unittest
 from Po.testapp.kuaishou_test import kuaishou_test
+from pywinauto import application
 
 
 def run():

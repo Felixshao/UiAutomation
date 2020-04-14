@@ -32,6 +32,21 @@ class mySelenium():
     def __init__(self):
         pass
 
+    def open_pc_exe(self, file_path, title=None, class_name=None,backend='win32'):
+        """
+        打开pc中exe应用
+        :param file_path:   # 应用路径
+        :param title:   # 窗口标题
+        :param backend:     # 窗口backend类型
+        :return:
+        """
+        try:
+            self.driver = Application(backend=backend)
+            self.driver.connect(title_re=title, class_name=class_name)
+        except BaseException :
+            self.driver.start(file_path)
+        log.info('Success open:"{}"'.format(file_path))
+
     def browser(self, browser=browser_data['chrome']):
         """
         配置浏览器
@@ -56,12 +71,13 @@ class mySelenium():
         log.info('{0} Open "{1}" browser.'.format(success, browser))
         # return self.driver
 
-    def mobile(self, data=phone_data):
+    def mobile(self, data=phone_data, secs=3):
         """
         配置app
         :return:
         """
         t1 = time.time()
+        time.sleep(secs)
         from appium import webdriver
         try:
             self.driver = webdriver.Remote(data['appium_url'], data)
@@ -75,21 +91,6 @@ class mySelenium():
             log.error('{0} to open "{1}" app, msg: 无法连接设备或无法安装Unicode'.format(fail, data['Appname']))
             log.error(web)
             return web
-
-    def open_pc_exe(self, file_path, title=None, class_name=None,backend='win32'):
-        """
-        打开pc中exe应用
-        :param file_path:   # 应用路径
-        :param title:   # 窗口标题
-        :param backend:     # 窗口backend类型
-        :return:
-        """
-        try:
-            self.driver = Application(backend=backend)
-            self.driver.connect(title_re=title, class_name=class_name)
-        except BaseException :
-            self.driver.start(file_path)
-        log.info('Success open:"{}"'.format(file_path))
 
     def caller_starup(self, source='browser', num=3):
         """
@@ -583,7 +584,6 @@ class mySelenium():
         """
         获取页面截图
         :param file_name:图片存储目录路径
-        :param img_name:图片名称
         :param source:来源：web or webview or app or other
         """
         time.sleep(1)
@@ -599,6 +599,22 @@ class mySelenium():
             log.error('{0} Get current page screenshot, spend {1} seconds'.format(fail, time.time() - t1))
             log.error(e)
             raise
+
+    def get_element_attribute(self, css, name):
+        """
+        获取元素属性值
+        :param css:element
+        :param name:属性名称
+        :return value:返回属性的值
+        """
+        try:
+            ele = self.find_element(css)
+            value = ele.get_attribute(name)
+            log.info('成功获取到元素: "{}" 属性值"{}": "{}"'.format(css, name, value))
+        except BaseException as b:
+            log.error('获取元素属性值失败，原因：{}'.format(b))
+            raise
+        return value
 
     def quit(self, sces=1):
         """关闭窗口/app"""
@@ -664,6 +680,24 @@ class mySelenium():
             log.error(e)
             raise
 
+    def move_offset(self, css, x_move, y_move=0, num=1, square=1):
+        """根据坐标移动"""
+        draggable = self.find_element(css)
+        # 鼠标按住滑块元素
+        ActionChains(self.driver).click_and_hold(draggable).perform()
+
+        n = int(x_move / square)
+        # 通过多次拖动来控制速度
+        for i in range(num):
+            if x_move - n * i < n:
+                n = x_move % square
+            if y_move - n * i < n:
+                y_move = y_move % square
+            # 拖动鼠标
+            ActionChains(self.driver).move_by_offset(xoffset=n, yoffset=y_move).perform()
+        # 释放鼠标
+        ActionChains(self.driver).release().perform()
+
     def win_scroll_page(self, num='0, 200'):
         """window系统滚动页面"""
         if ',' not in num:
@@ -705,6 +739,40 @@ class mySelenium():
         html_file.write(page)
         time.sleep(secs)
         html_file.close()
+
+    def get_current_handle(self):
+        """
+        获取当前页面窗口句柄
+        :return:
+        """
+        current_handle = self.driver.current_window_handle
+        return current_handle
+
+    def get_handles(self):
+        """
+        获取所有窗口句柄
+        :return:
+        """
+        handles = self.driver.window_handles
+        return handles
+
+    def switch_iframe(self, iframe):
+        """切换iframe"""
+        try:
+            self.driver.switch_to.frame(iframe)
+            log.info('成功切换iframe窗口: {}'.format(iframe))
+        except BaseException as b:
+            log.error('切换iframe窗口失败，原因: {}'.format(b))
+            raise
+
+    def switch_handle(self, handle):
+        """切换handle"""
+        try:
+            self.driver.switch_to.window(handle)
+            log.info('成功切换handle窗口: {}'.format(handle))
+        except BaseException as b:
+            log.error('切换handle窗口失败，原因: {}'.format(b))
+            raise
 
     """--------------------------------------------------mobile private-----------------------------------"""
     def app_background(self, secs=2):
@@ -805,6 +873,21 @@ class mySelenium():
         x1 = width * 0.5
         y1 = height * 0.8
         y2 = height * 0.2
+        for i in range(num):
+            self.driver.swipe(x1, y1, x1, y2)
+            time.sleep(1)
+
+    def slipe_under_window(self, num=1):
+        """
+        向下滑动页面
+        num:传入次数，控制滑动次数
+        """
+        size = self.driver.get_window_size()
+        width = size['width']
+        height = size['height']
+        x1 = width * 0.5
+        y1 = height * 0.4
+        y2 = height * 0.8
         for i in range(num):
             self.driver.swipe(x1, y1, x1, y2)
             time.sleep(1)

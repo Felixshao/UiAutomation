@@ -13,8 +13,8 @@ class tgpIntergral_test(Mymobile):
         app = tgpIntergral_page(self.dr)
         app.click_nav_recommend()
         app.click_intergral_icon()
-        app.click_intergral_checkIn()
-        app.click_intergral_annal()
+        # app.click_intergral_checkIn()
+        # app.click_intergral_annal()
 
     def test2_intergral_treasure(self):
         """
@@ -24,10 +24,10 @@ class tgpIntergral_test(Mymobile):
         app = tgpIntergral_page(self.dr)
         app.click_nav_recommend()
         app.click_intergral_icon()
-        app.click_intergral_treasure()
+        # app.click_intergral_treasure()
         # app.click_treasure_rule()
         # app.click_rule_window()
-        app.click_treasure_join()
+        # app.click_treasure_join()
 
     def test3_intergral_exchange(self):
         """积分商城兑换商品"""
