@@ -78,7 +78,6 @@ class ZClistinter_test(unittest.TestCase):
             honor = self.s.get(url=data[1], params=data[3], verify=False)
             self.assertEqual(honor.status_code, data[4]['status_code'],
                              msg='status_code:{0}'.format(honor.status_code))
-            print(honor.text)
             pattern = re.compile(pattern='<div class="dis_inlblo"><span class="rank_table_name">(.*)</span>')  # 匹配出榜单名称
             resu = pattern.findall(honor.text)
             print('用例成功，{0}详情:{1}'.format(data[0], resu))
