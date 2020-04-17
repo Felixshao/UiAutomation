@@ -1,7 +1,9 @@
-import unittest, ddt, requests, urllib3, re, datetime, time
+import unittest, ddt, requests, urllib3, re, datetime, time, warnings
 from common.operateExcel import operateExcel
 from common.log import Logger
 
+
+warnings.filterwarnings('ignore')
 honor_list = operateExcel(file_name='zc_interface.xlsx', sheet_name='list').get_excel_list()
 log = Logger('testinterface.ZClistinter_test').get_logger()
 
@@ -16,10 +18,11 @@ class ZClistinter_test(unittest.TestCase):
         login = operateExcel(file_name='zc_interface.xlsx', sheet_name='login').get_excel_list()[0]
         cls.s = requests.session()
         cls.s.post(url=login[1], data=eval(login[3]), verify=False)
-        cls.rank = list(datetime.datetime.now().isocalendar())
-        cls.yeal = str(datetime.datetime.now().year)
-        if (datetime.datetime.strptime(cls.yeal + '-01-01', '%Y-%m-%d')).isocalendar()[2] != 1:
+        cls.rank = list(datetime.datetime.now().isocalendar())      # 获取当前年份、第几周、第几天
+        # 通过周数计算期数
+        if (datetime.datetime.strptime(str(cls.rank[0]) + '-01-01', '%Y-%m-%d')).isocalendar()[2] != 1:
             cls.rank[1] = cls.rank[1] - 1
+            print(cls.rank)
 
     @classmethod
     def tearDownClass(cls):
