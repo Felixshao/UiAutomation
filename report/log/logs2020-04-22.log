@@ -1,2 +1,130 @@
 2020-04-22 13:24:21,129 - common.SMS.py - INFO - Success send messages, messages sid:SM4c4534b1002f44cf9a55141df74a029a, body:Sent from your Twilio trial account - zhe is code!
 2020-04-22 14:45:07,243 - common.SMS.py - INFO - Success send messages, messages sid:SM82fc1f2e8812446498e4314a61bd3ea7, body:Sent from your Twilio trial account - zhe is code!
+2020-04-22 17:23:41,976 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content
+2020-04-22 17:23:41,977 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\report" content
+2020-04-22 17:23:42,240 - config.getMobile - INFO - Success get mobile data, spend 0.011020660400390625 seconds
+2020-04-22 17:23:42,263 - common.caseSuite - INFO - Success get caseSuite, spend 0.2862401008605957 seconds
+2020-04-22 17:23:42,264 - common.runReport - INFO - start pool!
+2020-04-22 17:23:43,447 - config.getMobile - INFO - Success get mobile data, spend 0.005990743637084961 seconds
+2020-04-22 17:23:43,452 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test stark -------------------------------
+2020-04-22 17:23:43,453 - common.mySelenium - INFO - Start a new browser: chrome
+2020-04-22 17:23:45,584 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-04-22 17:23:46,701 - common.mySelenium - INFO - Success Maximize window, spend 1.1157951354980469 seconds
+2020-04-22 17:23:46,702 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.0010025501251220703 seconds
+2020-04-22 17:23:47,507 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 0.8054578304290771 seconds
+2020-04-22 17:23:47,595 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 0.8936400413513184 seconds
+2020-04-22 17:23:48,254 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.6575593948364258 seconds
+2020-04-22 17:23:48,287 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="c4abcb359720ec8d3955fbc6ddb557e3", element="0.0036233639898803904-1")>" content, this is show:""
+2020-04-22 17:23:48,325 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.7289464473724365 seconds
+2020-04-22 17:23:48,340 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.015542268753051758 seconds
+2020-04-22 17:23:48,372 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="c4abcb359720ec8d3955fbc6ddb557e3", element="0.0036233639898803904-2")>" content, this is show:""
+2020-04-22 17:23:48,409 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.08407759666442871 seconds
+2020-04-22 17:23:48,425 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.016036272048950195 seconds
+2020-04-22 17:23:48,457 - common.mySelenium - INFO - Success Click element:"class->lg-login", spend 0.04757833480834961 seconds
+2020-04-22 17:23:50,107 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 1.6509110927581787 seconds
+2020-04-22 17:23:50,117 - common.mySelenium - INFO - Success Execution event!
+2020-04-22 17:23:50,117 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 1.660938024520874 seconds
+2020-04-22 17:23:50,134 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.016598224639892578 seconds
+2020-04-22 17:23:50,215 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.09781527519226074 seconds
+2020-04-22 17:23:51,051 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 0.8356220722198486 seconds
+2020-04-22 17:23:52,434 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.38311076164245605 seconds
+2020-04-22 17:23:52,450 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[6]/a" through "xpath", spend 0.015035629272460938 seconds
+2020-04-22 17:23:52,529 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[6]/a", spend 0.09428691864013672 seconds
+2020-04-22 17:23:52,997 - common.mySelenium - INFO - Success Get current page link:"https://new.ztestin.com/school/begin" , spend 0.46744465827941895 seconds
+2020-04-22 17:23:52,997 - testpage.ZCschool_page - INFO - 进入众测学院用例成功!
+2020-04-22 17:23:54,315 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.31745314598083496 seconds
+2020-04-22 17:23:54,315 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\进入众测学院_成功.png
+2020-04-22 17:23:54,315 - common.BeautifulReport - ERROR - get_testcase_property method_name:list index out of range
+2020-04-22 17:23:54,315 - common.BeautifulReport - ERROR - get_testcase_property method_doc:list index out of range
+2020-04-22 17:23:57,440 - common.mySelenium - INFO - Success Quit window/app. spend 2.123889207839966 seconds
+2020-04-22 17:23:57,441 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test end -------------------------------
+2020-04-22 17:23:57,707 - common.runReport - INFO - start data processing!
+2020-04-22 17:23:57,707 - common.runReport - INFO - MoreProcess end.start Transfer data and generate reports...
+2020-04-22 17:23:57,726 - common.runReport - INFO - End of the project.Please see the report!
+2020-04-22 17:24:00,001 - sendEmail - INFO - Success send report to email: "2310563268@qq.com", spend 2.2347655296325684 seconds
+2020-04-22 17:25:12,490 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content
+2020-04-22 17:25:12,491 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\report" content
+2020-04-22 17:25:12,721 - config.getMobile - INFO - Success get mobile data, spend 0.007014751434326172 seconds
+2020-04-22 17:25:12,724 - common.caseSuite - INFO - Success get caseSuite, spend 0.23348665237426758 seconds
+2020-04-22 17:25:12,724 - common.runReport - INFO - start pool!
+2020-04-22 17:25:13,899 - config.getMobile - INFO - Success get mobile data, spend 0.005991935729980469 seconds
+2020-04-22 17:25:13,904 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test stark -------------------------------
+2020-04-22 17:25:13,904 - common.mySelenium - INFO - Start a new browser: chrome
+2020-04-22 17:25:16,014 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-04-22 17:25:17,131 - common.mySelenium - INFO - Success Maximize window, spend 1.1175792217254639 seconds
+2020-04-22 17:25:17,133 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.0015032291412353516 seconds
+2020-04-22 17:25:18,173 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 1.039642333984375 seconds
+2020-04-22 17:25:18,255 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 1.1223368644714355 seconds
+2020-04-22 17:25:18,894 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.6385703086853027 seconds
+2020-04-22 17:25:18,925 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="18eb87ada9df9f3a1912a65f2132dd18", element="0.3877004210380979-1")>" content, this is show:""
+2020-04-22 17:25:18,964 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.7087578773498535 seconds
+2020-04-22 17:25:18,980 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.016042709350585938 seconds
+2020-04-22 17:25:19,009 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="18eb87ada9df9f3a1912a65f2132dd18", element="0.3877004210380979-2")>" content, this is show:""
+2020-04-22 17:25:19,046 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.08171725273132324 seconds
+2020-04-22 17:25:19,061 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.015070915222167969 seconds
+2020-04-22 17:25:19,092 - common.mySelenium - INFO - Success Click element:"class->lg-login", spend 0.04612255096435547 seconds
+2020-04-22 17:25:20,148 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 1.0564711093902588 seconds
+2020-04-22 17:25:20,157 - common.mySelenium - INFO - Success Execution event!
+2020-04-22 17:25:20,157 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 1.0649938583374023 seconds
+2020-04-22 17:25:20,172 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.015561580657958984 seconds
+2020-04-22 17:25:20,252 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.09529471397399902 seconds
+2020-04-22 17:25:20,960 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 0.7078981399536133 seconds
+2020-04-22 17:25:22,328 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.36712169647216797 seconds
+2020-04-22 17:25:22,343 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[6]/a" through "xpath", spend 0.01554250717163086 seconds
+2020-04-22 17:25:22,422 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[6]/a", spend 0.09425115585327148 seconds
+2020-04-22 17:25:22,750 - common.mySelenium - INFO - Success Get current page link:"https://new.ztestin.com/school/begin" , spend 0.3282954692840576 seconds
+2020-04-22 17:25:22,750 - testpage.ZCschool_page - INFO - 进入众测学院用例成功!
+2020-04-22 17:25:24,062 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.3103017807006836 seconds
+2020-04-22 17:25:24,062 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\进入众测学院_成功.png
+2020-04-22 17:25:24,062 - common.BeautifulReport - ERROR - get_testcase_property method_name:list index out of range
+2020-04-22 17:25:24,062 - common.BeautifulReport - ERROR - get_testcase_property method_doc:list index out of range
+2020-04-22 17:25:27,180 - common.mySelenium - INFO - Success Quit window/app. spend 2.1177608966827393 seconds
+2020-04-22 17:25:27,180 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test end -------------------------------
+2020-04-22 17:25:27,405 - common.runReport - INFO - start data processing!
+2020-04-22 17:25:27,405 - common.runReport - INFO - MoreProcess end.start Transfer data and generate reports...
+2020-04-22 17:25:27,409 - common.runReport - INFO - End of the project.Please see the report!
+2020-04-22 17:25:29,307 - sendEmail - INFO - Success send report to email: "2310563268@qq.com", spend 1.85487961769104 seconds
+2020-04-22 17:29:41,926 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content
+2020-04-22 17:29:41,927 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\report" content
+2020-04-22 17:29:42,151 - config.getMobile - INFO - Success get mobile data, spend 0.007008790969848633 seconds
+2020-04-22 17:29:42,154 - common.caseSuite - INFO - Success get caseSuite, spend 0.22726798057556152 seconds
+2020-04-22 17:29:42,154 - common.runReport - INFO - start pool!
+2020-04-22 17:29:43,359 - config.getMobile - INFO - Success get mobile data, spend 0.006517648696899414 seconds
+2020-04-22 17:29:43,364 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test stark -------------------------------
+2020-04-22 17:29:43,365 - common.mySelenium - INFO - Start a new browser: chrome
+2020-04-22 17:29:45,470 - common.mySelenium - INFO - Success Open "chrome" browser.
+2020-04-22 17:29:46,584 - common.mySelenium - INFO - Success Maximize window, spend 1.113919973373413 seconds
+2020-04-22 17:29:46,586 - common.mySelenium - INFO - Success Open url: https://www.ztestin.com/, spend 0.001001596450805664 seconds
+2020-04-22 17:29:47,189 - common.mySelenium - INFO - Success Find element "nav_fff" through "class", spend 0.6025264263153076 seconds
+2020-04-22 17:29:47,273 - common.mySelenium - INFO - Success Click element:"class->nav_fff", spend 0.6867110729217529 seconds
+2020-04-22 17:29:47,907 - common.mySelenium - INFO - Success Find element "login_email" through "id", spend 0.6342678070068359 seconds
+2020-04-22 17:29:47,938 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="a2406478108ee1fab8f26e7b93eb22f3", element="0.14854063753029445-1")>" content, this is show:""
+2020-04-22 17:29:47,974 - common.mySelenium - INFO - Success Send keys:"id->login_email" content: "15779582092", spend 0.7014188766479492 seconds
+2020-04-22 17:29:47,990 - common.mySelenium - INFO - Success Find element "login_password" through "id", spend 0.01504063606262207 seconds
+2020-04-22 17:29:48,023 - common.mySelenium - INFO - Success clear element: "<selenium.webdriver.remote.webelement.WebElement (session="a2406478108ee1fab8f26e7b93eb22f3", element="0.14854063753029445-2")>" content, this is show:""
+2020-04-22 17:29:48,062 - common.mySelenium - INFO - Success Send keys:"id->login_password" content: "13691916244shao", spend 0.0867617130279541 seconds
+2020-04-22 17:29:48,077 - common.mySelenium - INFO - Success Find element "lg-login" through "class", spend 0.015541315078735352 seconds
+2020-04-22 17:29:48,108 - common.mySelenium - INFO - Success Click element:"class->lg-login", spend 0.04638504981994629 seconds
+2020-04-22 17:29:49,169 - common.mySelenium - INFO - Success Find element "nav_per_wrap" through "class", spend 1.060051441192627 seconds
+2020-04-22 17:29:49,179 - common.mySelenium - INFO - Success Execution event!
+2020-04-22 17:29:49,179 - common.mySelenium - INFO - Success Hover to element:"class->nav_per_wrap" , spend 1.0700716972351074 seconds
+2020-04-22 17:29:49,194 - common.mySelenium - INFO - Success Find element "//div[@class="nav_per_wrap"]/ul/li[1]/a" through "xpath", spend 0.015542745590209961 seconds
+2020-04-22 17:29:49,275 - common.mySelenium - INFO - Success Click element:"xpath->//div[@class="nav_per_wrap"]/ul/li[1]/a", spend 0.09625554084777832 seconds
+2020-04-22 17:29:50,126 - common.mySelenium - INFO - Success Find targeting element:"class->task-banner-main", spend 0.8515810966491699 seconds
+2020-04-22 17:29:51,496 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.36898136138916016 seconds
+2020-04-22 17:29:51,511 - common.mySelenium - INFO - Success Find element "//ul[@class="nav_ul"]/li[6]/a" through "xpath", spend 0.015566349029541016 seconds
+2020-04-22 17:29:51,593 - common.mySelenium - INFO - Success Click element:"xpath->//ul[@class="nav_ul"]/li[6]/a", spend 0.09675812721252441 seconds
+2020-04-22 17:29:51,950 - common.mySelenium - INFO - Success Get current page link:"https://new.ztestin.com/school/begin" , spend 0.35750341415405273 seconds
+2020-04-22 17:29:51,950 - testpage.ZCschool_page - INFO - 进入众测学院用例成功!
+2020-04-22 17:29:53,267 - common.mySelenium - INFO - Success Get current page screenshot, spend 0.3158409595489502 seconds
+2020-04-22 17:29:53,267 - common.BeautifulReport - INFO - Success insert screenshot, img:D:\study\python\UiAutomation\report\screen_shot\进入众测学院_成功.png
+2020-04-22 17:29:53,267 - common.BeautifulReport - ERROR - get_testcase_property method_name:list index out of range
+2020-04-22 17:29:53,267 - common.BeautifulReport - ERROR - get_testcase_property method_doc:list index out of range
+2020-04-22 17:29:56,388 - common.mySelenium - INFO - Success Quit window/app. spend 2.120004653930664 seconds
+2020-04-22 17:29:56,388 - testcase.ZCschool_test - INFO - --------------------------------- ZCschool_test end -------------------------------
+2020-04-22 17:29:56,605 - common.runReport - INFO - start data processing!
+2020-04-22 17:29:56,605 - common.runReport - INFO - MoreProcess end.start Transfer data and generate reports...
+2020-04-22 17:29:56,609 - common.runReport - INFO - End of the project.Please see the report!
+2020-04-22 17:29:58,675 - sendEmail - INFO - Success send report to email: "2310563268@qq.com", spend 2.0219764709472656 seconds
+2020-04-22 18:50:38,509 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content
+2020-04-22 18:51:43,220 - common.clearFolder - INFO - Success clear folder;"D:\study\python\UiAutomation\report\screen_shot" content

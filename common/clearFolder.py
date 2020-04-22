@@ -1,10 +1,11 @@
-import os
+import os, sys
 import shutil
 from config.getProjectPath import get_project_path
 from common.log import Logger
 
 path = get_project_path()
 log = Logger('common.clearFolder').get_logger()
+sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 class clearFolder():
@@ -60,6 +61,6 @@ class clearFolder():
 
 
 if __name__ == '__main__':
-
-    cle = clearFolder()
-    cle.clear_report()
+    print(1)
+    # cle = clearFolder()
+    # cle.clear_report()

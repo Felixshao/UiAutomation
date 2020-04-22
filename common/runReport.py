@@ -139,6 +139,7 @@ class run_report():
         q = mp.Manager().Queue()
         pool = mp.Pool()
         for i in self.suite_all:
+            print(i)
             pool.apply_async(self.pool_run_Beautifuhtml, args=(i, q, True))
         pool.close()
         pool.join()
