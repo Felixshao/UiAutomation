@@ -1,10 +1,11 @@
-import unittest
+import unittest, sys, os
 import time
 from common.MySelenium import mySelenium
 from Po.testpage.enterZC_page import enterZC_page
 from Po.testpage.ZCschool_page import ZCschool_page
 from common.log import Logger
 
+sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..')))
 log = Logger('testcase.ZCschool_test').get_logger()
 
 
