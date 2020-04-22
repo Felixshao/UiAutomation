@@ -7,11 +7,11 @@ log = Logger('common.SMS.py').get_logger()
 client = Client(twilio_data['account_sid'], twilio_data['account_token'])   # 配置twilio
 
 
-def send_msg(body):
+def send_msg(body, to=twilio_data['to'], from_=twilio_data['from']):
     """通过twilio发送短信"""
     try:
 
-        message = client.messages.create(to=twilio_data['to'], from_=twilio_data['from'], body=body)    # 新建短信
+        message = client.messages.create(to=to, from_=from_, body=body)    # 新建短信
         log.info('Success send messages, messages sid:{0}, body:{1}'.format(message.sid, message.body))
     except Exception as e:
         log.error('Fail send messages!')

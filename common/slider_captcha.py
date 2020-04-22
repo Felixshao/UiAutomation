@@ -1,10 +1,8 @@
 import cv2, os
-from pylab import *
 import time
-from selenium import webdriver
-from selenium.webdriver import ActionChains
 from config.getProjectPath import get_project_path
 from common.log import Logger
+from common.MySelenium import mySelenium
 
 log = Logger('common.slider_captcha.py').get_logger()
 path = get_project_path()   # 项目路径
@@ -192,32 +190,25 @@ def isEleExist(browser, id):
 
 # 小鹅通滑块测试
 def test():
-    browser = webdriver.Chrome()
+    browser = mySelenium()
+    browser.browser()
 
     # 网站登陆页面
     url = 'https://admin.xiaoe-tech.com/login_page?reg_source=0101&xeuti=ituex#/acount'
 
     # 浏览器访问登录页面
-    browser.get(url)
+    browser.open_url(url)
 
-    handle = browser.current_window_handle
-
-    # 等待3s用于加载脚本文件
-    browser.implicitly_wait(3)
+    handle = browser.get_current_handle()
 
     # 点击登陆按钮，弹出滑动验证码
-    browser.find_element_by_xpath('//div[@class="phoneWrapper"]/div/input').send_keys('15779582092')
-    browser.find_element_by_xpath('//div[@class="passwordWrapper"]/div/input').send_keys('123456')
-    btn = browser.find_element_by_class_name('login-btn')
-    btn.click()
-    frame = browser.find_element_by_id('tcaptcha_iframe')
-    browser.switch_to.frame(frame)
-    # slider_captcha(browser, handle, 'tcaptcha_iframe')
+    browser.send('xpath->//div[@class="phoneWrapper"]/div/input', '15779582092')
+    browser.send('xpath->//div[@class="passwordWrapper"]/div/input', '123456')
+    browser.click('class->login-btn')
+    browser.switch_iframe('tcaptcha_iframe', 2)
+    slider_captcha(browser, handle)
     time.sleep(10)
 
 
 if __name__ == '__main__':
-    # test()
-    x = 0
-    if x - 1 < 2:
-        print(x % 3)
+    test()

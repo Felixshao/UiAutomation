@@ -1,4 +1,4 @@
-import os, pywinauto
+import os
 import time
 from selenium.common.exceptions import InvalidElementStateException, WebDriverException
 from urllib3.exceptions import MaxRetryError
@@ -756,8 +756,9 @@ class mySelenium():
         handles = self.driver.window_handles
         return handles
 
-    def switch_iframe(self, iframe):
+    def switch_iframe(self, iframe, ces=0.1):
         """切换iframe"""
+        time.sleep(ces)
         try:
             self.driver.switch_to.frame(iframe)
             log.info('成功切换iframe窗口: {}'.format(iframe))

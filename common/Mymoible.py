@@ -2,7 +2,6 @@ import unittest
 import time
 from common.MySelenium import mySelenium
 from common.log import Logger
-from Po.testpage.enterApp_page import enterApp_page
 from config.getMobile import get_mobile
 from config.readConfig import readConfig
 
