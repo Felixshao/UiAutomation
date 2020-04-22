@@ -1,7 +1,4 @@
-# from selenium import webdriver
-#
-# driver = webdriver.Chrome()
-# driver.get('www.baidu.com')
+from selenium import webdriver
 
-import platform
-print(platform.python_version())
+driver = webdriver.Chrome()
+driver.get('www.baidu.com')
