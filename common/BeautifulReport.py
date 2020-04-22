@@ -80,7 +80,7 @@ FIELDS = {
 
 class PATH:
     """ all file PATH meta """
-    slash = '/' if platform != 'Windows' else '\\'
+    slash = '/' if platform.system() != 'Windows' else '\\'
     config_tmp_path = SITE_PAKAGE_PATH + slash + 'config' + slash + 'template'
 
 
@@ -452,7 +452,7 @@ class BeautifulReport(ReportTestResult, PATH):
         :param file_name: 用户在装饰器中传递进来的问价匿名
         :return:
         """
-        pattern = '/' if platform != 'Windows' else '\\'
+        pattern = '/' if platform.system() != 'Windows' else '\\'
         with open(img_path + pattern + file_name, 'rb') as file:
             data = file.read()
         return base64.b64encode(data).decode()

@@ -1,5 +1,6 @@
-import os
+import os, platform
 import time
+from pyvirtualdisplay import Display
 from selenium.common.exceptions import InvalidElementStateException, WebDriverException
 from urllib3.exceptions import MaxRetryError
 from config.getMobile import get_mobile
@@ -32,26 +33,29 @@ class mySelenium():
     def __init__(self):
         pass
 
-    def open_pc_exe(self, file_path, title=None, class_name=None,backend='win32'):
-        """
-        打开pc中exe应用
-        :param file_path:   # 应用路径
-        :param title:   # 窗口标题
-        :param backend:     # 窗口backend类型
-        :return:
-        """
-        try:
-            self.driver = Application(backend=backend)
-            self.driver.connect(title_re=title, class_name=class_name)
-        except BaseException :
-            self.driver.start(file_path)
-        log.info('Success open:"{}"'.format(file_path))
+    # def open_pc_exe(self, file_path, title=None, class_name=None,backend='win32'):
+    #     """
+    #     打开pc中exe应用
+    #     :param file_path:   # 应用路径
+    #     :param title:   # 窗口标题
+    #     :param backend:     # 窗口backend类型
+    #     :return:
+    #     """
+    #     try:
+    #         self.driver = Application(backend=backend)
+    #         self.driver.connect(title_re=title, class_name=class_name)
+    #     except BaseException :
+    #         self.driver.start(file_path)
+    #     log.info('Success open:"{}"'.format(file_path))
 
     def browser(self, browser=browser_data['chrome']):
         """
         配置浏览器
         :param browser:
         """
+        if platform.system() != 'Windows':
+            display = Display(visible=0, size=(900, 800))
+            display.start()
         log.info('Start a new browser: {0}'.format(browser))
         if browser == 'chrome' or browser == 'CHROME':
             desired_capabilities = DesiredCapabilities.CHROME   # 页面加载策略，设置为none，不等待页面加载完成
