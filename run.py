@@ -1,8 +1,10 @@
-import time
+import time, sys, os
 from common.runReport import run_report
 from common.sendEmail import send_annex_email
 from common.clearFolder import clearFolder
 
+# 设置启动目录
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 clear = clearFolder()
 
 
