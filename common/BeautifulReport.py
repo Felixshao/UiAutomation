@@ -80,7 +80,8 @@ FIELDS = {
 
 class PATH:
     """ all file PATH meta """
-    config_tmp_path = SITE_PAKAGE_PATH + '\\config\\template'
+    slash = '/' if platform != 'window' else '\\'
+    config_tmp_path = SITE_PAKAGE_PATH + slash + 'config' + slash + 'template'
 
 
 class MakeResultJson:
@@ -381,7 +382,7 @@ class ReportTestResult(unittest.TestResult):
 
 class BeautifulReport(ReportTestResult, PATH):
     img_path = 'screen_shot/' if platform.system() != 'Windows' else 'screen_shot\\'    # 设置截图地址
-    
+
     def __init__(self, suites, verbosity=1):
         super(BeautifulReport, self).__init__(suites)
         self.suites = suites
