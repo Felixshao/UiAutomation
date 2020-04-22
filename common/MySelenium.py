@@ -14,7 +14,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from config.getProjectPath import get_project_path
 from config.readConfig import readConfig
 from common.BeautifulReport import BeautifulReport
-from pywinauto.application import Application
+# from pywinauto.application import Application
 
 path = get_project_path()
 phone_data = get_mobile()[4]    # 选择设备和app
