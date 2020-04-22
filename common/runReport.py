@@ -120,11 +120,13 @@ class run_report():
     def pool_run_Beautifuhtml(self, suite=None, q=None, process=False):
         """执行用例并输出漂亮报告方法"""
         try:
+            print('开始运行用例!')
             name = '/report1' if platform.system() != 'Windows' else '\\report1'
             if not process:
                 suite = self.suite_all
             result = BeautifulReport(suite, verbosity=2)
             results = result.report(filename=name, description='测试众测报告', log_path=self.reportFile1, process=process)
+            print('结果results:', results)
             if process:
                 q.put(results)
         except Exception as e:
