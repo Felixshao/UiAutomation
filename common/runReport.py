@@ -1,4 +1,5 @@
 import os
+import platform
 import time
 import threading
 import multiprocessing as mp
@@ -119,7 +120,7 @@ class run_report():
     def pool_run_Beautifuhtml(self, suite=None, q=None, process=False):
         """执行用例并输出漂亮报告方法"""
         try:
-            name = '\\report1'
+            name = '/report1' if platform != 'Windows' else '\\report1'
             if not process:
                 suite = self.suite_all
             result = BeautifulReport(suite, verbosity=2)
@@ -163,6 +164,7 @@ class run_report():
             dict['totalTime'] = self.report_result[i]['totalTime']
         log.info('MoreProcess end.start Transfer data and generate reports...')
         result = BeautifulReport(self.suite_all)
-        result.stop_output(log_path=self.reportFile1 + '\\', FIELDS=dict)
+        slash = '/' if platform != 'Windows' else '//'   # 判断系统，给出不同路径连接符
+        result.stop_output(log_path=self.reportFile1 + slash, FIELDS=dict)
         log.info('End of the project.Please see the report!')
         print('用例结束，在{0}查看报告!'.format(self.reportFile1))

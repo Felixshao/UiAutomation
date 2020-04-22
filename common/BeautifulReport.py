@@ -80,7 +80,7 @@ FIELDS = {
 
 class PATH:
     """ all file PATH meta """
-    slash = '/' if platform != 'window' else '\\'
+    slash = '/' if platform != 'Windows' else '\\'
     config_tmp_path = SITE_PAKAGE_PATH + slash + 'config' + slash + 'template'
 
 
