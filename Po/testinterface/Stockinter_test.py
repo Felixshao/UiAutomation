@@ -47,34 +47,54 @@ class Stockinter_test(unittest.TestCase):
         self.collection_stock_prices('601698', data)
 
     def test3_xinlong_stock(self):
-        """查看欣龙控股（000955）股票情况"""
+        """查看金健米业（600127）股票情况"""
         data = stock[2]
         try:
             data[3] = eval(data[3])
             data[4] = eval(data[4])
         except TypeError:
             pass
-        self.collection_stock_prices('000955', data)
+        self.collection_stock_prices('600127', data)
 
     def test4_chinabaoan_stock(self):
-        """查看中国宝安（000009）股票情况"""
+        """查看华北制药（600812）股票情况"""
         data = stock[3]
         try:
             data[3] = eval(data[3])
             data[4] = eval(data[4])
         except TypeError:
             pass
-        self.collection_stock_prices('000009', data)
+        self.collection_stock_prices('600812', data)
 
     def test5_twosixthree_stock(self):
-        """查看二六三（002467）股票情况"""
+        """查看农产品（000061）股票情况"""
         data = stock[4]
         try:
             data[3] = eval(data[3])
             data[4] = eval(data[4])
         except TypeError:
             pass
-        return self.collection_stock_prices('002467', data)
+        return self.collection_stock_prices('000061', data)
+
+    def test6_ningbo_stock(self):
+        """查看宁波建工（601789）股票情况"""
+        data = stock[4]
+        try:
+            data[3] = eval(data[3])
+            data[4] = eval(data[4])
+        except TypeError:
+            pass
+        return self.collection_stock_prices('601789', data)
+
+    def test7_ningbo_stock(self):
+        """查看深粮控股（000019）股票情况"""
+        data = stock[4]
+        try:
+            data[3] = eval(data[3])
+            data[4] = eval(data[4])
+        except TypeError:
+            pass
+        return self.collection_stock_prices('000019', data)
 
     def collection_stock_prices(self, stock, data, filepath=file_path):
         """采集股票数据"""

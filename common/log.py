@@ -2,7 +2,7 @@ import os
 import logging
 import time
 from config import getProjectPath
-from config.readConfig import  readConfig
+from config.readConfig import readConfig
 from logging.handlers import TimedRotatingFileHandler
 
 path = getProjectPath.get_project_path()
