@@ -17,7 +17,7 @@ from common.BeautifulReport import BeautifulReport
 # from pywinauto.application import Application
 
 path = get_project_path()
-phone_data = get_mobile()[4]    # 选择设备和app
+phone_data = get_mobile()[2]    # 选择设备和app
 # phone_data = readConfig().get_App()
 browser_data = readConfig().get_browser()
 log = Logger('common.mySelenium').get_logger()

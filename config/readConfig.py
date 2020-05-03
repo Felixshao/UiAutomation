@@ -1,4 +1,5 @@
 import os
+from configparser import ConfigParser
 from common.MyConfiParser import MyConfigParser
 from config import getProjectPath
 
@@ -98,5 +99,6 @@ class readConfig():
 if __name__ == '__main__':
 
     exe = readConfig().get_App()
+    print(exe)
     print(type(exe['chromeOptions']))
 

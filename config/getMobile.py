@@ -44,7 +44,7 @@ def get_mobile():
 
 
 if __name__ == '__main__':
-    print(type(get_mobile()[1]))
+    print(get_mobile())
     # app = {'a': 'b'}
     # print(dict)
     # get_mobile()

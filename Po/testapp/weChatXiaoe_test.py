@@ -34,11 +34,11 @@ class weChatXiaoe_test(unittest.TestCase):
         self.xiaoe.click_xiaoetask_manualtask()
         self.xiaoe.input_manualtask_taskname(1)
         self.xiaoe.input_manualtask_taskcontent(1)
-        self.xiaoe.click_manualtask_taskcourse()
-        self.xiaoe.click_taskcourse_one()
-        self.xiaoe.click_manualtask_layout()
-        self.xiaoe.check_task(1)
-        self.xiaoe.click_buttomnav_home()
+        # self.xiaoe.click_manualtask_taskcourse()
+        # self.xiaoe.click_taskcourse_one()
+        # self.xiaoe.click_manualtask_layout()
+        # self.xiaoe.check_task(1)
+        # self.xiaoe.click_buttomnav_home()
 
     def test2_vlayout_workbook(self):
         """修改手动作业"""
