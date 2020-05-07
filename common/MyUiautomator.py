@@ -38,33 +38,55 @@ def isconnect(ips: list):
 
 def connect_android():
     """连接设备"""
-    ips = ['192.168.31.199:5555']
+    ips = ['127.0.0.1:5555']
     isconnect(ips)
 
-    app = u2.connect('192.168.31.199:5555')  # 连接设备
+    app = u2.connect('127.0.0.1:5555')  # 连接设备
+    app.healthcheck()   # 解锁屏幕(但无法解开锁屏密码)并开启uiautomator2服务
+    # app.unlock()
     app.session('com.tencent.mm')   # 连接app
     # app.app_start('com.tencent.mm')
     #
-    time.sleep(4)
+    app.toast.show('测试开始', 2)   # toast.show方法，手机显示toast提示
+    time.sleep(8)
     app.click(0.879, 0.955)  # 点击我的
     # app(xpath='com.tencent.mm:id/tb').click()
-    app(text='收藏').click()
-    app(description='搜索').click()
+    # app(text='收藏').click()
+    # app(description='搜索').click()
+    # #
+    # app.set_fastinput_ime(True)  # 切换成FastInputIME输入法
+    # app.send_keys('准线网')  # adb广播输入，在光标处输入
+    # # app.clear_text()  # 清除输入框所有内容(Require android-uiautomator.apk version >= 1.0.7)
+    # app.set_fastinput_ime(False)  # 切换成正常的输入法
+    #
+    # app(resourceId='com.tencent.mm:id/bd').click()
+    # print(app.info)
+    # print(app.current_app())
+    # time.sleep(8)
+    # dr = ChromeDriver(app).driver(device_ip='192.168.31.199:5555')
+    # dr.find_element_by_xpath("//div[@class='xe-navigation bottom_nav']/div[2]").click()
+    # print(dr.page_source())
+    app.toast.show('测试结束', 3)
+    app.service('uiautomator').stop()   # 关闭uiautomator服务，允许其他测试框架使用uiautomator服务
 
-    app.set_fastinput_ime(True)  # 切换成FastInputIME输入法
-    app.send_keys('准线网')  # adb广播输入，在光标处输入
-    # app.clear_text()  # 清除输入框所有内容(Require android-uiautomator.apk version >= 1.0.7)
-    app.set_fastinput_ime(False)  # 切换成正常的输入法
 
-    app(resourceId='com.tencent.mm:id/bd').click()
-    print(app.info)
-    print(app.current_app())
-    time.sleep(8)
-    dr = ChromeDriver(app).driver(device_ip='192.168.31.199:5555')
-    dr.find_element_by_xpath("//div[@class='xe-navigation bottom_nav']/div[2]").click()
-    print(dr.page_source())
+def connect_app_webview():
+
+    d = u2.connect('192.168.31.199:5555')
+    # d.app_start('com.github.android_app_bootstrap')
+    # d.session('com.github.android_app_bootstrap')
+    # d(text='Login').click()
+    # d(text='Baidu').click()
+    # time.sleep(3)
+
+    print(d.info)
+    print(d.current_app())
+    driver = ChromeDriver(d).driver('192.168.31.199:5555')
+    driver.find_element_by_id('index-kw').click()
+    driver.find_element_by_id('index-kw').send_keys('Python')
+    driver.find_element_by_id('index-bn').click()
+    driver.quit()
 
 
 if __name__ == '__main__':
-
-    connect_android()
+    connect_app_webview()
