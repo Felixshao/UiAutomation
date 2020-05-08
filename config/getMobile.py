@@ -10,14 +10,14 @@ mobile_path = os.path.join(path, 'config', 'mobile.xlsx')
 log = Logger('config.getMobile').get_logger()
 
 
-def get_mobile():
+def get_mobile(sheetname='android'):
     """
     获取配置的手机和app信息，在mobile.xlsx文件修改和增加配置元件
     :return:datas; 返回所有设备信息，dict格式
     """
     t1 = time.time()
     try:
-        table = xlrd.open_workbook(mobile_path).sheet_by_name('android')
+        table = xlrd.open_workbook(mobile_path).sheet_by_name(sheetname)
         row = table.nrows   # 行
         col = table.ncols   # 列
         datas = {}
@@ -44,7 +44,7 @@ def get_mobile():
 
 
 if __name__ == '__main__':
-    print(get_mobile())
+    print(get_mobile('uiauto2_android'))
     # app = {'a': 'b'}
     # print(dict)
     # get_mobile()

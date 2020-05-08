@@ -14,6 +14,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from config.getProjectPath import get_project_path
 from config.readConfig import readConfig
 from common.BeautifulReport import BeautifulReport
+from common.MyChromedriver import ChromeDriver
 # from pywinauto.application import Application
 
 path = get_project_path()
@@ -95,6 +96,16 @@ class mySelenium():
             log.error('{0} to open "{1}" app, msg: 无法连接设备或无法安装Unicode'.format(fail, data['Appname']))
             log.error(web)
             return web
+
+    def uiauto2_webview(self, app, device_ip=None, package=None, attach=True, activity=None, process=None, secs=2):
+        """
+        uiautomator2工具切换进入webview
+        :param app: uiautomatro2的device
+        :param ip:  设备ip(usb连接不用传ip)
+        :return:
+        """
+        self.driver = ChromeDriver(app).driver(device_ip, package, attach, activity, process)
+        time.sleep(secs)
 
     def caller_starup(self, source='browser', num=3):
         """
@@ -739,10 +750,10 @@ class mySelenium():
         time.sleep(secs)
         page = self.driver.page_source
         file_path = os.path.join(path, 'xiaoe', filename)
-        html_file = open(file_path, 'w', encoding='utf-8')
-        html_file.write(page)
-        time.sleep(secs)
-        html_file.close()
+        with open(file_path, 'w', encoding='utf-8') as html_file:
+            html_file.write(page)
+            time.sleep(secs)
+            html_file.close()
 
     def get_current_handle(self):
         """
