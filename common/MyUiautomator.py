@@ -3,15 +3,15 @@
 
 import time, subprocess, os
 import uiautomator2 as u2
-from common.MyChromedriver import ChromeDriver
-from common.MySelenium import mySelenium
 from config.getMobile import get_mobile
+from common.log import Logger
 
 # 获取设备信息
 mobile_data = get_mobile('uiauto2_android')[1]
+log = Logger().get_logger()
 
 
-class MyUiautomator2(mySelenium):
+class MyUiautomator2(object):
 
     def connect_android(self, ip=mobile_data['ip'], start='session', appPackage=mobile_data['appPackage'], secs=4):
         """
@@ -38,6 +38,7 @@ class MyUiautomator2(mySelenium):
         :param service: 服务名称，默认关闭‘uiautomator’
         :return:
         """
+        self.app.toast.show('测试结束', 2)
         self.app.service(service).stop()  # 关闭服务，默认关闭'uiautomator', 允许其他测试框架使用uiautomator服务
 
     def isconnect(self, ip):
@@ -64,16 +65,6 @@ class MyUiautomator2(mySelenium):
                 raise result
         return isconnect_child
 
-    def switch_chromedriver(self, app, device_ip=None, package=None, attach=True, activity=None, process=None, secs=2):
-        """
-        uiautomator2工具切换进入webview
-        :param app: uiautomatro2的device
-        :param ip:  设备ip(usb连接不用传ip)
-        :return:
-        """
-        self.driver = ChromeDriver(self.app).driver(device_ip, package, attach, activity, process)
-        time.sleep(secs)
-
     def get_app_info(self):
         """
         获取设备信息
@@ -90,61 +81,88 @@ class MyUiautomator2(mySelenium):
         app_current = self.app.app_current()
         return app_current
 
-    def connect_android1(self, secs=4):
-        """连接设备"""
-        self.isconnect(mobile_data['ip'])
-        app = u2.connect(mobile_data['ip'])  # 连接设备
-        app.healthcheck()   # 解锁屏幕(但无法解开锁屏密码)并开启uiautomator2服务
-        app.session(mobile_data['appPackage'])   # 连接app
-        app.toast.show('测试开始', 2)   # toast.show方法，手机显示toast提示
-        time.sleep(secs)
-        app.click(0.879, 0.955)  # 点击我的
-        app(text='收藏').click()
-        app(description='搜索').click()
-        #
-        app.set_fastinput_ime(True)  # 切换成FastInputIME输入法
-        app.send_keys('准线网')  # adb广播输入，在光标处输入
+    def find_ele(self, css):
+        """
+        uiautomator2点击元素
+        :param css:元素类型和元素定位,如: text->收藏
+        :return:
+        """
+        if '->' not in css:
+            log.error('Positioning syntax errors. element:"{0}" lack of "->"'.format(css))
+            raise NameError('Positioning syntax errors. lack of "->"')
+        by = css.split('->')[0]
+        ele = css.split('->')[1]
+        if by == 'text':
+            app_ele = self.app(text=ele)
+        elif by == 'description':
+            app_ele = self.app(description=ele)
+        elif by == 'resourceId':
+            app_ele = self.app(resourceId=ele)
+        elif by == 'className':
+            app_ele = self.app(className=ele)
+        else:
+            log.error('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
+            raise NameError('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
+        return app_ele
+
+    def click(self, css):
+        """
+        uiautomator2点击事件
+        :param css:传入定位元素或坐标,元素如:text->收藏; 坐标如:[1, 2]/(1, 2)
+        :return:
+        """
+        if type(css) is str:
+            self.find_ele(css).click()
+            log.info('sucess click ele: {}'.format(css))
+        elif type(css) is list or type(css) is tuple:
+            self.app.click(css[0], css[1])
+            log.info('sucess click coordinate: {}'.format(css))
+        else:
+            log.error('Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+            raise NameError('Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+
+    def set_text(self, css, text):
+        """输入值，不调用输入法输入"""
+        app_element = self.find_ele(css)
+        app_element.set_text(text)
+        log.info('sucess set text: "{}" / "{}"'.format(css, text))
+
+    def send_keys(self, text):
+        """
+        无法定位时，使用输入法输入，在光标处输入
+        :param text: 文本
+        :return:
+        """
+        self.app.set_fastinput_ime(True)  # 切换成FastInputIME输入法
+        self.app.send_keys(text)  # adb广播输入，在光标处输入
         # app.clear_text()  # 清除输入框所有内容(Require android-uiautomator.apk version >= 1.0.7)
-        app.set_fastinput_ime(False)  # 切换成正常的输入法
+        self.app.set_fastinput_ime(False)  # 切换成正常的输入法
+        log.info('sucess send keys: "{}"'.format(text))
 
-        app(resourceId='com.tencent.mm:id/bd').click()
-        print(app.info)
-        print(app.current_app())
-        time.sleep(8)
-        dr = mySelenium()
-        dr.uiauto2_webview(app, device_ip=mobile_data['ip'])
-        dr.get_page_source('homeAndmy.html')
-        dr.click("xpath->//div[@class='xe-navigation bottom_nav']/div[4]")
-        app.toast.show('测试结束', 3)
-        app.service('uiautomator').stop()   # 关闭uiautomator服务，允许其他测试框架使用uiautomator服务
+    def swipe_up(self, num=1):
+        """向上滑动"""
+        size = self.app.window_size()
+        for i in range(num):
+            x = size[0] * 0.5
+            y1 = size[1] * 0.8
+            y2 = size[1] * 0.2
 
-    def connect_app_webview(self):
-        ips = ['192.168.31.199:5555']
-        self.isconnect(ips)
-        d = u2.connect('192.168.31.199:5555')
-        print(type(d))
-        # d.app_start('com.github.android_app_bootstrap')
-        # d.session('com.github.android_app_bootstrap')
-        # d(text='Login').click()
-        # d(text='Baidu').click()
-        # time.sleep(3)
+            self.app.swipe(x, y1, x, y2)
 
-        # print(d.info)
-        # print(d.app_current())
+    def swipe_down(self, num=1):
+        """向上滑动"""
+        size = self.app.window_size()
+        for i in range(num):
+            x = size[0] * 0.5
+            y1 = size[1] * 0.8
+            y2 = size[1] * 0.2
 
-    def test(self):
-        pass
+            self.app.swipe(x, y1, x, y2)
+        self.uiauto2_stop()
 
 
 if __name__ == '__main__':
-   uiau = MyUiautomator2()
-   app = uiau.connect_android(start='app_start')
-
-   uiau.uiauto2_webview(app)
-
-   uiau.send('id->index-kw', 'python')
-   uiau.click('id->index-bn')
-   uiau.get_page_source('wxbaidu3.html')
-   # print(app.get_app_info())
-   uiau.quit()
-   uiau.uiauto2_stop()
+    uiau = MyUiautomator2()
+    uiau.connect_android(start='app_start')
+    time.sleep(2)
+    uiau.swipe_down(5)

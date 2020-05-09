@@ -10,6 +10,7 @@ from __future__ import absolute_import
 import atexit
 import six
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from urllib3.exceptions import MaxRetryError
 
 if six.PY3:
@@ -45,10 +46,10 @@ class ChromeDriver(object):
         Returns:
             selenium driver
         """
-        if device_ip:
-            subprocess.call(['adb', 'tcpip', '5555'])
-            subprocess.call(['adb', 'connect', str(device_ip)])
-        app = self._d.current_app()
+        # if device_ip:
+        #     subprocess.call(['adb', 'tcpip', '5555'])
+        #     subprocess.call(['adb', 'connect', str(device_ip)])
+        app = self._d.app_current()
         appname = self._d.info
 
         # 配置微信H5
@@ -71,6 +72,10 @@ class ChromeDriver(object):
             self._launch_webdriver()
             dr = webdriver.Remote('http://localhost:%d' % self._port, capabilities)
         except MaxRetryError:
+            self._launch_webdriver()
+            dr = webdriver.Remote('http://localhost:%d' % self._port, capabilities)
+        except WebDriverException:
+            subprocess.call('taskkill /f /t /im chromedriver.exe')
             self._launch_webdriver()
             dr = webdriver.Remote('http://localhost:%d' % self._port, capabilities)
 

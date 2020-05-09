@@ -18,7 +18,8 @@ from common.MyChromedriver import ChromeDriver
 # from pywinauto.application import Application
 
 path = get_project_path()
-phone_data = get_mobile()[2]    # 选择设备和app
+phone_data = get_mobile()[2]    # appium选择设备和app
+uiauto_phone_data = get_mobile('uiauto2_android')[1]    # uiautomator2选择设备和app
 # phone_data = readConfig().get_App()
 browser_data = readConfig().get_browser()
 log = Logger('common.mySelenium').get_logger()
@@ -29,7 +30,7 @@ install_unicode = 'id->com.android.packageinstaller:id/btn_install_confirm'
 img_path = os.path.join(path, 'report', 'screen_shot')
 
 
-class mySelenium():
+class mySelenium(object):
 
     def __init__(self):
         pass
@@ -97,7 +98,7 @@ class mySelenium():
             log.error(web)
             return web
 
-    def uiauto2_webview(self, app, device_ip=None, package=None, attach=True, activity=None, process=None, secs=2):
+    def uiauto2_webview(self, app, device_ip=uiauto_phone_data['ip'], package=None, attach=True, activity=None, process=None, secs=2):
         """
         uiautomator2工具切换进入webview
         :param app: uiautomatro2的device
@@ -731,12 +732,13 @@ class mySelenium():
             log.error(e)
             raise
 
-    def back_button(self, num=1):
+    def back_button(self, num=1, secs=0.5):
         """
         返回按钮事件
         :param num:返回次数
         :return:
         """
+        time.sleep(secs)
         for i in range(num):
             self.driver.back()
 
