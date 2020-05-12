@@ -34,6 +34,6 @@ if __name__ == '__main__':
         else:
             command = '%s()' % (action.strip())
         exec(command)   # 运行操作语句
-    print('github')
+    print('git')
 
 
