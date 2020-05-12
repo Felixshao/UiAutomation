@@ -35,5 +35,6 @@ if __name__ == '__main__':
             command = '%s()' % (action.strip())
         exec(command)   # 运行操作语句
     print('github2')
+    print('github3')
 
     print('本地git1')
