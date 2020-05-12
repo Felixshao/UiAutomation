@@ -4,26 +4,35 @@
 import time, subprocess, os
 import uiautomator2 as u2
 from config.getMobile import get_mobile
+from config.readConfig import readConfig
 from common.log import Logger
 
 # 获取设备信息
 mobile_data = get_mobile('uiauto2_android')[1]
+unlock_data = readConfig().get_unlock()
 log = Logger().get_logger()
 
 
 class MyUiautomator2(object):
 
-    def connect_android(self, ip=mobile_data['ip'], start='session', appPackage=mobile_data['appPackage'], secs=4):
+    def connect_android(self, ip=mobile_data['ip']):
         """
-        连接设备和app
+        连接设备
+        :param ip: 设备ip，数据线连接传入None
+        """
+        self.isconnect(ip)
+        self.app = u2.connect(ip)  # 连接设备
+        self.app.unlock()
+        # self.app.healthcheck()  # 解锁屏幕(但无法解开锁屏密码)并开启uiautomator2服务
+
+    def connect_app(self, start='session', appPackage=mobile_data['appPackage'], secs=4):
+        """
+        连接app
         :param ip: 设备ip，数据线连接传入None
         :param appPackage:包名
         :param secs:
         :return:
         """
-        self.isconnect(ip)
-        self.app = u2.connect(ip)  # 连接设备
-        self.app.healthcheck()  # 解锁屏幕(但无法解开锁屏密码)并开启uiautomator2服务
         if start == 'session':
             self.app.session(appPackage)  # 连接app
         elif start == 'app_start':
@@ -96,7 +105,7 @@ class MyUiautomator2(object):
             app_ele = self.app(text=ele)
         elif by == 'description':
             app_ele = self.app(description=ele)
-        elif by == 'resourceId':
+        elif by == 'id':
             app_ele = self.app(resourceId=ele)
         elif by == 'className':
             app_ele = self.app(className=ele)
@@ -104,6 +113,32 @@ class MyUiautomator2(object):
             log.error('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
             raise NameError('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
         return app_ele
+
+    def find_ele_all(self, css):
+        """
+        uiautomator2点击元素
+        :param css:元素类型和元素定位,如: text->收藏
+        :return:
+        """
+        if '->' not in css:
+            log.error('Positioning syntax errors. element:"{0}" lack of "->"'.format(css))
+            raise NameError('Positioning syntax errors. lack of "->"')
+        by = css.split('->')[0]
+        ele = css.split('->')[1]
+        if by == 'text':
+            app_eles = self.app(text=ele).all()
+        elif by == 'description':
+            app_eles = self.app(description=ele).all()
+        elif by == 'id':
+            app_eles = self.app(resourceId=ele).all()
+        elif by == 'className':
+            app_eles = self.app(className=ele).all()
+        elif by == 'xpath':
+            app_eles = self.app.xpath(ele).all()
+        else:
+            log.error('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
+            raise NameError('无此类型: {}，请输入一下类型: text、 description、 resourceId、 className'.format(by))
+        return app_eles
 
     def click(self, css):
         """
@@ -118,8 +153,42 @@ class MyUiautomator2(object):
             self.app.click(css[0], css[1])
             log.info('sucess click coordinate: {}'.format(css))
         else:
-            log.error('Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
-            raise NameError('Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+            log.error('click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+            raise NameError('click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+
+    def double_click(self, css, secs=0.1):
+        """
+        uiautomator2两次点击事件
+        :param css:传入定位元素或坐标,元素如:text->收藏; 坐标如:[1, 2]/(1, 2)
+        :param secs:两次点击间隔时间
+        :return:
+        """
+        if type(css) is str:
+            self.find_ele(css).double_click(duration=secs)
+            log.info('sucess double_click ele: {}'.format(css))
+        elif type(css) is list or type(css) is tuple:
+            self.app.double_click(css[0], css[1], duration=secs)
+            log.info('sucess double_click coordinate: {}'.format(css))
+        else:
+            log.error('double_click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+            raise NameError('double_click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+
+    def long_click(self, css, secs=0.5):
+        """
+        uiautomator2长按点击事件
+        :param css:传入定位元素或坐标,元素如:text->收藏; 坐标如:[1, 2]/(1, 2)
+        :param secs;长按时间
+        :return:
+        """
+        if type(css) is str:
+            self.find_ele(css).long_click(duration=secs)
+            log.info('sucess long_click ele: {}'.format(css))
+        elif type(css) is list or type(css) is tuple:
+            self.app.long_click(css[0], css[1], duration=secs)
+            log.info('sucess long_click coordinate: {}'.format(css))
+        else:
+            log.error('long_click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
+            raise NameError('long_click Positioning syntax errors: {}, 请传入以下类型: str、 list、 tuble'.format(css))
 
     def set_text(self, css, text):
         """输入值，不调用输入法输入"""
@@ -160,9 +229,44 @@ class MyUiautomator2(object):
             self.app.swipe(x, y1, x, y2)
         self.uiauto2_stop()
 
+    def swipe_points(self, points=unlock_data['felix'], secs=0.2):
+        """"拖动"""
+        print(unlock_data['felix'], type(unlock_data['felix']))
+        points = list(points)
+        print(points)
+        self.app.swipe_points(points, secs)
+
+    def touch_down(self, x1, y1):
+        """模拟按下"""
+        self.app.touch.down(x1, y1)
+
+    def touch_up(self):
+        """模拟抬起"""
+        self.app.touch.up()
+
+    def ele_center(self, ele):
+        """获取元素中心坐标"""
+        ele_coor = []
+        if type(ele) is str:
+            ele_coor.append(ele.center())
+        elif type(ele) is list:
+            for i in ele:
+                ele_coor.append(i.center())
+        else:
+            raise NameError('类型错误，请输入定位元素或元素list')
+
+        return ele_coor
+
 
 if __name__ == '__main__':
     uiau = MyUiautomator2()
-    uiau.connect_android(start='app_start')
+    uiau.connect_android()
+    ele_list = uiau.find_ele_all('xpath->//android.view.View')
+    ele_coor = uiau.ele_center(ele_list)
+    print(ele_coor)
+    print(unlock_data['felix'])
+    uiau.swipe_points()
+    # uiau.drag(0.24, 0.477, 0.231, 0.773)
+    # uiau.drag(0.231, 0.773, 0.759, 0.775)
     time.sleep(2)
-    uiau.swipe_down(5)
+    # uiau.swipe_down(5)

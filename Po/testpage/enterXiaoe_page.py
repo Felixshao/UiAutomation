@@ -7,7 +7,7 @@ from common.basePage import Page
 wechat_nav_my = [0.879, 0.955]      # 微信导航栏我的
 wechat_my_shouc = 'text->收藏'    # 微信我的收藏
 wechat_shouc_search = 'description->搜索'     # 微信收藏搜索图标
-wechat_search_one = 'resourceId->com.tencent.mm:id/bd'  # 搜索后第一个结果
+wechat_search_one = 'id->com.tencent.mm:id/bd'  # 搜索后第一个结果
 
 
 class enterXiaoe_page(Page):

@@ -7129,33 +7129,137 @@
 <script type="text/javascript">
     var resultData = {
     "testName": "测试众测报告",
-    "beginTime": "2020-04-22 17:29:43",
-    "testPass": 1,
+    "beginTime": "2020-05-12 16:47:26",
+    "testPass": 8,
     "testResult": [
         {
-            "className": "ZCschool_test",
-            "methodName": "test1_enter_zcschool",
-            "description": "进入众测学院页面",
-            "spendTime": "1.77 s",
+            "className": "ZCuserinter_test",
+            "methodName": "test1_user_income_1___基本资料",
+            "description": "基本资料",
+            "spendTime": "0.025 s",
+            "status": "失败",
+            "log": [
+                "",
+                "Traceback (most recent call last):\n",
+                "  File \"F:\\test\\python\\lib\\unittest\\case.py\", line 59, in testPartExecutor\n    yield\n",
+                "  File \"F:\\test\\python\\lib\\unittest\\case.py\", line 615, in run\n    testMethod()\n",
+                "  File \"F:\\test\\python\\lib\\site-packages\\ddt.py\", line 145, in wrapper\n    return func(self, *args, **kwargs)\n",
+                "  File \"D:\\study\\python\\UiAutomation\\Po\\testinterface\\ZCuserinter_test.py\", line 39, in test1_user_income\n    soup = BeautifulSoup(basic, 'lxml')\n",
+                "  File \"F:\\test\\python\\lib\\site-packages\\bs4\\__init__.py\", line 245, in __init__\n    elif len(markup) <= 256 and (\n",
+                "TypeError: object of type 'AttributeError' has no len()\n"
+            ]
+        },
+        {
+            "className": "ZCuserinter_test",
+            "methodName": "test2_user_income_1___测试设备",
+            "description": "测试设备",
+            "spendTime": "0.0221 s",
+            "status": "失败",
+            "log": [
+                "",
+                "Traceback (most recent call last):\n",
+                "  File \"F:\\test\\python\\lib\\unittest\\case.py\", line 59, in testPartExecutor\n    yield\n",
+                "  File \"F:\\test\\python\\lib\\unittest\\case.py\", line 615, in run\n    testMethod()\n",
+                "  File \"F:\\test\\python\\lib\\site-packages\\ddt.py\", line 145, in wrapper\n    return func(self, *args, **kwargs)\n",
+                "  File \"D:\\study\\python\\UiAutomation\\Po\\testinterface\\ZCuserinter_test.py\", line 69, in test2_user_income\n    soup = BeautifulSoup(basic, 'lxml')\n",
+                "  File \"F:\\test\\python\\lib\\site-packages\\bs4\\__init__.py\", line 245, in __init__\n    elif len(markup) <= 256 and (\n",
+                "TypeError: object of type 'AttributeError' has no len()\n"
+            ]
+        },
+        {
+            "className": "ZCuserinter_test",
+            "methodName": "test3_user_information_1___身份信息",
+            "description": "身份信息",
+            "spendTime": "0.0211 s",
             "status": "成功",
             "log": [
-                "进入众测学院用例成功!",
-                "data: 进入众测学院_成功",
-                "",
-                "    <a href=\"..\\screen_shot\\进入众测学院_成功.png\" target=\"_blank\" id='aClick'>",
-                "    <img src=\"..\\screen_shot\\进入众测学院_成功.png\" height=\"500px\"/>",
-                "    </a>",
-                "    <br></br>",
-                "",
+                "用例成功!",
+                ""
+            ]
+        },
+        {
+            "className": "ZCuserinter_test",
+            "methodName": "test4_financial_income_1___财务收入明细",
+            "description": "财务收入明细",
+            "spendTime": "0.021 s",
+            "status": "成功",
+            "log": [
+                "用例成功!",
+                ""
+            ]
+        },
+        {
+            "className": "ZCuserinter_test",
+            "methodName": "test5_gold_income_1___金币收入明细",
+            "description": "金币收入明细",
+            "spendTime": "0.0221 s",
+            "status": "成功",
+            "log": [
+                "用例成功!",
+                ""
+            ]
+        },
+        {
+            "className": "ZCuserinter_test",
+            "methodName": "test6_invite_friends_1___邀请好友",
+            "description": "邀请好友",
+            "spendTime": "0.0211 s",
+            "status": "成功",
+            "log": [
+                "用例成功!",
+                ""
+            ]
+        },
+        {
+            "className": "ZClistinter_test",
+            "methodName": "test1_newhonor_list_1___最新一期榜单",
+            "description": "最新一期榜单",
+            "spendTime": "0.382 s",
+            "status": "成功",
+            "log": [
+                "用例成功，最新一期榜单详情:['止水如心', '哇哦！虞书欣！', '屠屠冲呀', '向阳324', '小测001', '黑糖小圆玉', '夜之殇泪', '樱桃子', '盈盈一水间', 'sxxs']",
+                ""
+            ]
+        },
+        {
+            "className": "ZClistinter_test",
+            "methodName": "test2_lastterm_list_1___上一期榜单",
+            "description": "上一期榜单",
+            "spendTime": "0.201 s",
+            "status": "成功",
+            "log": [
+                "用例成功，202017期榜单详情:['盈盈一水间', '手残党', '程潇是零食大王', '超越是零食大王', '新月十九', '黑糖小圆玉', '一凡', '呀呀呀', '椰子Yap', '五月刺猬']",
+                ""
+            ]
+        },
+        {
+            "className": "ZClistinter_test",
+            "methodName": "test3_lastissue_list_1___上上期榜单",
+            "description": "上上期榜单",
+            "spendTime": "0.206 s",
+            "status": "成功",
+            "log": [
+                "用例成功，202016期榜单详情:['魔鬼天使', '夜思', '長佩兮陆離', '夜之殇泪2', '黑糖小圆玉', '小段段', '铅笔2', '程潇是零食大王', '林君怡也是A班', '樱桃子']",
+                ""
+            ]
+        },
+        {
+            "className": "ZClistinter_test",
+            "methodName": "test4_lastperiod_list_1___上上上期榜单",
+            "description": "上上上期榜单",
+            "spendTime": "0.211 s",
+            "status": "成功",
+            "log": [
+                "用例成功，202015期榜单详情:['樱桃子', '程潇是零食大王', '落星', '木易杨', '波妞', '元气柚子', '猫小起', '青出于蓝', 'yaoxiaolei', '呀呀呀2']",
                 ""
             ]
         }
     ],
-    "testAll": 1,
-    "testFail": 0,
+    "testAll": 10,
+    "testFail": 2,
     "testSkip": 0,
     "testError": 0,
-    "totalTime": "13s"
+    "totalTime": "2s"
 };
 
     function clickRow(obj){

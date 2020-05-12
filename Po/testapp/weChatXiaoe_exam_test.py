@@ -14,7 +14,8 @@ class weChatXiaoe_exam_test(unittest.TestCase):
     def setUpClass(cls):
         cls.uiau = MyUiautomator2()
         cls.dr = mySelenium()
-        cls.app = cls.uiau.connect_android()
+        cls.uiau.connect_android()
+        cls.app = cls.uiau.connect_app()
         cls.exam = weChatXiaoe_exam_page(driver=cls.dr, uiau=cls.uiau, app=cls.app)
         cls.entet = enterXiaoe_page(driver=cls.dr, uiau=cls.uiau, app=cls.app)
         cls.entet.wechat_xiaoe_zhunxianwang()

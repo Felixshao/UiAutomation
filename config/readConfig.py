@@ -95,10 +95,27 @@ class readConfig():
             values_dict[i[0]] = i[1]
         return values_dict
 
+    def get_unlock(self):
+        """
+        获取Unlock配置信息
+        :return:
+        """
+        values = config.items('Unlock')
+        values_dict = {}
+        for i in values:
+            values_dict[i[0]] = i[1]
+        return values_dict
+
 
 if __name__ == '__main__':
 
-    exe = readConfig().get_App()
-    print(exe)
-    print(type(exe['chromeOptions']))
+    exe = readConfig().get_unlock()
+    print(exe['felix'], type(exe['felix']))
+    a = exe['felix'].replace(' ', '').split(';')
+    b = []
+    for i in a:
+        b.append(i.split(')'))
+    print(a, type(a))
+    print(b, type(b))
+    # print(type(exe['chromeOptions']))
 
