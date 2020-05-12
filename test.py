@@ -23,6 +23,7 @@ def quit():
 
 
 if __name__ == '__main__':
+    print
 
     with open('./test.txt') as fp:
         datalist = fp.readlines()   # 读取关键字
@@ -34,3 +35,6 @@ if __name__ == '__main__':
         else:
             command = '%s()' % (action.strip())
         exec(command)   # 运行操作语句
+    print('github')
+
+
