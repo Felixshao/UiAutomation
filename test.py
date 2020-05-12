@@ -23,7 +23,6 @@ def quit():
 
 
 if __name__ == '__main__':
-    print
 
     with open('./test.txt') as fp:
         datalist = fp.readlines()   # 读取关键字
