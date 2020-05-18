@@ -75,7 +75,7 @@ class ChromeDriver(object):
             self._launch_webdriver()
             dr = webdriver.Remote('http://localhost:%d' % self._port, capabilities)
         except WebDriverException:
-            subprocess.call('taskkill /f /t /im chromedriver.exe')
+            self.windows_kill()
             self._launch_webdriver()
             dr = webdriver.Remote('http://localhost:%d' % self._port, capabilities)
 

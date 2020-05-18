@@ -639,6 +639,21 @@ class mySelenium(object):
         self.driver.quit()
         log.info('{0} Quit window/app. spend {1} seconds'.format(success, time.time() - t1))
 
+    def close_window(self, window=None, secs=0.5):
+        """关闭指定窗口"""
+        if window is None:
+            self.driver.close()
+        else:
+            if type(window) is str:
+                self.switch_handle(window)
+                time.sleep(secs)
+                self.driver.close()
+            else:
+                for i in window:
+                    self.switch_handle(i)
+                    time.sleep(secs)
+                    self.driver.close()
+
     def action_perform(self, action):
         """
         执行action事件
@@ -791,6 +806,11 @@ class mySelenium(object):
         except BaseException as b:
             log.error('切换handle窗口失败，原因: {}'.format(b))
             raise
+
+    def get_cookies(self):
+        """获取cookies"""
+        cookies = self.driver.get_cookies()
+        return cookies
 
     """--------------------------------------------------mobile private-----------------------------------"""
     def app_background(self, secs=2):

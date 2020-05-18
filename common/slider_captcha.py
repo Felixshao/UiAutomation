@@ -172,6 +172,11 @@ def slider_captcha(browser, handle, tcaptcha_iframe='tcaptcha_iframe', slideBg='
     if isEleExist(browser, slideBg):
         slider_captcha(browser, handle)
         log.info('滑块拼图验证失败，重新验证!')
+    else:
+        handles = browser.get_handles()
+        for i in range(1, len(handles)):
+            browser.close_window(handles[i])
+        browser.switch_handle(handles[0])
 
 
 def isEleExist(browser, id):
@@ -208,6 +213,7 @@ def test():
     browser.switch_iframe('tcaptcha_iframe', 2)
     slider_captcha(browser, handle)
     time.sleep(10)
+    print(browser.get_cookies())
 
 
 if __name__ == '__main__':

@@ -1,5 +1,4 @@
 import os
-from configparser import ConfigParser
 from common.MyConfiParser import MyConfigParser
 from config import getProjectPath
 

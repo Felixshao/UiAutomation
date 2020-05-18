@@ -35,5 +35,3 @@ if __name__ == '__main__':
             command = '%s()' % (action.strip())
         exec(command)   # 运行操作语句
     print('git')
-
-
